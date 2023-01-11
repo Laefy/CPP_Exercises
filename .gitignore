@@ -34,3 +34,6 @@
 # VSCode files
 build/
 .vscode/launch.json
+
+# Autres
+.DS_Store
