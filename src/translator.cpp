@@ -6,16 +6,23 @@
 #include <string>
 #include <vector>
 
+using Dictionary = std::map<std::string, std::string>;
+using History = std::vector<std::string>;
+using Context = std::pair<Dictionary, History>;
+using Languages = std::pair<std::string, std::string>;
+using Translator = std::map<Languages, Context>;
+
 std::set<std::string> make_exit_commands()
 {
     return { "q", "e", "exit", "quit" };
 }
 
 bool execute_instruction(std::istream& input,
-                         std::map<std::string, std::string>& dictionary,
-                         std::vector<std::string>& history)
+                         Translator& translator,
+                         Languages& languages)
 {
     const auto exit_commands = make_exit_commands();
+    auto&      [dictionary, history] = translator[languages];
 
     auto command = std::string {};
     input >> command;
@@ -80,7 +87,7 @@ bool execute_instruction(std::istream& input,
         auto file = std::ifstream { name };
         while (!file.eof())
         {
-            execute_instruction(file, dictionary, history);
+            execute_instruction(file, translator, languages);
         }
     }
     else if (command == "clear")
@@ -108,20 +115,31 @@ bool execute_instruction(std::istream& input,
 
         history.push_back("remove " + word);
     }
+    else if (command == "from")
+    {
+        std::cin >> languages.first;
+    }
+    else if (command == "to")
+    {
+        std::cin >> languages.second;
+    }
 
     return true;
 }
 
-int main()
+int main(int argc, char** argv)
 {
-    auto dictionary = std::map<std::string, std::string> {};
-    auto history = std::vector<std::string> {};
+    auto languages = argc == 3 ? 
+        Languages { argv[1], argv[2] } :
+        Languages { "fr", "en" };
+
+    auto translator = Translator {};
 
     while (true)
     {
         std::cout << "Enter a command: " << std::endl;
 
-        if (!execute_instruction(std::cin, dictionary, history))
+        if (!execute_instruction(std::cin, translator, languages))
         {
             break;
         }
