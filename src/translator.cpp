@@ -83,6 +83,31 @@ bool execute_instruction(std::istream& input,
             execute_instruction(file, dictionary, history);
         }
     }
+    else if (command == "clear")
+    {
+        dictionary.clear();
+        history.clear();
+    }
+    else if (command == "remove")
+    {
+        auto word = std::string {};
+        input >> word;
+
+        for (auto it = dictionary.begin(); it != dictionary.end(); )
+        {
+            if (it->first == word || it->second == word)
+            {
+                std::cout << it->first << " x " << it->second << std::endl;
+                it = dictionary.erase(it);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+
+        history.push_back("remove " + word);
+    }
 
     return true;
 }
