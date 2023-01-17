@@ -23,7 +23,7 @@ Et si vous bloquez toujours, vous pouvez consulter la branche tp2-solutions.
 ## 3- Sauvegarde et restauration
 
 1. Ajoutez un conteneur séquentiel nommé `history`, qui contient la liste des instructions `add` entrées par l'utilisateur.
-2. Implémentez une commande `save <name>` qui permet de sauvegarder l'historique des commandes `add` dans le fichier nommé `<name>`.
+2. Implémentez une commande `save <name>` qui permet de sauvegarder l'historique des commandes `add` dans le fichier nommé `<name>`.  On pourra utiliser un [std::fstream](https://en.cppreference.com/w/cpp/io/basic_fstream).
 3. Implémentez ensuite la commande `load <name>` qui recharge la liste des instructions enregistrées dans `<name>` et les réapplique. Essayez de limiter la duplication de code.
 
 ## 4- Suppression
