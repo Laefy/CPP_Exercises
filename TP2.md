@@ -15,10 +15,11 @@ Et si vous bloquez toujours, vous pouvez consulter la branche tp2-solutions.
 
 ## 2- Ajouter une traduction
 
-1. Modifiez le programme pour que lorsque l'utilisateur entre la commande `add <w1> <w2>`, le programme affiche "`<w1>` => `<w2>`".
-2. Si l'utilisateur entre ensuite la commande `translate <w1>`, le programme affiche `<w2>`. Si aucune traduction n'a été ajouté pour `<w1>`, alors le programme affiche `???` 
-3. Modifiez la dernière commande pour que l'utilisateur puisse rentrer une phrase complète.
-4. Ajoutez la commande `print` permettant d'afficher l'intégralité du dictionnaire.
+1. Ecrire une fonction `split_string` qui coupe une string à chaque espace. Par exemple, si on lui donne comme argument `"hello world !"`, la fonction renvoie les chaines `"hello"` `"world"` et `"!"`, dans un conteneur approprié.
+2. Modifiez le programme pour que lorsque l'utilisateur entre la commande `add <w1> <w2>`, le programme affiche "`<w1>` => `<w2>`".
+3. Si l'utilisateur entre ensuite la commande `translate <w1>`, le programme affiche `<w2>`. Si aucune traduction n'a été ajouté pour `<w1>`, alors le programme affiche `???` 
+4. Modifiez la dernière commande pour que l'utilisateur puisse rentrer une phrase complète.
+5. Ajoutez la commande `print` permettant d'afficher l'intégralité du dictionnaire.
 
 ## 3- Sauvegarde et restauration
 
