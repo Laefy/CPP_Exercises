@@ -53,7 +53,9 @@ git push -u origin tp2
 
 1.3. La fonction `count` permet de savoir si un élément est présent dans certains conteneurs.
 
-2.3. Vous pouvez utiliser `std::getline` et `std::stringstream`.
+2.3. Vous pouvez utiliser `std::getline` et :
+- soit `std::stringstream`,
+- soit `std::string::split`.
 
 3.2. Vous pouvez utiliser `std::ofstream`.
 
