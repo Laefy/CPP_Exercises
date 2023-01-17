@@ -33,8 +33,10 @@ Et si vous bloquez toujours, vous pouvez consulter la branche tp2-solutions.
 
 ## 5- Traducteur polyglote
 
-1. Modifiez le programme pour qu'il attende deux arguments : la langue source et la langue cible du traducteur. Par défaut, si aucun argument n'est fourni, la langue source sera "fr" et la langue cible "en". 
+1. Modifiez le programme pour qu'il attende deux arguments sur la ligne de commande: la langue source et la langue cible du traducteur.  Par défaut, si aucun argument n'est fourni, la langue source sera "fr" et la langue cible "en". 
 2. Ajoutez deux commandes `from <name>` et `to <name>` qui permettent de changer la langue source et la langue cible du traducteur. Les commandes précédentes s'appliquent toujours à la paire de langues actuellement sélectionnées.
+
+**Notez que ces deux questions demandent de changer beaucoup de choses écrites précemment car le programme doit garder en mémoire tous les dictionnaires pour toutes les langues, et la sauvegarde/restauration doit le gérer correctement.**
 
 ## Indices
 
