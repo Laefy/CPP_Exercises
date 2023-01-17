@@ -17,7 +17,7 @@ Et si vous bloquez toujours, vous pouvez consulter la branche tp2-solutions.
 
 1. Modifiez le programme pour que lorsque l'utilisateur entre la commande `add <w1> <w2>`, le programme affiche "`<w1>` => `<w2>`".
 2. Si l'utilisateur entre ensuite la commande `translate <w1>`, le programme affiche `<w2>`. Si aucune traduction n'a été ajouté pour `<w1>`, alors le programme affiche `???` 
-3. Modifiez la dernière commande pour que l'utilisateur puisse rentrer une phrase complète.
+3. Modifiez la dernière commande pour que l'utilisateur puisse rentrer une phrase complète, c'est à dire une commande de la forme `translate <w1> <w2> etc`.  Chaque mot est traduit indépendamment.
 4. Ajoutez la commande `print` permettant d'afficher l'intégralité du dictionnaire.
 
 ## 3- Sauvegarde et restauration
