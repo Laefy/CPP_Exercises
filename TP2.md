@@ -7,6 +7,17 @@ Nous allons vous faire implémenter un traducteur en ligne de commande.
 Si vous bloquez, vous pourrez trouver des indices à la fin de l'énoncé pour vous aider à avancer. 
 Et si vous bloquez toujours, vous pouvez consulter la branche tp2-solutions.
 
+## 0- Mise à jour du dépôt
+
+Vous allez devoir récupérer les sources du TP2 sur votre dépôt local.
+Pour ce faire, exécutez les commandes suivantes :
+```b
+git remote add upstream https://github.com/Laefy/CPP_Exercises.git
+git fetch upstream
+git switch tp2
+git push -u origin tp2
+```
+
 ## 1- Sortie du programme
 
 1. Pour le moment, votre traducteur ne fait rien du tout. Modifiez le code pour que si l'utilisateur entre 'q', 'quit', 'e' ou 'exit', le programme s'arrête.
@@ -36,7 +47,7 @@ Et si vous bloquez toujours, vous pouvez consulter la branche tp2-solutions.
 1. Modifiez le programme pour qu'il attende deux arguments sur la ligne de commande: la langue source et la langue cible du traducteur.  Par défaut, si aucun argument n'est fourni, la langue source sera "fr" et la langue cible "en". 
 2. Ajoutez deux commandes `from <name>` et `to <name>` qui permettent de changer la langue source et la langue cible du traducteur. Les commandes précédentes s'appliquent toujours à la paire de langues actuellement sélectionnées.
 
-**Notez que ces deux questions demandent de changer beaucoup de choses écrites précemment car le programme doit garder en mémoire tous les dictionnaires pour toutes les langues, et la sauvegarde/restauration doit le gérer correctement.**
+**Notez que ces deux questions demandent de changer beaucoup de choses écrites précédemment car le programme doit garder en mémoire tous les dictionnaires pour toutes les langues, et la sauvegarde/restauration doit le gérer correctement.**
 
 ## Indices
 
