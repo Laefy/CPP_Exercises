@@ -41,6 +41,8 @@ TEST_CASE("Test 10 - "
     plush_store.loan(100);
 
     // Par exemple, une formule qui fonctionne :
+    // valeur finale <- valeur investie + exp
+    // ou encore
     // valeur finale <- valeur investie + max(exp, exp * valeur investie / 100)
     const auto value_1 = plush_store.make_plush(10);
     const auto value_2 = plush_store.make_plush(10);
