@@ -5,9 +5,15 @@
 #include <memory>
 #include <utility>
 
-TEST_CASE("3. Pokemons can be stored in Pokeballs")
+TEST_CASE("3a. There exists a type `PokemonPtr` that represents a pointer to a Pokemon")
 {
-    auto pikachu = std::make_unique<Pokemon>("Pikachu");
+    PokemonPtr null = nullptr;
+}
+
+
+TEST_CASE("3b. Pokemons can be stored in Pokeballs")
+{
+    PokemonPtr pikachu = std::make_unique<Pokemon>("Pikachu");
 
     auto pokeball = Pokeball {};
     REQUIRE(pokeball.empty() == true);
