@@ -95,6 +95,9 @@ Bon courage à vous ! Si vous êtes bloqués, n'hésitez pas à utiliser les ind
 > **Querying the name of a Pokemon does not modify the Pokemon**\
 > Comment faut-il faire pour indiquer qu'une fonction-membre ne va pas modifier les attributs de l'instance sur laquelle elle est appelée ?
 
+> **Whenever a Pokemon is constructed, it is assigned an identifier that gets incremented each time**\
+> Vous pouvez utiliser un attribut static pour stocker le prochain identifiant à utiliser.
+
 ### Test-2
 
 > **Pokeballs are empty by default**\
@@ -192,8 +195,7 @@ REQUIRE(a == 0);
 > **A trainer can retrieve their Pokemons from the PC**\
 > Recherchez sur cppreference comment supprimer un élément du conteneur que vous avez utilisé pour stocker les Pokémons dans le PC.\
 Lorsque vous allez sur la documentation d'une fonction ou d'une classe, il faut toujours commencer par regarder les exemples.\
-> Pour éviter les inclusions cycliques (PC -> Trainer et Trainer -> PC), vous pouvez utiliser une forward-declaration et implémentez certaines fonctions dans le .cpp.
-> Attention aux invalidations d'itérateurs !
+> Pour éviter les inclusions cycliques (PC -> Trainer et Trainer -> PC), vous pouvez utiliser une forward-declaration.
 
 ---
 

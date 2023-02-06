@@ -12,12 +12,12 @@ TEST_CASE("10. A trainer can store Pokemons in the PC")
     auto pc    = PC {};
     auto sacha = Trainer { "Sacha", pc };
 
-    auto        bulbizarre         = std::make_unique<Pokemon>("Bulbizarre");
-    const auto* bulbizarre_address = bulbizarre.get();
+    auto       bulbizarre    = std::make_unique<Pokemon>("Bulbizarre");
+    const auto bulbizarre_id = bulbizarre->id();
     sacha.capture(std::move(bulbizarre));
     
-    auto        carapuce         = std::make_unique<Pokemon>("Carapuce");
-    const auto* carapuce_address = carapuce.get();
+    auto       carapuce    = std::make_unique<Pokemon>("Carapuce");
+    const auto carapuce_id = carapuce->id();
     sacha.capture(std::move(carapuce));
     
     const auto bulbizarre_idx = 0;
@@ -33,7 +33,7 @@ TEST_CASE("10. A trainer can store Pokemons in the PC")
         sacha.store_in_pc(bulbizarre_idx);
 
         REQUIRE(pc.pokemons().empty() == false);
-        REQUIRE(pc.pokemons()[0].get() == bulbizarre_address);
+        REQUIRE(pc.pokemons()[0]->id() == bulbizarre_id);
 
         REQUIRE(sacha.pokeballs()[bulbizarre_idx].empty() == true);
         REQUIRE(sacha.pokeballs()[carapuce_idx].empty() == false);
@@ -45,8 +45,8 @@ TEST_CASE("10. A trainer can store Pokemons in the PC")
         sacha.store_in_pc(carapuce_idx);
 
         REQUIRE(pc.pokemons().empty() == false);
-        REQUIRE(pc.pokemons()[0].get() == bulbizarre_address);
-        REQUIRE(pc.pokemons()[1].get() == carapuce_address);
+        REQUIRE(pc.pokemons()[0]->id() == bulbizarre_id);
+        REQUIRE(pc.pokemons()[1]->id() == carapuce_id);
 
         REQUIRE(sacha.pokeballs()[bulbizarre_idx].empty() == true);
         REQUIRE(sacha.pokeballs()[carapuce_idx].empty() == true);

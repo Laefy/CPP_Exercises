@@ -16,6 +16,8 @@ foreach(test_file ${all_tests})
         src/PC.h
         src/Pokeball.cpp
         src/Pokeball.h
+        src/Pokedex.cpp
+        src/Pokedex.h
         src/Pokemon.cpp
         src/Pokemon.h
         src/Trainer.cpp

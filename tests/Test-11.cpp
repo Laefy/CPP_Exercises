@@ -15,8 +15,8 @@ TEST_CASE("11. A trainer can retrieve their Pokemons from the PC")
 
     const auto& sacha_pokeballs = sacha.pokeballs();
 
-    auto        bulbizarre         = std::make_unique<Pokemon>("Bulbizarre");
-    const auto* bulbizarre_address = bulbizarre.get();
+    auto       bulbizarre    = std::make_unique<Pokemon>("Bulbizarre");
+    const auto bulbizarre_id = bulbizarre->id();
     sacha.capture(std::move(bulbizarre));
     
     const auto bulbizarre_idx = 0;
@@ -27,17 +27,17 @@ TEST_CASE("11. A trainer can retrieve their Pokemons from the PC")
         REQUIRE(pc.pokemons().empty() == false);
         REQUIRE(sacha_pokeballs[bulbizarre_idx].empty() == true);
 
-        pc.give_back(sacha, "Bulbizarre");
+        sacha.fetch_from_pc("Bulbizarre");
 
         REQUIRE(pc.pokemons().empty() == true);
         REQUIRE(sacha_pokeballs[bulbizarre_idx].empty() == false);
-        REQUIRE(&sacha_pokeballs[bulbizarre_idx].pokemon() == bulbizarre_address);
+        REQUIRE(sacha_pokeballs[bulbizarre_idx].pokemon().id() == bulbizarre_id);
     }
 
     SECTION("When a trainer retrieves its Pokemon, it goes in the next empty Pokeball")
     {
-        auto        carapuce = std::make_unique<Pokemon>("Carapuce");
-        const auto* carapuce_address = carapuce.get();
+        auto       carapuce    = std::make_unique<Pokemon>("Carapuce");
+        const auto carapuce_id = carapuce->id();
         sacha.capture(std::move(carapuce));
 
         const auto carapuce_idx   = 0;
@@ -45,11 +45,11 @@ TEST_CASE("11. A trainer can retrieve their Pokemons from the PC")
         REQUIRE(sacha_pokeballs[carapuce_idx].empty() == false);
         REQUIRE(sacha_pokeballs[next_empty_idx].empty() == true);
 
-        pc.give_back(sacha, "Bulbizarre");
+        sacha.fetch_from_pc("Bulbizarre");
         REQUIRE(sacha_pokeballs[carapuce_idx].empty() == false);
-        REQUIRE(&sacha_pokeballs[carapuce_idx].pokemon() == carapuce_address);
+        REQUIRE(sacha_pokeballs[carapuce_idx].pokemon().id() == carapuce_id);
         REQUIRE(sacha_pokeballs[next_empty_idx].empty() == false);
-        REQUIRE(&sacha_pokeballs[next_empty_idx].pokemon() == bulbizarre_address);
+        REQUIRE(sacha_pokeballs[next_empty_idx].pokemon().id() == bulbizarre_id);
     }
 
     SECTION("If a trainer with no empty Pokeball tries to retrieve a Pokemon, nothing happens")
@@ -63,11 +63,11 @@ TEST_CASE("11. A trainer can retrieve their Pokemons from the PC")
         }
 
         REQUIRE(pc.pokemons().empty() == false);
-        REQUIRE(pc.pokemons()[0].get() == bulbizarre_address);
-        pc.give_back(sacha, "Bulbizarre");
+        REQUIRE(pc.pokemons()[0]->id() == bulbizarre_id);
+        sacha.fetch_from_pc("Bulbizarre");
         
         REQUIRE(pc.pokemons().empty() == false);
-        REQUIRE(pc.pokemons()[0].get() == bulbizarre_address);
+        REQUIRE(pc.pokemons()[0]->id() == bulbizarre_id);
     }
 
     SECTION("If a trainer tries to steal the Pokemon of someone else, nothing happens")
@@ -83,7 +83,7 @@ TEST_CASE("11. A trainer can retrieve their Pokemons from the PC")
         REQUIRE(pc.pokemons().size() == 2);
         REQUIRE(sacha_pokeballs[0].empty() == true);
 
-        pc.give_back(sacha, "Carapuce");
+        sacha.fetch_from_pc("Carapuce");
 
         REQUIRE(pc.pokemons().size() == 2);
         REQUIRE(sacha_pokeballs[0].empty() == true);
