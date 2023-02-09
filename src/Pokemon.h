@@ -21,7 +21,7 @@ public:
 
     Pokemon& operator=(const Pokemon& other)
     {
-        if (this == &other)
+        if (this != &other)
         {
             _name = other._name;
         }
