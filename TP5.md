@@ -67,10 +67,20 @@ Si vous souhaitez ajouter d'autres fichiers sources, pensez à les ajouter égal
 
 Afin de faire passer les tests de fichier Test-9, il y a différentes manières d'implémenter la classe `Board` :
    - avec 1 seul conteneur de `std::unique_ptr<Card>`,
-   - avec 3 conteneurs pour chaque type de carte,
+   - avec 3 conteneurs (1 par type de cartes),
    - sans stocker les cartes, en utilisant seulement des compteurs pour les cartes.
 
 1. Chacune des méthodes ci-dessus présente des inconvénients. Identifiez-les.
+
+**Avec 1 seul conteneur de `std::unique_ptr<Card>`**\
+Si la classe n'est pas polymorphe, alors on peut avoir des fuites de mémoire, puisque les destructeurs des classes-filles ne seront pas correctement appelées.
+Si la classe est polymorphe, alors on ajoute un appel virtuel à la destruction de chaque `std::unique_ptr<Card>`.
+
+**Avec 3 conteneurs (1 par type de cartes)**\
+On a de la redondance de code.
+
+**Sans stocker les cartes, en utilisant seulement des compteurs pour les cartes**\
+Les cartes sont détruites à la fin de l'appel à `put`, donc si des références ont été stockées avant, ces références ne sont plus valides ensuite.
 
 2. Recherchez sur Internet des exemples d'utilisation du type `std::variant`. Modifiez votre code afin de stocker les cartes du `Board` dans un conteneur de `std::variant<...>`.
 
