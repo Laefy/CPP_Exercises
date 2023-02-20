@@ -125,13 +125,15 @@ Voici une courte description des tests:
 - Le fichier `routine_memory_check` contient un `TEST_CASE` qui vérifie que tous les `Node` ont été correctement désalloué; il est systématiquement `#include` à la fin de chaque fichier de test.
 
 - Les tests 02 à 03 demandent de créer les classes `IntLeaf` et `StringLeaf` qui correspondent aux deux types de feuille.  
-  * Ils devront tous avoir des fonctions-membres `kind()` et `print()` définis de façon approprié, et héritée dynamiquement de `Node`.
-  - La fonction-membre `kind()` ne devra pas être virtuelle.
-  * La fonction-membre `print()` devra être virtuelle pure.
+  * Ils devront tous avoir des fonctions-membres `kind()` et `print()` définis de façon approprié, et héritée de `Node`.
+    - La fonction-membre `kind()` ne devra pas être virtuelle.
+    - La fonction-membre `print()` devra être virtuelle pure.
   * `IntLeaf` et `StringLeaf` devront chacun avoir un constructeur qui prend un argument du type approprié (par exemple `IntLeaf::IntLeaf(int)`), il s'agit de la donnée portée par la feuille.
-  * Chacun devra avoir une fonction pour accéder à la donnée portée (par exemple `int IntLeaf::data())`)
+  * Chacun devra avoir une fonction-membre `data()` pour accéder à la donnée portée, elle ne sera pas virtuelle.
 
-- Les tests 03 et 04 demandent de créer les classes `ArrayNode` et `ObjectNode`.
+  Dorénavant, nous n'indiquerons pas si les fonction-membre doivent être virtuelle ou non.  Réfléchissez-y, et demander à votre chargé de TP en cas de doute.
+
+- Les tests 04 et 05 demandent de créer les classes `ArrayNode` et `ObjectNode`.
   * Ils devront implémenter la fonction-membre `print()`.
   * Ils ont un constructeur par défaut (par exemple `ArrayNode::ArrayNode()`) qui crée un noeud sans enfants.
 
@@ -140,28 +142,28 @@ Voici une courte description des tests:
   * pour chaque type de Noeud, une fonction-membre statique `make_ptr(..)` (par exemple `StringLeaf::make_ptr(std::string)`) qui permet de créer un pointeur vers un nouveau noeud.
 *(En temps normal, il faudrait rendre tous les constructeurs `protected` et obliger les utilisateur à utiliser `make_ptr` pour construire des `Node`;nous ne le ferons pas ici pour que les tests continuent de passer.)*
 
-- Les tests 11 et 12 demande de créer les fonctions-membres de `ArrayNode` et `ObjectNode` pour pouvoir leurs ajouter de nouveaux enfants. 
+- Les tests 11 et 12 demande de créer les fonction-membres de `ArrayNode` et `ObjectNode` pour pouvoir leurs ajouter de nouveaux enfants. 
 
 - Le test 13 vérifie que la classe `ObjectNode` implémente bien un dictionnaire, c'est-à-dire qu'il n'aura pas plusieurs enfants associé à la même clef.
 
-- Le test 20 demande de rajouter les deux fonctions-membres suivantes:
+- Le test 20 demande de rajouter les deux fonction-membres suivantes:
   * `height() ` qui renvoie la hauteur de l'arbre JSON représenté dans `this`.
   * `node_count()` qui renvoie le nombre de noeuds dans l'arbre JSON représenté dans `this`.
-  Ces fonctions serviront par la suite à vérifier que les arbres JSON construits vsont corrects.
+  Ces fonction-membres serviront par la suite à vérifier que les arbres JSON construits sont (ou plutôt ont l'air) corrects.
 
-- Les tests 21 à 24 consistent à parser les documents JSON du répertoire json et vérifier que votre représentation en mémoire de ces tests est correcte.
+- Les tests 21 à 24 consistent à parser les documents JSON du répertoire json et vérifier que votre représentation en mémoire est correcte.
 
-- Les tests 30 à 33 demandent d'écrire des fonctions-membres (par exemple `as_StringLeaf`) pour caster un `Node` dans une de ses classes filles (par exemple en `StringLeaf`).  Pour éviter la duplication de code, il vaut mieux dans ce cas que `Node::as_Stringleaf()` ne soit pas virtuelle pure !
+- Les tests 30 à 33 demandent d'écrire des fonction-membres (par exemple `as_StringLeaf`) pour caster un `Node` dans une de ses classes filles (par exemple en `StringLeaf`).  Pour éviter la duplication de code, il vaut mieux dans ce cas que `Node::as_Stringleaf()` ne soit pas virtuelle pure !
 
-- Le test 34 demande d'écrire une des deux fonctions-membres (l'autre est dans le test 37) pour pouvoir naviguer dans un arbre JSON.  Il s'agit d'ajouter une fonction-membre à `ArrayNode` pour pouvoir accéder à ses enfants.
+- Le test 34 demande d'écrire une des trois fonctions-membres (voir test 37) pour pouvoir naviguer dans un arbre JSON.  Il s'agit d'ajouter une fonction-membre à `ArrayNode` pour pouvoir accéder à ses enfants.
 
-- Le test 35 vérifie que l'insertion d'un nouveau pokemon dans le pokedex se passe correctement.
+- Le test 35 vérifie que l'insertion d'un nouveau pokemon dans le `pokedex.json` se passe correctement.
 
-- Le test 36 demande d'écrire la deuxième fonction-membre pour pouvoir naviguer dans un arbre JSON.  Il s'agit d'ajouter les fonctions-membres nécessaires pour pouvoir effectuer un une boucle *for each* sur un `ArrayNode`.
+- Le test 36 demande d'écrire la deuxième fonction-membre pour pouvoir naviguer dans un arbre JSON.  Il s'agit d'ajouter les fonctions-membres nécessaires pour pouvoir effectuer une boucle *for each* sur un `ArrayNode`.
 
 - Le test 37 vérifie que la navigation se passe bien.  Il s'agit de parcourir le `pokedex.json` et de construire des dictionnaires qui associe à le nom d'un pokemon avec son numéro dans le pokedex.
 
-- Le test 38 vérifie qu'on peut naviguer sans le modifier un arbre JSON lorsqu'il est const. Ce test demande de dupliquer la plupart des fonctions-membres écrites pour les tests 3X.
+- Le test 38 vérifie qu'on peut naviguer dans un arbre JSON lorsqu'il est const.  Ce test demande de "dupliquer" la plupart des fonctions-membres écrites pour les tests 3X, sans quoi le test 35 ne passera pas correctement.
 
 - Le test 40 demande d'écrire un opérateur pour tester l'égalité de Node.
 
