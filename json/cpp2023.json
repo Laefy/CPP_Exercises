@@ -1,0 +1,11 @@
+{
+  "name":"C++",
+  "level":"M1",
+  "year": 2023,
+  "teachers":["Céline","Clément","Christophe", "Victor", "Youssef"],
+  "grading":[
+    {"name":"TP noté 1", "aboutChapters":[0,1,2,5]},
+    {"name":"TP noté 2", "aboutChapters":[0,1,2,3,4,5]},
+    {"name":"Exam", "aboutChapters":"all"}
+  ]
+}
