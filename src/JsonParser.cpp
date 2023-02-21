@@ -62,8 +62,8 @@ std::unique_ptr<Node> JsonParser::parse_Node()
         return parse_ArrayNode();
     case '"':
         return parse_StringLeaf();
-        //        case 'n':
-        //            return parse_constant("null");
+    case 'n':
+        return parse_constant("null");
     case 'f':
         return parse_constant("false");
     case 't':
@@ -106,8 +106,8 @@ std::unique_ptr<Node> JsonParser::parse_constant(std::string_view target)
             return nullptr;
         }
     }
-    //        if (target == "null")
-    //            return NullNode::make_ptr();
+    if (target == "null")
+        return StringLeaf::make_ptr("null");
     if (target == "true")
         return IntLeaf::make_ptr(1);
     if (target == "false")
