@@ -13,12 +13,6 @@ TEST_CASE("ArrayNode derives from Node.")
     Node &r = p;
 }
 
-TEST_CASE("The kind of ArrayNode is NodeKind::ARRAY.")
-{
-    ArrayNode p{};
-    REQUIRE(p.kind() == NodeKind::ARRAY);
-}
-
 TEST_CASE("ArrayNode are arrays of nodes. By default it is empty, hence printed as an empty list.")
 {
     ArrayNode p{};

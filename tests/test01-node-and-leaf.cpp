@@ -10,8 +10,9 @@ TEST_CASE("There is an abstract class `Node` that inherits from `InstanceCounter
     Node *node = nullptr;
     [[maybe_unused]] InstanceCounter *ic = node;
 
-    // This tests that Node is an abstract class.
-    // REQUIRE(std::is_abstract<Node>::value);
+    // The next line tests that Node does not have a public
+    // Node() constructor.
+    REQUIRE(std::is_default_constructible<Node>::value == false);
 }
 
 TEST_CASE("There is an abstract class `Leaf` that inherits from `Node.`")
@@ -20,8 +21,9 @@ TEST_CASE("There is an abstract class `Leaf` that inherits from `Node.`")
     Leaf *node = nullptr;
     [[maybe_unused]] Node *ic = node;
 
-    // This tests that Leaf is an abstract class.
-    // REQUIRE(std::is_abstract<Leaf>::value);
+    // The next line tests that Leaf does not have a public
+    // Leaf() constructor.
+    REQUIRE(std::is_default_constructible<Leaf>::value == false);
 }
 
 #include "routine_memory_check.cpp"

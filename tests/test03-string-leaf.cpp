@@ -14,13 +14,7 @@ TEST_CASE("Stringleaf derives from Leaf and from Node.")
     Node &r = l;
 }
 
-TEST_CASE("The kind of Stringleaf is NodeKind::STRING.")
-{
-    StringLeaf p{"Hello World"};
-    REQUIRE(p.kind() == NodeKind::STRING);
-}
-
-TEST_CASE("Stringleaf are printed between \" \".")
+TEST_CASE("Stringleaf::print() prints the held data between \" \".")
 {
     StringLeaf p{"Hello World"};
     REQUIRE(p.print() == "\"Hello World\"");

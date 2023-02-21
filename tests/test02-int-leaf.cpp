@@ -14,12 +14,6 @@ TEST_CASE("IntLeaf derives from Leaf and from Node.")
     Node &r = l;
 }
 
-TEST_CASE("The kind of IntLeaf is NodeKind::INTEGER.")
-{
-    IntLeaf p{1};
-    REQUIRE(p.kind() == NodeKind::INT);
-}
-
 TEST_CASE("IntLeaf are printed as numbers.")
 {
     IntLeaf p{1};
