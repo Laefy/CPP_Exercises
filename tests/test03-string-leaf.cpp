@@ -2,7 +2,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Stringleaf is a class that can be built from an integer.")
+TEST_CASE("Stringleaf is a class that can be built from an std::string.")
 {
     StringLeaf p{"Hello World"};
 }
@@ -20,7 +20,7 @@ TEST_CASE("The kind of Stringleaf is NodeKind::STRING.")
     REQUIRE(p.kind() == NodeKind::STRING);
 }
 
-TEST_CASE("Stringleaf are printed as numbers.")
+TEST_CASE("Stringleaf are printed between \" \".")
 {
     StringLeaf p{"Hello World"};
     REQUIRE(p.print() == "\"Hello World\"");
