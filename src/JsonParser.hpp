@@ -20,21 +20,21 @@ private:
 
     std::optional<std::string> extract_string();
 
-    NodePtr parse_Node();
-    NodePtr parse_constant(std::string_view target);
-    NodePtr parse_StringLeaf();
-    NodePtr parse_IntLeaf();
-    NodePtr parse_ArrayNode();
-    NodePtr parse_ObjectNode();
+    std::unique_ptr<Node> parse_Node();
+    std::unique_ptr<Node> parse_constant(std::string_view target);
+    std::unique_ptr<Node> parse_StringLeaf();
+    std::unique_ptr<Node> parse_IntLeaf();
+    std::unique_ptr<Node> parse_ArrayNode();
+    std::unique_ptr<Node> parse_ObjectNode();
 
 public:
     JsonParser(std::istream& in)
         : _in(in)
     {}
 
-    NodePtr run();
+    std::unique_ptr<Node> run();
 
-    static NodePtr parse_from_istream(std::istream& in);
-    static NodePtr parse_from_file(std::string const& path);
-    static NodePtr parse_from_string(std::string const& str);
+    static std::unique_ptr<Node> parse_from_istream(std::istream& in);
+    static std::unique_ptr<Node> parse_from_file(std::string const& path);
+    static std::unique_ptr<Node> parse_from_string(std::string const& str);
 };

@@ -11,7 +11,7 @@ std::string json_dir = "../json/";
 
 TEST_CASE("Extracting data from pokedex.json")
 {
-    NodePtr node = JsonParser::parse_from_file(json_dir + "pokedex.json");
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(json_dir + "pokedex.json");
 
     REQUIRE(node->kind() == NodeKind::OBJECT);
     REQUIRE(node->as_ObjectNode()->has_child("pokemon"));

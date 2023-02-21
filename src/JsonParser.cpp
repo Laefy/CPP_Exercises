@@ -50,7 +50,7 @@ bool JsonParser::check_next_char_equals(int c, std::string_view v)
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_Node()
+std::unique_ptr<Node> JsonParser::parse_Node()
 {
     extract_spaces();
     int c = _in.peek();
@@ -92,7 +92,7 @@ NodePtr JsonParser::parse_Node()
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_constant(std::string_view target)
+std::unique_ptr<Node> JsonParser::parse_constant(std::string_view target)
 {
     char c[6];
     for (size_t x = 0; x < target.size(); x++)
@@ -145,7 +145,7 @@ std::optional<std::string> JsonParser::extract_string()
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_StringLeaf()
+std::unique_ptr<Node> JsonParser::parse_StringLeaf()
 {
     auto str = extract_string();
     if (str)
@@ -156,7 +156,7 @@ NodePtr JsonParser::parse_StringLeaf()
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_IntLeaf()
+std::unique_ptr<Node> JsonParser::parse_IntLeaf()
 {
     // unsigned starting_pos = _in.tellg();
 
@@ -169,7 +169,7 @@ NodePtr JsonParser::parse_IntLeaf()
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_ArrayNode()
+std::unique_ptr<Node> JsonParser::parse_ArrayNode()
 {
     if (!check_next_char_equals('['))
         return nullptr;
@@ -201,7 +201,7 @@ NodePtr JsonParser::parse_ArrayNode()
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_ObjectNode()
+std::unique_ptr<Node> JsonParser::parse_ObjectNode()
 {
     if (!check_next_char_equals('{'))
         return nullptr;
@@ -238,17 +238,17 @@ NodePtr JsonParser::parse_ObjectNode()
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::run()
+std::unique_ptr<Node> JsonParser::run()
 {
     return parse_Node();
 }
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_from_istream(std::istream& in)
+std::unique_ptr<Node> JsonParser::parse_from_istream(std::istream& in)
 {
     JsonParser parser(in);
-    NodePtr    parsed_tree = parser.run();
+    std::unique_ptr<Node>    parsed_tree = parser.run();
     if (parsed_tree)
         return parsed_tree;
     else
@@ -257,7 +257,7 @@ NodePtr JsonParser::parse_from_istream(std::istream& in)
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_from_file(std::string const& path)
+std::unique_ptr<Node> JsonParser::parse_from_file(std::string const& path)
 {
     std::ifstream in(path.c_str(), std::ifstream::in);
     if (!in.is_open())
@@ -270,7 +270,7 @@ NodePtr JsonParser::parse_from_file(std::string const& path)
 
 // DO NOT MODIFY THIS FILE !
 
-NodePtr JsonParser::parse_from_string(std::string const& str)
+std::unique_ptr<Node> JsonParser::parse_from_string(std::string const& str)
 {
     std::stringstream ss { str };
     return parse_from_istream(ss);

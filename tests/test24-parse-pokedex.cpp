@@ -8,7 +8,7 @@ std::string json_dir = "../json/";
 
 TEST_CASE("Parsing the full pokedex !")
 {
-    NodePtr node = JsonParser::parse_from_file(json_dir + "pokedex.json");
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(json_dir + "pokedex.json");
     REQUIRE(node->kind() == NodeKind::OBJECT);
     REQUIRE(node->height() == 5u);
     REQUIRE(node->node_count() == 3779u);

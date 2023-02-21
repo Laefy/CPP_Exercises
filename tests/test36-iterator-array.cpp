@@ -7,10 +7,10 @@ std::string json_dir = "../json/";
 
 TEST_CASE("One may iterate through ArrayNode with foreach.")
 {
-    NodePtr node = JsonParser::parse_from_file(json_dir + "pokedex.json");
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(json_dir + "pokedex.json");
     ArrayNode *pokemons = node->as_ObjectNode()->at("pokemon")->as_ArrayNode();
     unsigned i = 0;
-    for (NodePtr const &pokemon : *pokemons)
+    for (std::unique_ptr<Node> const &pokemon : *pokemons)
     {
         ++i;
         std::cerr << pokemon->as_ObjectNode()->at("Name") << std::endl;

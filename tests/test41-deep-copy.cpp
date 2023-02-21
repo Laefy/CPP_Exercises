@@ -7,11 +7,11 @@ std::string json_dir = "../json/";
 
 TEST_CASE("Node::deep_copy() makes a deep copy of a Node.")
 {
-    NodePtr original_ptr = JsonParser::parse_from_file(json_dir + "pokedex.json");
+    std::unique_ptr<Node> original_ptr = JsonParser::parse_from_file(json_dir + "pokedex.json");
     // We make the copy multiple times to ensure that deallocation works
     for (unsigned i = 0; i < 100; ++i)
     {
-        NodePtr copy_ptr = original_ptr->deep_copy();
+        std::unique_ptr<Node> copy_ptr = original_ptr->deep_copy();
         REQUIRE(copy_ptr->height() == 5u);
         REQUIRE(copy_ptr->node_count() == 3779u);
         REQUIRE(copy_ptr->kind() == NodeKind::OBJECT);

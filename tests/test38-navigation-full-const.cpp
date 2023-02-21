@@ -9,7 +9,7 @@
 /* Json files are in directory `json` in the root directory of the TP. */
 std::string json_dir = "../json/";
 
-TEST_CASE("Extracting data from pokedex.json, ensuring that it works on const NodePtr. ")
+TEST_CASE("Extracting data from pokedex.json, ensuring that it works on const std::unique_ptr<Node>. ")
 {
     /*
         This tests require to "duplicate" a lot of functions already written.

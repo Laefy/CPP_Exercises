@@ -101,7 +101,7 @@ Un document JSON sera représenté en mémoire comme un arbre dont les noeuds so
 - La classe `Node` sera la classe-mère permettant de représenter tout élément de l'arbre dont on ne connaît pas le type exact. Elle sera abstraite.
 - Les classes `IntLeaf` et `StringLeaf` représentent les deux types de feuilles de l'arbre, suivant le type de la donnée portée. Elles hériteront d'une classe abstraite `Leaf` qui héritera elle-même de `Node`.
 - Les classes `ArrayNode`, `ObjectNode` représenteront les deux types de noeuds internes.
-- Le type `NodePtr` sera utilisée pour pointer vers les enfants d'un noeud interne. Il sera utilisé en interne pour stocker les enfants des `ArrayNode` et `ObjectNode`. A vous de choisir le bon type.
+- Le type `std::unique_ptr<Node>` sera utilisée pour pointer vers les enfants d'un noeud interne. Il sera utilisé en interne pour stocker les enfants des `ArrayNode` et `ObjectNode`.  De cette manière, quand un `ArrayNode` est détruit, ses enfants le seront aussi.
 - Le type `NodeKind` est fourni, c'est une `enum` listant les différents types de noeuds. A l'exécution, il sera utilisé par les `Node`'s pour indiquer leur type réel.
 
 Pour les tests supérieurs à 20, un parseur JSON sera utilisé. Il est fourni (classe `JsonParser`) et vous n'avez pas à le modifier.
@@ -111,7 +111,6 @@ Tests
 ------
 
 Quelques remarques préliminaires.
-- Ce TP était à l'origine prévu pour deux séances.  C'est donc déjà bien si vous arrivez à faire passer tous les tests jusqu'à 33.  Nous conseillons néanmoins de finir le TP chez vous.
 - Les tests inférieurs à 30 doivent être faits dans l'ordre, ensuite vous pouvez faire les 3X et 4X indépendamment.
 - Le fichier `sandbox.cpp` est à votre disposition. Ce qu'il contient sera compilé et exécuté en sélectionnant `sandbox` dans les listes.
 - Essayez de factoriser au maximum le code en écrivant, quand c'est possible, le corps des fonctions dans `Node` ou `Leaf`.
@@ -120,26 +119,26 @@ Quelques remarques préliminaires.
 
 Voici une courte description des tests:
 
-- Le test 01 vous demande de créer une classe `Node` qui hérite de `InstanceCounter`.  La classe `InstanceCounter` est fournie et ne sert qu'à compter le nombre d'objets Node en mémoire pour les tests.
+- Le test 01 vous demande de créer une classe `Node` qui hérite de `InstanceCounter`.  La classe `InstanceCounter` est fournie et ne sert qu'à compter le nombre d'objets `Node` en mémoire.  Ainsi, on peut vérifier qu'on a pas de fuite mémoire.
 
 - Le fichier `routine_memory_check` contient un `TEST_CASE` qui vérifie que tous les `Node` ont été correctement désalloués; il est systématiquement `#include` à la fin de chaque fichier de test.
 
 - Les tests 02 à 03 demandent de créer les classes `IntLeaf` et `StringLeaf` qui correspondent aux deux types de feuille.  
-  * Ils devront tous avoir des fonctions-membres `kind()` et `print()` définies de façon appropriée, et hériter de `Node`.
-    - La fonction-membre `kind()` ne devra pas être virtuelle.
-    - La fonction-membre `print()` devra être virtuelle pure.
-  * `IntLeaf` et `StringLeaf` devront chacune avoir un constructeur qui prend un argument du type approprié (par exemple `IntLeaf::IntLeaf(int)`), il s'agit de la donnée portée par la feuille.
-  * Chacun devra avoir une fonction-membre `data()` pour accéder à la donnée portée, elle ne sera pas virtuelle.
-
-  Dorénavant, nous n'indiquerons pas si les fonction-membre doivent être virtuelle ou non. Réfléchissez-y et demandez à votre chargé de TP en cas de doute.
+  Ils devront tous deux
+  * hériter du type `Leaf`
+  * hériter d'une fonction-membre `Node::print()`, qui est virtuelle pure dans `Node`.
+  * avoir un constructeur qui prend un argument le type approprié (par exemple `IntLeaf::IntLeaf(int)`), il s'agit de la donnée portée par la feuille.
+  * avoir une fonction-membre `data()` pour accéder à la donnée portée.  Cette fonction ne sera pas une fonction virtuelle héritée de `Node` puisque `IntLeaf::data()` et `StringLeaf::data()` ont des signatures incompatibles.
 
 - Les tests 04 et 05 demandent de créer les classes `ArrayNode` et `ObjectNode`.
   * Elles devront implémenter la fonction-membre `print()`.
   * Elles ont un constructeur par défaut (par exemple `ArrayNode::ArrayNode()`) qui crée un noeud sans enfants.
 
-- Le test 10 demande de 
-  * choisir un type de pointeur `NodePtr` qui servira à représenter un arbre JSON.
-  * pour chaque type de noeud, une fonction-membre statique `make_ptr(..)` (par exemple `StringLeaf::make_ptr(std::string)`) qui permet de créer un pointeur vers un nouveau noeud.
+- Le test 06 demande de rajouter une fonction-membre `NodeKind Node::kind()` qui **n'est pas virtuelle**.
+
+Dorénavant, nous n'indiquerons pas si les fonction-membre doivent être virtuelle ou non. Réfléchissez-y et demandez à votre chargé de TP en cas de doute.
+
+- Le test 10 demande, pour chaque type de noeud, une fonction-membre statique `make_ptr(..)` (par exemple `StringLeaf::make_ptr(std::string)`) qui permet de créer un pointeur vers un nouveau noeud.
 *(En temps normal, il faudrait rendre tous les constructeurs `protected` et obliger les utilisateur à utiliser `make_ptr` pour construire des `Node`; nous ne le ferons pas ici pour que les tests continuent de passer.)*
 
 - Les tests 11 et 12 demandent de créer les fonctions-membre de `ArrayNode` et `ObjectNode` pour pouvoir leurs ajouter de nouveaux enfants. 

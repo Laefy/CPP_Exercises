@@ -11,22 +11,24 @@ std::string json_dir = "../json/";
 
 TEST_CASE("There is a member-function Node::as_IntLeaf")
 {
-    NodePtr node = IntLeaf::make_ptr(42);
+    std::unique_ptr<Node> node = IntLeaf::make_ptr(42);
     auto bnode = node->as_IntLeaf();
     int data = bnode->data();
     REQUIRE(data == 42);
 }
 
+/* The return type of as_IntLeaf() is not trivial! Think about it. */
+
 TEST_CASE("Node::as_IntLeaf returns a nullptr if Node is not a IntLeaf")
 {
 
-    NodePtr node2 = StringLeaf::make_ptr("Hello world");
+    std::unique_ptr<Node> node2 = StringLeaf::make_ptr("Hello world");
     REQUIRE(node2->as_IntLeaf() == nullptr);
 
-    NodePtr node3 = ArrayNode::make_ptr();
+    std::unique_ptr<Node> node3 = ArrayNode::make_ptr();
     REQUIRE(node3->as_IntLeaf() == nullptr);
 
-    NodePtr node4 = ObjectNode::make_ptr();
+    std::unique_ptr<Node> node4 = ObjectNode::make_ptr();
     REQUIRE(node4->as_IntLeaf() == nullptr);
 }
 

@@ -11,7 +11,7 @@ std::string json_dir = "../json/";
 
 TEST_CASE("There is a member-function Node::as_StringLeaf")
 {
-    NodePtr node = StringLeaf::make_ptr("Hello world");
+    std::unique_ptr<Node> node = StringLeaf::make_ptr("Hello world");
     auto bnode = node->as_StringLeaf();
     const std::string &data = bnode->data();
     REQUIRE(data == "Hello world");
@@ -19,13 +19,13 @@ TEST_CASE("There is a member-function Node::as_StringLeaf")
 
 TEST_CASE("Node::as_StringLeaf returns a nullptr if Node is not a StringLeaf")
 {
-    NodePtr node1 = IntLeaf::make_ptr(42);
+    std::unique_ptr<Node> node1 = IntLeaf::make_ptr(42);
     REQUIRE(node1->as_StringLeaf() == nullptr);
 
-    NodePtr node2 = ArrayNode::make_ptr();
+    std::unique_ptr<Node> node2 = ArrayNode::make_ptr();
     REQUIRE(node2->as_StringLeaf() == nullptr);
 
-    NodePtr node3 = ObjectNode::make_ptr();
+    std::unique_ptr<Node> node3 = ObjectNode::make_ptr();
     REQUIRE(node3->as_StringLeaf() == nullptr);
 }
 

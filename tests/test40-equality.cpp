@@ -7,21 +7,21 @@ std::string json_dir = "../json/";
 TEST_CASE("Testing quality operator with file `number_42.json`")
 {
     std::string filename = json_dir + "number_42.json";
-    NodePtr node = JsonParser::parse_from_file(filename);
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(filename);
     REQUIRE(*node == *IntLeaf::make_ptr(42));
 }
 
 TEST_CASE("Testing quality operator with file `string_hello.json` ")
 {
     std::string filename = json_dir + "string_hello.json";
-    NodePtr node = JsonParser::parse_from_file(filename);
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(filename);
     REQUIRE(*node == *StringLeaf::make_ptr("Hello"));
 }
 
 TEST_CASE("Testing quality operator with file `object_alphabet.json")
 {
     std::string filename = json_dir + "object_alphabet.json";
-    NodePtr node = JsonParser::parse_from_file(filename);
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(filename);
 
     auto target = ObjectNode::make_ptr();
     for (char c = 'a'; c <= 'z'; c++)
@@ -33,7 +33,7 @@ TEST_CASE("Testing quality operator with file `object_alphabet.json")
 TEST_CASE("Testing quality operator with file `array_range10.json`")
 {
     std::string filename = json_dir + "array_range10.json";
-    NodePtr node = JsonParser::parse_from_file(filename);
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(filename);
 
     auto target = ArrayNode::make_ptr();
     for (unsigned i = 0; i < 10; i++)
@@ -45,7 +45,7 @@ TEST_CASE("Testing quality operator with file `array_range10.json`")
 TEST_CASE("Testing quality operator with file `pokedex.json`")
 {
     std::string filename = json_dir + "pokedex.json";
-    NodePtr node = JsonParser::parse_from_file(filename);
+    std::unique_ptr<Node> node = JsonParser::parse_from_file(filename);
     REQUIRE(*node == *node);
 }
 

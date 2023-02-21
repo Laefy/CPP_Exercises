@@ -8,33 +8,42 @@
 
 #include <utility>
 
-// This function will compile if there exists a type `NodePtr` that points to a `Node`
-Node &f(NodePtr node_ptr)
-{
-    return *node_ptr;
-}
-
 TEST_CASE("IntLeaf::make_ptr()")
 {
-    NodePtr node_ptr = IntLeaf::make_ptr(1);
+    std::unique_ptr<IntLeaf> node_ptr = IntLeaf::make_ptr(1);
     REQUIRE(node_ptr->print() == "1");
 }
 
 TEST_CASE("StringLeaf::make_ptr()")
 {
-    NodePtr node_ptr = StringLeaf::make_ptr("Hello world");
+    std::unique_ptr<StringLeaf> node_ptr = StringLeaf::make_ptr("Hello world");
     REQUIRE(node_ptr->print() == "\"Hello world\"");
 }
 
 TEST_CASE("ArrayNode::make_ptr()")
 {
-    NodePtr node_ptr = ArrayNode::make_ptr();
+    std::unique_ptr<ArrayNode> node_ptr = ArrayNode::make_ptr();
     REQUIRE(node_ptr->print() == "[]");
 }
 
 TEST_CASE("ObjectNode::make_ptr()")
 {
-    NodePtr node_ptr = ObjectNode::make_ptr();
+    std::unique_ptr<ObjectNode> node_ptr = ObjectNode::make_ptr();
+    REQUIRE(node_ptr->print() == "{}");
+}
+
+TEST_CASE("Note that all these member-functions return something that can be stored in std::unique_ptr<Node>.")
+{
+    std::unique_ptr<Node> node_ptr = IntLeaf::make_ptr(1);
+    REQUIRE(node_ptr->print() == "1");
+
+    std::unique_ptr<Node> node_ptr = StringLeaf::make_ptr("Hello world");
+    REQUIRE(node_ptr->print() == "\"Hello world\"");
+
+    std::unique_ptr<Node> node_ptr = ArrayNode::make_ptr();
+    REQUIRE(node_ptr->print() == "[]");
+
+    std::unique_ptr<Node> node_ptr = ObjectNode::make_ptr();
     REQUIRE(node_ptr->print() == "{}");
 }
 
