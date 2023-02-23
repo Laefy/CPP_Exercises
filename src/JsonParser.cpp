@@ -117,7 +117,7 @@ NodePtr JsonParser::parse_constant(std::string_view target)
 
 // DO NOT MODIFY THIS FILE !
 
-std::optional<std::string> JsonParser::extract_string()
+OptionalString JsonParser::extract_string()
 {
     extract_spaces();
     check_next_char_equals('"');
@@ -138,7 +138,7 @@ std::optional<std::string> JsonParser::extract_string()
     if (_in.eof())
     {
         std::cerr << "Found EOF while looking for closing \"." << std::endl;
-        return std::optional<std::string>();
+        return OptionalString();
     }
     return s;
 }
@@ -215,7 +215,7 @@ NodePtr JsonParser::parse_ObjectNode()
 
     do
     {
-        std::optional<std::string> opt_key = extract_string();
+        OptionalString opt_key = extract_string();
         if (!opt_key)
             return nullptr;
         extract_spaces();
