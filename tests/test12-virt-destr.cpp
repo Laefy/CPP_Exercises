@@ -7,7 +7,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <memory>
 
-TEST_CASE("ArrayNode::push_back() allows to push_back all kinds of Node's at the end of an ArrayNode")
+TEST_CASE("When a Node is destroyed, the correct destructor is called")
 {
     auto arraynode_ptr = ArrayNode::make_ptr();
     arraynode_ptr->push_back(ArrayNode::make_ptr());

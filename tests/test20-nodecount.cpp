@@ -6,6 +6,8 @@
 #include "../src/StringLeaf.hpp"
 #include <catch2/catch_test_macros.hpp>
 
+#include <iostream>
+
 TEST_CASE("Node::node_count() gives the number of Node's in the tree.")
 {
     auto truenode_ptr = IntLeaf::make_ptr(1);
