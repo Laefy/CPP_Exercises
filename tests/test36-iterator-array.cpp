@@ -13,7 +13,9 @@ TEST_CASE("One may iterate through ArrayNode with foreach.")
     for (NodePtr const &pokemon : *pokemons)
     {
         ++i;
-        std::cerr << pokemon->as_ObjectNode()->at("Name") << std::endl;
+        REQUIRE(pokemon->as_ObjectNode() != nullptr);
+        REQUIRE(pokemon->as_ObjectNode()->at("name") != nullptr);
+        std::cerr << pokemon->as_ObjectNode()->at("name")->print() << std::endl;
     }
     REQUIRE(i == 151);
 }

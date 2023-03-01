@@ -102,7 +102,7 @@ NodePtr JsonParser::parse_constant(std::string_view target)
         {
             c[x + 1] = '\0';
             std::cerr << "Expecting JSON value (probably constant " << target << ") at position "
-                      << (_in.tellg() - (long)x) << ". Got string starting with " << c << std::endl;
+                      << ((long)_in.tellg() - (long)x) << ". Got string starting with " << c << std::endl;
             return nullptr;
         }
     }
