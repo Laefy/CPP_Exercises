@@ -9,6 +9,12 @@
 /* Json files are in directory `json` in the root directory of the TP. */
 std::string json_dir = "../json/";
 
+// In order toi solve this test, you probably need to add the following line
+// at the top of Node.hpp
+//     class IntLeaf;
+// and the following line at the top of Node.cpp
+//     #include "IntLeaf.hpp"
+
 TEST_CASE("There is a member-function Node::as_IntLeaf")
 {
     std::unique_ptr<Node> node = IntLeaf::make_ptr(42);
