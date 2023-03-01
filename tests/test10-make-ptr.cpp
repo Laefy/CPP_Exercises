@@ -9,9 +9,9 @@
 #include <utility>
 
 // This function will compile if there exists a type `NodePtr` that points to a `Node`
-Node &f(NodePtr node_ptr)
+void some_function(NodePtr ptr)
 {
-    return *node_ptr;
+    [[maybe_unused]] Node &v = *ptr;
 }
 
 TEST_CASE("IntLeaf::make_ptr()")
