@@ -32,4 +32,17 @@ TEST_CASE("Node::as_IntLeaf returns a nullptr if Node is not a IntLeaf")
     REQUIRE(node4->as_IntLeaf() == nullptr);
 }
 
+TEST_CASE("Node::as_IntLeaf is not virtual")
+{
+
+    std::unique_ptr<Node> node2 = StringLeaf::make_ptr("Hello world");
+    REQUIRE(node2->as_IntLeaf() == nullptr);
+
+    std::unique_ptr<Node> node3 = ArrayNode::make_ptr();
+    REQUIRE(node3->as_IntLeaf() == nullptr);
+
+    std::unique_ptr<Node> node4 = ObjectNode::make_ptr();
+    REQUIRE(node4->as_IntLeaf() == nullptr);
+}
+
 #include "routine_memory_check.cpp"
