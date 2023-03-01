@@ -145,12 +145,12 @@ Dorénavant, nous n'indiquerons pas si les fonction-membre doivent être virtuel
 
 - Le test 13 vérifie que la classe `ObjectNode` implémente bien un dictionnaire, c'est-à-dire qu'il n'aura pas plusieurs enfants associés à la même clef.
 
-- Le test 20 demande de rajouter les deux fonctions-membre suivantes:
-  * `height() ` qui renvoie la hauteur de l'arbre JSON représenté dans `this`.
+ Les tests 21 et 22 demandent de rajouter les deux fonctions-membre suivantes:
   * `node_count()` qui renvoie le nombre de noeuds dans l'arbre JSON représenté dans `this`.
+  * `height() ` qui renvoie la hauteur de l'arbre JSON représenté dans `this`.
   Ces fonction-membres serviront par la suite à vérifier que les arbres JSON construits semblent corrects.
 
-- Les tests 21 à 24 consistent à parser les documents JSON du répertoire json et vérifier que votre représentation en mémoire est correcte.
+- Les tests 22 à 25 consistent à parser les documents JSON du répertoire json et vérifier que votre représentation en mémoire est correcte.
 
 - Les tests 30 à 33 demandent d'écrire des fonctions-membre (par exemple `as_StringLeaf`) pour caster un `Node` dans une de ses classes filles (par exemple en `StringLeaf`).  Pour éviter la duplication de code, il vaut mieux dans ce cas que `Node::as_Stringleaf()` ne soit pas virtuelle pure !
 
