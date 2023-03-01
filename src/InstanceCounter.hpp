@@ -8,7 +8,7 @@ class InstanceCounter
 public:
     InstanceCounter() { ++_counter; }
     InstanceCounter(const InstanceCounter&) { ++_counter; }
-    InstanceCounter& operator=(const InstanceCounter& other);
+    InstanceCounter& operator=(const InstanceCounter& other) = default;
     ~InstanceCounter() { --_counter; }
 
     static int counter() { return _counter; }
