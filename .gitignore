@@ -34,3 +34,4 @@
 # VSCode files
 build/
 .vscode/launch.json
+.vscode/settings.json
