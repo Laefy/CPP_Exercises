@@ -28,57 +28,33 @@ file(GLOB all_tests tests/Tests-*)
 foreach(test_path ${all_tests})
     get_filename_component(test_name ${test_path} NAME_WE)
 
+    # ${test_id} contains the part before the first `-`.
+    string(REGEX REPLACE "-.*" "" test_id ${test_name})
+    # ${test_num} contains the test number.
+    string(REGEX REPLACE "test" "" test_num ${test_id})
+    # ${test_short_desc} contains the part after the first `-`.
+    string(REGEX REPLACE "test[0-9]*-" "" test_short_desc ${test_name})
+
     add_executable(
         ${test_name} EXCLUDE_FROM_ALL 
         ${test_path}
         ${common_sources}
     )
 
-    set_target_properties(
-        ${test_name}
-        PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tests"
-    )
-
     target_compile_features(${test_name} PRIVATE cxx_std_17)
     target_compile_options(${test_name} PRIVATE -Wall -W -Wextra -Wfatal-errors -Wno-unused-variable)
     target_link_libraries(${test_name} PRIVATE Catch2::Catch2WithMain)
 
+    # zrun-${test_name} is a custom target that builds and runs ${test_name}
+    add_custom_target(zrun-${test_name} 
+        COMMAND ./${test_name} 
+        DEPENDS ${test_name})
+
     add_test(
-        NAME "BUILD-${test_name}"
-        COMMAND "${CMAKE_COMMAND}" --build ${CMAKE_BINARY_DIR} --target "${test_name}")
-
-    string(REGEX REPLACE "Tests-" "" test_desc ${test_name})
-
-    catch_discover_tests(
-        ${test_name}
-        TEST_PREFIX "TEST-${test_desc}_"
-    )
-
-    add_custom_target(
-        run-${test_desc}
-        DEPENDS ${test_name}
-        COMMAND ${CMAKE_CTEST_COMMAND} -R "^TEST-${test_desc}_.*" -j 10
-    )
+        NAME "${test_name}" 
+        COMMAND "${CMAKE_COMMAND}" --build ${CMAKE_BINARY_DIR} --target zrun-${test_name})
 
 endforeach()
-
-add_custom_target(
-    clean-tests
-    COMMAND ${CMAKE_COMMAND} -E rm -rf "${CMAKE_CURRENT_BINARY_DIR}/tests"
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/tests"
-)
-
-add_custom_target(
-    build-tests
-    COMMAND ${CMAKE_CTEST_COMMAND} -R "^BUILD-.*"
-    DEPENDS clean-tests
-)
-
-add_custom_target(
-    run-tests
-    COMMAND ${CMAKE_CTEST_COMMAND} -R "^TEST-.*" -j 10
-)
 
 add_executable(
     kitchen 
