@@ -1,0 +1,35 @@
+#+TITLE: Heu oui les templates
+#+subtitle: Bienvenue en enfer
+
+
+* Un template c'est quoi?
+C'est un truc pour la généricité cf cours
+* But de ce TP
+Les images sont des tableaux de *pixels*.
+On va utiliser des templates pour définir des images de taille statique utilisant plusieurs types de pixels.
+
++ implémenter des pixels
++ implémenter des images
++ implémenter un opérateur entre 2 images qui fait des trucs en fonction du type de pixel
++ conversion de pixels
++ conversions d'images
+| A    | B    | effet                  | Type sortant |
+|------+------+------------------------+--------------|
+| any  | RGBA | superposition          | RGBA         |
+| any  | Luma | masque de transparence | RGBA         |
+| RGBA | RGB  | addition               | RGBA         |
+| RGB  | RGB  | addition               | RGB          |
+| Luma | RGB  | addition               | RGB          |
+  
+* Les tests pas à pas
+** Test 01
+Il faut juste créer les 3 types de pixels de ce TP
+
+| RBGA | couleur RGB sur 8 bits + un canal alpha |
+| RGB  | couleur RGB sur 8 bits                  |
+| Luma | niveau de gris sur 8 bits               |
+
+** Test 02
+On encode les couleurs sur 8 bits en tant qu'entier non-signés.
+Vous avez le choix entre utiliser `unsigned char` ou `uint8_t` (pro tip: si y'a marqué 8 dans le nom du type, c'est pour que ça soit plus clair que l'autre option).
+** Test 03
