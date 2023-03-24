@@ -18,7 +18,7 @@ TEST_CASE("The 3 pixels structure RGBA RGB Luma are implemented")
     REQUIRE(luma.gray == 100);
 }
 
-TEST_CASE("The values of the pixels are encoded on one octet")
+TEST_CASE("The channels of the pixels are encoded on one byte")
 {
     REQUIRE(sizeof(RGBA) == 4);
     REQUIRE(sizeof(RGB ) == 3);

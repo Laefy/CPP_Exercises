@@ -15,11 +15,11 @@ On va utiliser des templates pour définir des images de taille statique utilisa
 + conversions d'images
 | A    | B    | effet                  | Type sortant |
 |------+------+------------------------+--------------|
-| any  | RGBA | superposition          | RGBA         |
 | any  | Luma | masque de transparence | RGBA         |
-| RGBA | RGB  | addition               | RGBA         |
-| RGB  | RGB  | addition               | RGB          |
-| Luma | RGB  | addition               | RGB          |
+| any  | RGBA | blending               | RGBA         |
+| RGBA | RGB  | blending               | RGBA         |
+| RGB  | RGB  | blending               | RGB          |
+| Luma | RGB  | blending               | RGB          |
   
 * Les tests pas à pas
 ** Test 01

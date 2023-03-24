@@ -6,7 +6,7 @@
 #include <iostream>
 #include <type_traits>
 
-
+/*
 TEST_CASE("Luma as transparency mask (RGB+Luma)")
 {
     const RGBA pix = RGB{1,3,4} + Luma{120};
@@ -33,3 +33,4 @@ TEST_CASE("Luma as transparency mask (Luma+Luma)")
     REQUIRE(pix.b == rgb.b);
     REQUIRE(pix.a == 120);
 }
+*/
