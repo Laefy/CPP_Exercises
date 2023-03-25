@@ -1,5 +1,12 @@
 #pragma once
 
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_DEFINE
+#include "../extern/stb_image/stb_image.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "../extern/stb_image/stb_image_write.h"
+
+
 #include <stdint.h>
 #include <array>
 

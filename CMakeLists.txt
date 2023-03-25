@@ -74,20 +74,15 @@ add_custom_target(
     COMMAND ${CMAKE_CTEST_COMMAND} -R "^TEST-.*" -j 10
 )
 
-add_executable(
-    lol 
-    src/main.cpp
-    ${common_sources}
-)
 
 
-set_target_properties(
-    lol
-    PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin"
-)
+# set_target_properties(
+#     lol
+#     PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin"
+# )
 
-target_compile_features(lol PRIVATE cxx_std_17)
-target_compile_options(lol PRIVATE -Wall -W -Wextra -Wfatal-errors -Wno-unused-variable)
-target_link_libraries(lol PRIVATE Catch2::Catch2)
+# target_compile_features(lol PRIVATE cxx_std_17)
+# target_compile_options(lol PRIVATE -Wall -W -Wextra -Wfatal-errors -Wno-unused-variable)
+# target_link_libraries(lol PRIVATE Catch2::Catch2)
 

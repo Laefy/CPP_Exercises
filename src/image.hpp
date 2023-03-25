@@ -2,9 +2,14 @@
 
 #include "pixels.hpp"
 
-#include "../lib/image_io.hpp"
+#include "../lib/lib.hpp"
 
+#include <stdint.h>
 #include <cstddef>
+#include <functional>
+#include <string>
+#include <array>
+#include <iostream>
 
 template<typename P, size_t W, size_t H>
 struct Image
@@ -54,7 +59,7 @@ struct Image
                                          &w, &h, &c, 0);
         if(data == NULL)
         {
-            std::cout << "Could not find image '" << path << "'" << std::endl;
+            std::cerr << "Could not find image '" << path << "'" << std::endl;
             exit(1);
         }
         else if (w!=W || h != H || c != sizeof(P))
