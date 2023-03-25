@@ -6,7 +6,7 @@ add_subdirectory(extern/Catch2)
 
 include(Catch)
 enable_testing()
-
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/images")
 file(
     GLOB
     common_sources
