@@ -6,21 +6,10 @@
 C'est un truc pour la généricité cf cours
 * But de ce TP
 Les images sont des tableaux de *pixels*.
-On va utiliser des templates pour définir des images de taille statique utilisant plusieurs types de pixels.
+On va utiliser des templates pour définir des images de *taille statique* utilisant plusieurs types de pixels.
+Tout au long tu TP, votre code produira des images dans le dossier ~images~ situé dans votre dosser de build (pas celui à la racine de votre dossier).
 
-+ implémenter des pixels
-+ implémenter des images
-+ implémenter un opérateur entre 2 images qui fait des trucs en fonction du type de pixel
-+ conversion de pixels
-+ conversions d'images
-| A    | B    | effet                  | Type sortant |
-|------+------+------------------------+--------------|
-| any  | Luma | masque de transparence | RGBA         |
-| any  | RGBA | blending               | RGBA         |
-| RGBA | RGB  | blending               | RGBA         |
-| RGB  | RGB  | blending               | RGB          |
-| Luma | RGB  | blending               | RGB          |
-  
+
 * Les tests pas à pas
 ** TODO Test 01: Image
 On travaillera dans image.hpp
@@ -146,7 +135,7 @@ Implémentez ensuite ~B into<A,B>(const A &)~, qui fait la même chose que ~from
 
 
 
-** TODO Test 06: Blending
+** TODO Test 05: Blending
 On veut pouvoir additioner les différents pixels qu'on a définit pour pouvoir combiner des images.
 On peut:
 + soit “blender„ les couleurs de deux pixels (en utilisant la fonction mix_color de la lib du TP)
