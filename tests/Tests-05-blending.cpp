@@ -56,7 +56,7 @@ TEST_CASE("Blending (RGBA + RGBA) => RGBA")
     const RGBA b = RGBA{5, 137, 54, 100};
     const RGBA pix = a + b;
 
-    const std::array<uint8_t, 4> raw = mix_color(a.r, a.g, a.b, a.a,
+    const std::array<uint8_t, 4> raw = lib::mix_color(a.r, a.g, a.b, a.a,
                                                  b.r, b.g, b.b, b.a);
     const RGBA truth = reinterpret_cast<const RGBA &>(raw);
     REQUIRE(truth.r == pix.r);
@@ -71,7 +71,7 @@ TEST_CASE("Blending (RGB + RGBA) => RGBA")
     const RGB  b = RGB {5, 137, 54};
     const RGBA pix = a + b;
 
-    const std::array<uint8_t, 4> raw = mix_color(a.r, a.g, a.b, a.a,
+    const std::array<uint8_t, 4> raw = lib::mix_color(a.r, a.g, a.b, a.a,
                                                  b.r, b.g, b.b, 255);
     const RGBA truth = reinterpret_cast<const RGBA &>(raw);
     REQUIRE(truth.r == pix.r);
@@ -87,7 +87,7 @@ TEST_CASE("Blending (Luma + RGBA) => RGBA")
     const RGBA pix = a + b;
     
     const RGBA c = from<RGBA, Luma>(a);
-    const std::array<uint8_t, 4> raw = mix_color(c.r, c.g, c.b, c.a,
+    const std::array<uint8_t, 4> raw = lib::mix_color(c.r, c.g, c.b, c.a,
                                                  b.r, b.g, b.b, b.a);
     const RGBA truth = reinterpret_cast<const RGBA &>(raw);
     REQUIRE(truth.r == pix.r);
@@ -104,7 +104,7 @@ TEST_CASE("Blending (RGBA + RGB) => RGBA")
     const RGB  b = RGB {5, 137, 54};
     const RGBA pix = a + b;
 
-    const std::array<uint8_t, 4> raw = mix_color(a.r, a.g, a.b, a.a,
+    const std::array<uint8_t, 4> raw = lib::mix_color(a.r, a.g, a.b, a.a,
                                                  b.r, b.g, b.b, 255);
     const RGBA truth = reinterpret_cast<const RGBA &>(raw);
     REQUIRE(truth.r == pix.r);
@@ -119,7 +119,7 @@ TEST_CASE("Blending (RGB + RGB) => RGB")
     const RGB  b = RGB{5, 137, 54};
     const RGB  pix = a + b;
 
-    const std::array<uint8_t, 4> raw = mix_color(a.r, a.g, a.b, 255,
+    const std::array<uint8_t, 4> raw = lib::mix_color(a.r, a.g, a.b, 255,
                                                  b.r, b.g, b.b, 255);
     const RGBA truth = reinterpret_cast<const RGBA &>(raw);
     REQUIRE(truth.r == pix.r);
@@ -135,7 +135,7 @@ TEST_CASE("Blending (Luma + RGB) => RGB")
     const RGB  pix = a + b;
     
     const RGB  c = from<RGB, Luma>(a);
-    const std::array<uint8_t, 4> raw = mix_color(c.r, c.g, c.b, 255,
+    const std::array<uint8_t, 4> raw = lib::mix_color(c.r, c.g, c.b, 255,
                                                  b.r, b.g, b.b, 255);
     const RGBA truth = reinterpret_cast<const RGBA &>(raw);
     REQUIRE(truth.r == pix.r);

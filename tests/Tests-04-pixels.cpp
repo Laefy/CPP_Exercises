@@ -45,7 +45,7 @@ TEST_CASE("Implementation of the function from<A, B> converting B to A")
     REQUIRE(rgba_from_rgb.b == rgb.b);
     REQUIRE(rgba_from_rgb.a == 255);
 
-    REQUIRE(luma_from_rgb.gray == rgb_to_grayscale(rgb.r, rgb.g, rgb.b));
+    REQUIRE(luma_from_rgb.gray == lib::rgb_to_grayscale(rgb.r, rgb.g, rgb.b));
     
 }
 
@@ -70,7 +70,7 @@ TEST_CASE("Implementation of the function into<A, B> converting A to B")
     REQUIRE(rgba_into_rgb.b == rgba.b);
     
     {
-        const auto [r,g,b] = grayscale_to_rgb(luma.gray);
+        const auto [r,g,b] = lib::grayscale_to_rgb(luma.gray);
         REQUIRE(luma_into_rgb.r == r);
         REQUIRE(luma_into_rgb.g == g);
         REQUIRE(luma_into_rgb.b == b);
