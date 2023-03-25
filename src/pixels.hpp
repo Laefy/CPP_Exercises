@@ -45,8 +45,6 @@ template<>
 RGBA
 from(const RGBA & stuff)
 {
-//    std::cout << "RGBA => RGBA" << std::endl;
-    
     return stuff;
 }
 
@@ -135,28 +133,3 @@ operator+(const Pix & pix,
 }
 
 
-
-// RGB
-// operator+(const RGB & pix,
-//           const RGB & rhs)
-// {
-//     return from<RGB, RGBA>(from<RGBA, RGB>(pix) + from<RGBA, RGB>(rhs));
-// }
-
-// RGB
-// operator+(const Luma & pix,
-//           const RGB & rhs)
-// {
-//     return from<RGB, Luma>(pix) + rhs;
-// }
-
-
-/*
-RGB
-operator+(const RGB & pix,
-          const Luma & rhs)
-{
-    return from<RGB, RGBA>(from<RGBA, RGB>(pix) + rhs);
-}
-
-*/

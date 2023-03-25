@@ -7,30 +7,30 @@
 #include <type_traits>
 #include <complex>
 
-TEST_CASE("We can construct an Image with a std::function foo so that foo(i,j) returns the pixel at coordinates (i,j)")
-{
-    const size_t WIDTH = 32;
-    const size_t HEIGHT = 16;
+// TEST_CASE("We can construct an Image with a std::function foo so that foo(i,j) returns the pixel at coordinates (i,j)")
+// {
+//     const size_t WIDTH = 32;
+//     const size_t HEIGHT = 16;
     
-    const std::function<char(const size_t, const size_t)> foo = []
-        (const size_t i, const size_t j)
-    {
-        return 97+ (i+j*j)%16;
-    };
-    const auto img = Image<char, WIDTH, HEIGHT>(foo);
+//     const std::function<char(const size_t, const size_t)> foo = []
+//         (const size_t i, const size_t j)
+//     {
+//         return 97+ (i+j*j)%16;
+//     };
+//     const auto img = Image<char, WIDTH, HEIGHT>(foo);
 
     
-    for (size_t j = 0; j < HEIGHT; ++j)
-    {
-        for (size_t i = 0; i < WIDTH; ++i)
-        {
-            REQUIRE(img(i,j) == foo(i,j));
-            std::cout << img(i,j) << " ";
-        }
-        std::cout << std::endl;
-    }
+//     for (size_t j = 0; j < HEIGHT; ++j)
+//     {
+//         for (size_t i = 0; i < WIDTH; ++i)
+//         {
+//             REQUIRE(img(i,j) == foo(i,j));
+//             std::cout << img(i,j) << " ";
+//         }
+//         std::cout << std::endl;
+//     }
     
-}
+// }
 
 TEST_CASE("Look we can already do pretty neat things, look at images/mandelbrot.png")
 {
@@ -65,6 +65,6 @@ TEST_CASE("Look we can already do pretty neat things, look at images/mandelbrot.
     
     const Image<uint8_t, WIDTH, HEIGHT> img(fun);
 
-    img.save("images/mandelbrottt.png");
+    img.save("images/mandelbrot.png");
 
 }

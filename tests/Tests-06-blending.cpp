@@ -177,4 +177,5 @@ TEST_CASE("PHOTO COMPOSITING: RGBA + LUMA")
         const Image<RGBA, 499, 499> sum = bg + sum0;
         sum.save("images/sonic_stars.png");
     }
+
 }

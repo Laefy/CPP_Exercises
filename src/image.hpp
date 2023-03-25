@@ -147,3 +147,4 @@ operator+(const Image<A, W, H> & lhs, const Image<Luma, W, H> & rhs)
     }
     return out;
 }
+
