@@ -1,6 +1,5 @@
-#+TITLE: Heu oui les templates
-#+subtitle: Bienvenue en enfer
-
+#+TITLE: Les templates
+#+subtitle: On va faire des collages
 
 * Un template c'est quoi?
 C'est un truc pour la généricité cf cours
