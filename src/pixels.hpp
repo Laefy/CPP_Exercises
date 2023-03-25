@@ -128,6 +128,7 @@ RGBA
 operator+(const Pix & pix,
           const Luma & mask)
 {
+//    std::cout << "aeazezae" << std::endl;
     RGBA rgba = from<RGBA, Pix>(pix);
     rgba.a = uint8_t((uint32_t(rgba.a)*uint32_t(mask.gray)/255));
     return rgba;
@@ -150,7 +151,7 @@ operator+(const Pix & pix,
 // }
 
 
-
+/*
 RGB
 operator+(const RGB & pix,
           const Luma & rhs)
@@ -158,3 +159,4 @@ operator+(const RGB & pix,
     return from<RGB, RGBA>(from<RGBA, RGB>(pix) + rhs);
 }
 
+*/

@@ -36,6 +36,7 @@ TEST_CASE("Look we can already do pretty neat things, look at images/mandelbrot.
 {
     const size_t WIDTH = 1000;
     const size_t HEIGHT = 1000;
+   
     const auto fun = [&](const size_t i, const size_t j)
     {
         const double res = 2.0/std::min(WIDTH, HEIGHT);
@@ -43,23 +44,27 @@ TEST_CASE("Look we can already do pretty neat things, look at images/mandelbrot.
         const double y = (double(j) -double(HEIGHT)/2.0)*res;
         const std::complex c = {x,y};
         std::complex z = 0.;
-        for (uint32_t k = 0; std::norm(z) < 2.0 && k < 100; ++k)
+        uint32_t k = 0;
+        
+        for (; std::norm(z) < 2.0 && k < 100; ++k)
         {
             z = z*z + c;
         }
         const double norm = std::norm(z);
         if (norm < 2.0)
         {
-            return uint8_t(255);
+            return uint8_t(0);
         }
         else
         {
-            //std::cout << "NORM = " << norm << "   z= " << z << "   c = " << c << std::endl;
-            const double val = std::exp(-norm/2.)*255;
+            const double val = std::sqrt(double(k))*20.;
+
             return uint8_t(val);
         }
     };
+    
     const Image<uint8_t, WIDTH, HEIGHT> img(fun);
-    img.save("images/mandelbrot.png");
+
+    img.save("images/mandelbrottt.png");
 
 }

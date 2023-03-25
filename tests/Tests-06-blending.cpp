@@ -8,12 +8,12 @@
 
 TEST_CASE("We can add two images of the same size")
 {
-    Image<uint8_t, 2, 3> ima, imb;
+    Image<int, 2, 3> ima, imb;
     ima(0,0) = 21; ima(1,0) = 41 ;  imb(0,0) = 51 ; imb(1,0) = 91;
     ima(0,1) = 56; ima(1,1) = 123;  imb(0,1) = 41 ; imb(1,1) = 13;
     ima(0,2) = 13; ima(1,2) = 4  ;  imb(0,2) = 130; imb(1,2) = 123;
 
-    const Image<uint8_t, 2, 3> imc = ima+imb;
+    const Image<int, 2, 3> imc = ima+imb;
 
     REQUIRE(imc(0,0) == 21+51);
     REQUIRE(imc(1,0) == 41+91);
@@ -25,10 +25,11 @@ TEST_CASE("We can add two images of the same size")
 }
 TEST_CASE("Luma as transparency mask (RGB+Luma) => RGBA")
 {
-    const RGB pix = RGB{1,3,4} + Luma{120};
+    const RGBA pix = RGB{1,3,4} + Luma{120};
     REQUIRE(pix.r == 1);
     REQUIRE(pix.g == 3);
     REQUIRE(pix.b == 4);
+    REQUIRE(pix.a == 120);
 }
 TEST_CASE("Luma as transparency mask (RGBA+Luma) => RGBA")
 {
@@ -160,3 +161,20 @@ TEST_CASE("PHOTO COMPOSITING: RGBA+RGBA")
     }
 }
 
+
+
+TEST_CASE("PHOTO COMPOSITING: RGBA + LUMA")
+{
+    {
+        const Image<RGB, 499, 499> base("../images/sonic.png");
+        const Image<Luma, 499, 499> mask("../images/sonic_mask.png");
+        const Image<RGBA, 499, 499> bg("../images/sonic_new_bg.png");
+        const RGBA lol = from<RGBA, RGB>(base(10,10));
+        std::cout << "aezaezaeza  "<< int(lol.a) << std::endl;
+        std::cout << "aezaezaeza  "<< int(mask(10,10).gray) << std::endl;
+        std::cout << "aezaezaeza  "<< int((lol+mask(10,10)).a) << std::endl; 
+        const Image<RGBA, 499, 499> sum0 = base + mask;
+        const Image<RGBA, 499, 499> sum = bg + sum0;
+        sum.save("images/sonic_stars.png");
+    }
+}
