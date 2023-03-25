@@ -20,26 +20,12 @@ struct Luma
 };
 
 
-/*
-template<typename Pix>
-RGBA
-to_rgba(const Pix & pix);
-
-template<typename Pix>
-Pix
-from_rgba(const RGBA & pix);
-
-
-template<>
-RGBA
-to_rgba(const )
-
-*/
-
-#include <iostream>
-
 template<typename A, typename B>
-A from(const B & stuff);
+A from(const B & stuff)
+{
+    RGBA rgba = from<RGBA, B>(stuff);
+    return from<A, RGBA>(rgba);
+}
 
 template<>
 RGBA
@@ -78,13 +64,6 @@ RGBA from<RGBA, Luma>(const Luma & pix)
 
 
 
-template<typename A, typename B>
-A from(const B & stuff)
-{
-    RGBA rgba = from<RGBA, B>(stuff);
-    return from<A, RGBA>(rgba);
-}
-
 
 RGBA
 mix_two_rgba(const RGBA & lhs,
@@ -94,16 +73,6 @@ mix_two_rgba(const RGBA & lhs,
                                        rhs.r, rhs.g, rhs.b, rhs.a);
     return {r,g,b,a};
 }
-// RGB
-// mix_two_rgb(const RGB & lhs,
-//             const RGB & rhs)
-// {
-//     const auto & [r,g,b,a] = mix_color(rhs.r, rhs.g, rhs.b, 255,
-//                                        lhs.r, lhs.g, lhs.b, 255);
-//     return {r,g,b};
-// }
-
-
 
 // blending with at least one alpha channel (cast to rgba)
 #define IMPL_ADD(A,B,C)                                    \
@@ -126,7 +95,6 @@ RGBA
 operator+(const Pix & pix,
           const Luma & mask)
 {
-//    std::cout << "aeazezae" << std::endl;
     RGBA rgba = from<RGBA, Pix>(pix);
     rgba.a = uint8_t((uint32_t(rgba.a)*uint32_t(mask.gray)/255));
     return rgba;

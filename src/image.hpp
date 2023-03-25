@@ -22,18 +22,7 @@ struct Image
         }
     }
     Image() = default;
-    template<typename P2, size_t W2 = W, size_t H2 = H>
-    Image(const Image<P2, W2, H2> & other)
-    {
-        for (auto & col: _pixels)
-        {
-            for (auto & pix: col)
-            {
-                pix = from<P, P2>(pix);
-            }
-        }
-    }
-    
+
     P &
     operator()(const size_t i, const size_t j)
     {
@@ -99,28 +88,12 @@ struct Image
 
 };
 
-// template <typename A, typename B>
-// struct ReturnType
-// {
-//     typedef A type;
-// };
 
-// #define ADD_RETURN_TYPE(A,B,C) \
-// template<>                     \
-// struct ReturnType<A,B>         \
-// {                              \
-//     typedef C type;            \
-// };
-
-// ADD_RETURN_TYPE(RGB,Luma,RGBA)
-
-// //template<typename A, typename B>
-// //using add_type_t = typename ReturnType<A,B>::type;
-
-
-template<const size_t W, const size_t H, typename A, typename B>
+template<const size_t W, const size_t H,
+         typename A, typename B>
 Image<A, W, H>
-operator+(const Image<A, W, H> & lhs, const Image<B, W, H> & rhs)
+operator+(const Image<A, W, H> & lhs,
+          const Image<B, W, H> & rhs)
 {
     Image<A, W, H> out{};
     for (uint32_t i = 0; i < W; ++i)
@@ -135,7 +108,8 @@ operator+(const Image<A, W, H> & lhs, const Image<B, W, H> & rhs)
 
 template<size_t W, size_t H, typename A>
 Image<RGBA, W, H>
-operator+(const Image<A, W, H> & lhs, const Image<Luma, W, H> & rhs)
+operator+(const Image<A   , W, H> & lhs,
+          const Image<Luma, W, H> & rhs)
 {
     Image<RGBA, W, H> out{};
     for (uint32_t i = 0; i < W; ++i)

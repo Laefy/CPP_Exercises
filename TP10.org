@@ -20,7 +20,7 @@ Utilisez des std::array<> pour stocker les pixels.
 
 On doit avoir:
 + un constructeur ~Image(const P & pix)~ prenant un pixel de remplissage et construisant une image unie
-+ un constructeur par défault ~Image()~ utilisant le constructeur précédent
++ un constructeur par défault ~Image()~
 
 On veut aussi pouvoir utiliser img(i,j) pour accéder au pixel de la j-ème ligne et de la i-ème colone, on va pour cela implémenter:
 + ~P & operator(const size_t i, const size_t j)~

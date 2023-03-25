@@ -13,7 +13,6 @@ file(
 
     src/pixels.hpp
     src/image.hpp
-    src/fuse_images.hpp
 
     # Si vous ajoutez de nouveaux fichiers, vous pouvez le faire ici...
 )

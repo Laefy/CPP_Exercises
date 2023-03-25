@@ -26,13 +26,6 @@ TEST_CASE("Default constructor")
 }
 
 
-/* un peu trop ?
-TEST_CASE("The type of integer used for the image size is unsigned")
-{
-    const Image<char, -1, 1> img(0);
-    
-}
-*/
 
 TEST_CASE("Image pixel access with image(i,j)")
 {
