@@ -1,8 +1,7 @@
 #+TITLE: Les templates
 #+subtitle: On va faire des collages
 
-* Un template c'est quoi?
-C'est un truc pour la généricité cf cours
+
 * But de ce TP
 Les images sont des tableaux de *pixels*.
 On va utiliser des templates pour définir des images de *taille statique* utilisant plusieurs types de pixels.
