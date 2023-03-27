@@ -35,7 +35,10 @@ On veut aussi pouvoir utiliser img(i,j) pour accéder au pixel de la j-ème lign
 + ~const P & operator(const size_t i, const size_t j) const~
 
 Ensuite, on veux pouvoir additioner deux image de même tailles, en additionants les pixels un par un.
-Ainsi on aura \((img_1 + img_2)(i,j) = img_1(i,j) + img_2(i,j)\).
+Ainsi on aura
+
+\[(img_1 + img_2)(i,j) = img_1(i,j) + img_2(i,j)\].
+
 Overloadez l'opérateur + hors de la classe, ça sera plus facile pour la suite.
 
 Ajoutez le constructeur:
@@ -49,8 +52,6 @@ Image<P, W, H>(const std::function<P(const size_t i, const size_t j)> & functor)
 
 Où functor(i,j) est une valeur de pixel à mettre en (i,j).
 
-** TODO Test 02: Image IO
-Rien à faire.
 
 ** TODO Test 03: Procedural Images
 Ici rien à faire, regardez juste les images générées dans build/images.
@@ -80,7 +81,7 @@ template<typename A, typename B>
 A from(const B & stuff);
 #+end_src
 
-Implémentez les cas de conversions suivants:
+On va implémenter les cas de conversions suivants:
 
 | Entrée | Sortie | Méthode                                      |
 |--------+--------+----------------------------------------------|
