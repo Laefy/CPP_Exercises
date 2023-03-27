@@ -33,65 +33,18 @@ On veut aussi pouvoir utiliser img(i,j) pour accéder au pixel de la j-ème lign
 Ensuite, on veux pouvoir additioner deux image de même tailles, en additionants les pixels un par un.
 Ainsi on aura \((img_1 + img_2)(i,j) = img_1(i,j) + img_2(i,j)\).
 Overloadez l'opérateur + hors de la classe, ça sera plus facile pour la suite.
-  
-** TODO Test 02: Image IO
-Avant toute chose, on va ajouter un nouveau constructeur:
+
+Ajoutez le constructeur:
 #+begin_src c++
     Image<P, W, H>(const std::function<P(const size_t i, const size_t j)> & functor)
     {
         // todo
     }
 #+end_src
-
 Où functor(i,j) est une valeur de pixel à mettre en (i,j).
 
-Ensuite, vous allez simplement ajouter les deux méthodes suivantes à Image:
-#+begin_src c++
-    Image<P, W, H>(const std::string & path)
-    {
-        int w, h, c;
-        const uint8_t * data = stbi_load(path.c_str(),
-                                         &w, &h, &c, 0);
-        if(data == NULL)
-        {
-            std::cout << "Could not find image '" << path << "'" << std::endl;
-            exit(1);
-        }
-        else if (w!=W || h != H || c != sizeof(P))
-        {
-            std::cout << "Could not open image '"
-                      << path << "' with the dimensions ("
-                      << W <<"," << H << ","
-                      << sizeof(P)<<"), found ("
-                      << w <<","<<h<<","<< c  << ")" << std::endl;
-        }
-        else
-        {
-            for (size_t i = 0; i < W; ++i)
-            {
-                for (size_t j = 0; j < H; ++j)
-                {
-                    const uint8_t * pixel_ptr = data + ((j%h)*w + (i%w))*c;
-                    (*this)(i,j) = *reinterpret_cast<const P *>(pixel_ptr);
-                }
-            }
-        }
-    }
-    
-    void
-    save(const std::string & path) const
-    {
-        const auto data = reinterpret_cast<const uint8_t *>(this);
-        stbi_write_png(path.c_str(), W, H, sizeof(P), data, W*sizeof(P));
-    }
-        
-
-#+end_src
-
-Ne perdez pas trop de temps à lire ces fonctions: on s'en fout et vous ne travaillez pas sur ce sujet aujourd'hui.
-
-Maintennant vous pouvez lire et écrire des images, et même générer procéduralement des images.
-
+** TODO Test 02: Image IO
+Rien à faire
 
 ** TODO Test 03: Procedural Images
 Ici rien à faire, regardez juste les images générées dans build/images.
