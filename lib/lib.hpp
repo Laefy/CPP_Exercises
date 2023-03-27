@@ -9,6 +9,12 @@
 
 #include <stdint.h>
 #include <array>
+#include <string>
+#include <iostream>
+
+template <typename P, size_t W, size_t H>
+struct Image;
+
 
 namespace lib
 {
@@ -61,5 +67,50 @@ namespace lib
         };
     }
           
+    template<typename P, size_t W, size_t H>
+    Image<P,W,H>
+    load(const std::string & path)
+    {
+        int w, h, c;
+        const uint8_t * data = stbi_load(path.c_str(),
+                                         &w, &h, &c, 0);
+        Image<P,W,H> img = {};
+        if(data == NULL)
+        {
+            std::cout << "Could not find image '" << path << "'" << std::endl;
+            exit(1);
+        }
+        else if (w!=W || h != H || c != sizeof(P))
+        {
+            std::cout << "Could not open image '"
+                      << path << "' with the dimensions ("
+                      << W <<"," << H << ","
+                      << sizeof(P)<<"), found ("
+                      << w <<","<<h<<","<< c  << ")" << std::endl;
+        }
+        else
+        {
+            for (size_t i = 0; i < W; ++i)
+            {
+                for (size_t j = 0; j < H; ++j)
+                {
+                    const uint8_t * pixel_ptr = data + ((j%h)*w + (i%w))*c;
+                    img(i,j) = *reinterpret_cast<const P *>(pixel_ptr);
+                }
+            }
+        }
+        return img;
+    
+    }
 
+    template<typename P, size_t W, size_t H>
+    void
+    save(const Image<P,W,H> &img,
+         const std::string & path)
+    {
+        const auto data = reinterpret_cast<const uint8_t *>(&img);
+        stbi_write_png(path.c_str(), W, H, sizeof(P), data, W*sizeof(P));
+    }
+
+    
 }
