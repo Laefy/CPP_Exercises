@@ -124,10 +124,10 @@ RGBA from(const RGB & x)
 ** TODO Test 05: Combiner des images
 On veut pouvoir additioner les différents pixels qu'on a définit pour pouvoir combiner des images.
 On peut:
-+ soit /blender/ les couleurs de deux pixels (en utilisant la fonction mix_color de la lib du TP)
++ soit /blender/ les couleurs de deux pixels (en utilisant la fonction ~mix_color~ de la lib du TP)
 + soit se servir de l'image de droite comme un /masque de transparence/.
-On va se servir de la fonction lib::mix_color pour le blending.
-L'idée est de faire une "superposition" d'une image par une autre, la fonction mix_color n'est donc pas symétrique.
+On va se servir de la fonction ~lib::mix_color~ pour le blending.
+L'idée est de faire une "superposition" d'une image par une autre, la fonction ~mix_color~ n'est donc pas symétrique.
 
 [[./figures/blending.png]]
 
