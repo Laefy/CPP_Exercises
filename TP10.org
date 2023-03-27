@@ -83,17 +83,17 @@ A from(const B & stuff);
 
 On va implémenter les cas de conversions suivants:
 
-| Entrée | Sortie | Méthode                                      |
-|--------+--------+----------------------------------------------|
-| RGBA   | RGBA   | on retourne juste la valeur qu'on reçoit     |
-| RGB    | RGB    | on retourne juste la valeur qu'on reçoit     |
-| Luma   | Luma   | on retourne juste la valeur qu'on reçoit     |
-| RGBA   | RGB    | on retire le canal alpha                     |
-| RGB    | RGBA   | on met 255 pour le canal alpha               |
-| RGB    | Luma   | on utilise lib::rgb_to_grayscale()           |
-| Luma   | RGB    | on utilise lib::grayscale_to_rgb()           |
-| RGBA   | Luma   | On utilise from<RGBA, RGB> et from<RGB,Luma> |
-| Luma   | RGBA   | On utilise from<Luma, RGB> et from<RGB,RGBA> |
+| Entrée | Sortie | Méthode                                          |
+|--------+--------+--------------------------------------------------|
+| RGBA   | RGBA   | on retourne juste la valeur qu'on reçoit         |
+| RGB    | RGB    | on retourne juste la valeur qu'on reçoit         |
+| Luma   | Luma   | on retourne juste la valeur qu'on reçoit         |
+| RGBA   | RGB    | on retire le canal alpha                         |
+| RGB    | RGBA   | on met 255 pour le canal alpha                   |
+| RGB    | Luma   | on utilise ~lib::rgb_to_grayscale()~             |
+| Luma   | RGB    | on utilise ~lib::grayscale_to_rgb()~             |
+| RGBA   | Luma   | On utilise ~from<RGBA, RGB>~ et ~from<RGB,Luma>~ |
+| Luma   | RGBA   | On utilise ~from<Luma, RGB>~ et ~from<RGB,RGBA>~ |
 
 Remarquez qu'on aurait pu avoir l'idée de faire les 3 premiers cas en une seule fois avec
 
