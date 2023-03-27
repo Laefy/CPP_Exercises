@@ -44,13 +44,13 @@ public:
         return _data[j][i];
     }
 
-    Image(const std::function<P(const size_t, const size_t)> & foo)
+    Image(const std::function<P(const size_t, const size_t)> & functor)
     {
         for (size_t j = 0; j < H; ++j)
         {
             for (size_t i = 0; i < W; ++i)
             {
-                (*this)(i,j) = foo(i,j);
+                (*this)(i,j) = functor(i,j);
             }
         }        
     }

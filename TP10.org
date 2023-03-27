@@ -9,7 +9,7 @@ Tout au long tu TP, votre code produira des images dans le dossier ~images~ situ
 
 
 * Les tests pas à pas
-** TODO Test 01: Image
+** TODO Tests 01*: Image
 /On travaillera dans image.hpp/
 
 On définit une classe template ~Image<typename P, size_t W, size_t H>~ où (W,H) est la dimension de l'image et P le type utilisé pour les pixels (au début on utilisera des entiers simples).
@@ -39,16 +39,18 @@ Ainsi on aura \((img_1 + img_2)(i,j) = img_1(i,j) + img_2(i,j)\).
 Overloadez l'opérateur + hors de la classe, ça sera plus facile pour la suite.
 
 Ajoutez le constructeur:
+
 #+begin_src c++
-    Image<P, W, H>(const std::function<P(const size_t i, const size_t j)> & functor)
-    {
-        // todo
-    }
+Image<P, W, H>(const std::function<P(const size_t i, const size_t j)> & functor)
+{
+    // todo
+}
 #+end_src
+
 Où functor(i,j) est une valeur de pixel à mettre en (i,j).
 
 ** TODO Test 02: Image IO
-Rien à faire
+Rien à faire.
 
 ** TODO Test 03: Procedural Images
 Ici rien à faire, regardez juste les images générées dans build/images.
@@ -58,15 +60,19 @@ Ici rien à faire, regardez juste les images générées dans build/images.
 /On travaillera dans pixels.hpp/
 
 On va définir nos propres types de pixels: les ~struct~ RGBA, RGB, et Luma.
+
 |      | Nombre de canaux/taille en octets   | Description           |
 |------+-------------------------------------+-----------------------|
 | RGBA |                                   4 | Rouge,Vert,Bleu,Alpha |
 | RGB  |                                   3 | Rouge,Vert,Bleu       |
 | Luma |                                   1 | Niveau de Gris        |
 
-Implémentez ces trois ~struct~, en utilisant le type uint8_t ou unsigned char pour les valeurs des canaux.
+Une ~struct~ c'est comme une ~class~ sauf que tout est publique par défaut dedans et que l'instanciation d'une struct ne peux pas valoir NULL.
+
+Implémentez ces trois ~struct~, en utilisant le type uint8_t ou unsigned char (les deux correspondant à un entier non-signé sur 8 bits) pour les valeurs des canaux.
 
 On va ensuite vouloir *convertir* les pixels entre eux.
+
 On va donc créer une fonction template
 
 #+begin_src c++
@@ -89,6 +95,7 @@ Implémentez les cas de conversions suivants:
 | Luma   | RGBA   | On utilise from<Luma, RGB> et from<RGB,RGBA> |
 
 Remarquez qu'on aurait pu avoir l'idée de faire les 3 premiers cas en une seule fois avec
+
 #+begin_src c++
 template<typename A>
 A from(const A & x)
@@ -100,6 +107,7 @@ A from(const A & x)
 Mais attention! c++ n'autorise pas la spécialisation partielle de fonctions templates, et ça n'est donc pas possible (il aurait fallut utiliser une class ou une struct, ce qu'on ne fera pas aujourd'hui).
 
 Pour spécialiser la fonction, suivez ce modèle:
+
 #+begin_src c++
 template<>
 RGBA from(const RGB & x)
@@ -129,6 +137,7 @@ Voici un exemple parlant:
 [[./figures/transparency_mask.png]]
 
 On va se baser sur ce tableau pour savoir quoi faire:
+
 | A    | B    | effet                  | Type sortant C |
 |------+------+------------------------+----------------|
 | RGBA | RGBA | blending               | RGBA           |
@@ -142,6 +151,7 @@ On va se baser sur ce tableau pour savoir quoi faire:
 
 *** color blending
 Commencez par implémenter, le premier cas du tableau.
+
 #+begin_src c++
 RGBA
 operator+(const RGBA & lhs,
@@ -150,11 +160,13 @@ operator+(const RGBA & lhs,
     // TODO
 }
 #+end_src
+
 On va par la suite implémenter tous les autres cas de blending en utilisant ce premier cas, en utilisant ~from~ pour transformer les pixels d'entrée en RGBA et convertir la sortie en le type attendu.
 
 Astuce: si vous êtes en confiance et que vous avez du temps, vous pouvez vous arranger écrire une macro avec ~#define~ pour ne pas avoir à réécrire 6 fois la même fonction.
 
 Vous auriez quelque chose comme ça:
+
 #+begin_src c++
 IMPL_ADD(RGBA, RGBA, RGBA);
 IMPL_ADD(RGBA, RGB , RGBA);
@@ -169,6 +181,7 @@ Vous pouvez vous passer de la macro (c'est d'ailleurs conseillé si vous n'êtes
 *** Luma as alpha mask
 
 Pour celle-là, il suffit d'écrire que cette fonction template sans spécialisation:
+
 #+begin_src c++
 // mask operator
 template<typename A>
@@ -184,13 +197,17 @@ Il est attendu que la sortie soit toujours du RGBA (vu que c'est le seul type de
 La valeur alpha de la sortie sera celle de lhs fois la valeur de gris de mask, le tout divisé par 255.
 
 
-/dans image.hpp/
+/On se remet dans image.hpp/
+
 
 Normalement à ce stade, il manque une chose: revenez à Image et regardez l'opérateur+
+
 #+begin_src c++
-template<const size_t W, const size_t H, typename A, typename B>
+template<const size_t W, const size_t H,
+         typename A, typename B>
 Image<A, W, H>
-operator+(const Image<A, W, H> & lhs, const Image<B, W, H> & rhs)
+operator+(const Image<A, W, H> & lhs,
+          const Image<B, W, H> & rhs)
 {
     // des trucs
 }
@@ -201,7 +218,7 @@ Remarquez que le type de retour est le même que le type à gauche. Hors on veut
 |------+------+--------|
 | tout | Luma | RGBA   |
 
-Il suffit de rajouter une spécialisation de l'opérateur + de image.
+Il suffit de rajouter une spécialisation de l'opérateur + de image qui fait à peu près la même chose que la première, mais qui sans le type B (on sait déjà que c'est Luma) et avec RGBA comme type de retour.
 
 
 À ce stade, vous pouvez regarder les images générées dans build/images: votre code produit des montages à partir des fonctionalitées que vous avez implémenté!

@@ -8,7 +8,7 @@
 #include <complex>
 
 
-TEST_CASE("Look we can already do pretty neat things, look at images/mandelbrot.png")
+TEST_CASE("Look we can already do pretty neat things, look at build/images/mandelbrot.png")
 {
     const size_t WIDTH = 1000;
     const size_t HEIGHT = 1000;
