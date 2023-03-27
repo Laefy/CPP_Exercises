@@ -17,7 +17,10 @@ On définit une classe template ~Image<typename P, size_t W, size_t H>~ où (W,H
 Attention, l'image doît être stockée en *lignes* et pas en *colones*.
 
 On appelle **row-major** une image qui est stockée ligne par ligne et **column-major** une image qui est stockée colone par colone. Voici un schéma explicatif:
+
 [[./figures/Row_and_column_major.png]]
+
+On se place donc dans le cas en rouge.
 
 Vous utiliserez un std::array nesté ~std::array<std::array<P, W>, H>~ pour stocker les pixels.
 
@@ -27,6 +30,7 @@ On doit avoir:
 
   
 On veut aussi pouvoir utiliser img(i,j) pour accéder au pixel de la j-ème ligne et de la i-ème colone, on va pour cela implémenter:
+
 + ~P & operator(const size_t i, const size_t j)~
 + ~const P & operator(const size_t i, const size_t j) const~
 
@@ -137,9 +141,16 @@ On va se baser sur ce tableau pour savoir quoi faire:
 
 
 *** color blending
-Écrivez une fonction ~blend_two_rgba~ qui prend deux RGBA et les blend en utilisant lib::mix_color.
-
-Ensuite, vous pouvez utiliser cette fonction pour implémenter tous les ~C operator+(const A & lhs, const B & rhs)~ nécessaires.
+Commencez par implémenter, le premier cas du tableau.
+#+begin_src c++
+RGBA
+operator+(const RGBA & lhs,
+          const RGBA & rhs)
+{
+    // TODO
+}
+#+end_src
+On va par la suite implémenter tous les autres cas de blending en utilisant ce premier cas, en utilisant ~from~ pour transformer les pixels d'entrée en RGBA et convertir la sortie en le type attendu.
 
 Astuce: si vous êtes en confiance et que vous avez du temps, vous pouvez vous arranger écrire une macro avec ~#define~ pour ne pas avoir à réécrire 6 fois la même fonction.
 
