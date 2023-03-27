@@ -9,7 +9,7 @@ Tout au long tu TP, votre code produira des images dans le dossier ~images~ situ
 
 
 * Les tests pas à pas
-** TODO Tests 01*: Image
+** Image
 /On travaillera dans image.hpp/
 
 On définit une classe template ~Image<typename P, size_t W, size_t H>~ où (W,H) est la dimension de l'image et P le type utilisé pour les pixels (au début on utilisera des entiers simples).
@@ -53,11 +53,11 @@ Image<P, W, H>(const std::function<P(const size_t i, const size_t j)> & functor)
 Où functor(i,j) est une valeur de pixel à mettre en (i,j).
 
 
-** TODO Test 03: Procedural Images
+** Des images prodédurales
 Ici rien à faire, regardez juste les images générées dans build/images.
 (ne confondez pas avec le dossier images à la racine de votre projet).
 
-** TODO Test 04: Pixels
+** Pixels
 /On travaillera dans pixels.hpp/
 
 On va définir nos propres types de pixels: les ~struct~ RGBA, RGB, et Luma.
@@ -122,7 +122,7 @@ RGBA from(const RGB & x)
 
 
 
-** TODO Test 05: Combiner des images
+** Combiner des images
 On veut pouvoir additioner les différents pixels qu'on a définit pour pouvoir combiner des images.
 On peut:
 + soit /blender/ les couleurs de deux pixels (en utilisant la fonction ~mix_color~ de la lib du TP)
@@ -150,7 +150,7 @@ On va se baser sur ce tableau pour savoir quoi faire:
 | tout | Luma | masque de transparence | RGBA           |
 
 
-*** color blending
+*** Blending
 Commencez par implémenter, le premier cas du tableau.
 
 #+begin_src c++
@@ -179,7 +179,7 @@ IMPL_ADD(RGB , RGB , RGB);
 
 Vous pouvez vous passer de la macro (c'est d'ailleurs conseillé si vous n'êtes pas en avance).
 
-*** Luma as alpha mask
+*** Masque de transparence
 
 Pour celle-là, il suffit d'écrire que cette fonction template sans spécialisation:
 
