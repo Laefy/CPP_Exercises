@@ -116,10 +116,12 @@ On peut:
 + soit se servir de l'image de droite comme un /masque de transparence/.
 On va se servir de la fonction lib::mix_color pour le blending.
 L'idée est de faire une "superposition" d'une image par une autre, la fonction mix_color n'est donc pas symétrique.
+
 [[./figures/blending.png]]
 
 Appliquer le masque de transparence B sur une image A voudra dire pour nous “remplacer le canal alpha de A par B„ (B sera donc une image à un seul canal).
-Voici un exemple parlant
+Voici un exemple parlant:
+
 [[./figures/transparency_mask.png]]
 
 On va se baser sur ce tableau pour savoir quoi faire:
