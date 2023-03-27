@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+// The alpha canal is useless here!
 TEST_CASE("Blending (Luma + RGBA) => RGB")
 {
     const Luma a = Luma{109};
