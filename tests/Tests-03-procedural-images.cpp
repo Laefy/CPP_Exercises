@@ -41,6 +41,6 @@ TEST_CASE("Look we can already do pretty neat things, look at images/mandelbrot.
     
     const Image<uint8_t, WIDTH, HEIGHT> img(fun);
 
-    img.save("images/mandelbrot.png");
+    lib::save(img, "images/mandelbrot.png");
 
 }

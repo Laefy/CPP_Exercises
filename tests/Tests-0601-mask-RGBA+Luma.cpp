@@ -19,11 +19,11 @@ TEST_CASE("Luma as transparency mask (RGBA+Luma) => RGBA")
 TEST_CASE("PHOTO COMPOSITING: RGB + (RGBA + LUMA)")
 {
     {
-        const Image<RGB, 499, 499> base("../images/sonic.png");
-        const Image<Luma, 499, 499> mask("../images/sonic_mask.png");
-        const Image<RGBA, 499, 499> bg("../images/sonic_new_bg.png");
-        const Image<RGBA, 499, 499> sum = bg + (base + mask);
-        sum.save("images/sonic_stars.png");
+        const auto base = lib::load<RGB, 499, 499>("../images/sonic.png");
+        const auto mask = lib::load<RGB, 499, 499>("../images/sonic_mask.png");
+        const auto bg   = lib::load<RGB, 499, 499>("../images/sonic_new_bg.png");
+        const auto sum = bg + (base + mask);
+        lib::save(sum, "images/sonic_stars.png");
     }
 
 }

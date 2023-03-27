@@ -24,9 +24,9 @@ TEST_CASE("Blending (RGBA + RGBA) => RGBA")
 
 TEST_CASE("PHOTO COMPOSITING: RGBA+RGBA")
 {
-    const Image<RGBA, 1012, 570> base("../images/photo_base.png");
-    const Image<RGBA, 1012, 570> effect("../images/photo_dithering.png");
+    const auto base   = lib::load<RGBA,1012,570>("../images/photo_base.png");
+    const auto effect = lib::load<RGBA,1012,570>("../images/photo_dithering.png");
     const auto sum = base + effect;
-    sum.save("images/compositing.png");
+    lib::save(sum, "images/compositing.png");
     
 }
