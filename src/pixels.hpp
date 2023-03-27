@@ -83,7 +83,7 @@ C operator+(const A & lhs, const B & rhs)       \
 
 IMPL_BLEND(RGBA, RGB , RGBA);
 IMPL_BLEND(RGB , RGBA, RGB );
-IMPL_BLEND(Luma, RGBA, RGBA);
+IMPL_BLEND(Luma, RGBA, RGB);
 IMPL_BLEND(Luma, RGB , RGB);
 IMPL_BLEND(RGB , RGB , RGB);
 

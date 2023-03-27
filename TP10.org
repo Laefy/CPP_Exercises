@@ -127,7 +127,9 @@ Voici un exemple parlant:
 On va se baser sur ce tableau pour savoir quoi faire:
 | A    | B    | effet                  | Type sortant C |
 |------+------+------------------------+----------------|
-| tout | RGBA | blending               | RGBA           |
+| RGBA | RGBA | blending               | RGBA           |
+| RGB  | RGBA | blending               | RGB            |
+| Luma | RGBA | blending               | RGB            |
 | RGBA | RGB  | blending               | RGBA           |
 | RGB  | RGB  | blending               | RGB            |
 | Luma | RGB  | blending               | RGB            |
