@@ -109,11 +109,11 @@ RGBA from(const RGB & x)
 
 
 
-** TODO Test 05: Blending
+** TODO Test 05: Combiner des images
 On veut pouvoir additioner les différents pixels qu'on a définit pour pouvoir combiner des images.
 On peut:
-+ soit “blender„ les couleurs de deux pixels (en utilisant la fonction mix_color de la lib du TP)
-+ soit se servir de l'image de droite comme masque de transparence.
++ soit /blender/ les couleurs de deux pixels (en utilisant la fonction mix_color de la lib du TP)
++ soit se servir de l'image de droite comme un /masque de transparence/.
   # METTRE Images d'exemple.
 On va se baser sur ce tableau pour savoir quoi faire:
 | A    | B    | effet                  | Type sortant C |
@@ -126,11 +126,11 @@ On va se baser sur ce tableau pour savoir quoi faire:
 
 
 *** color blending
-Écrivez une fonction ~blend_two_rgba~ qui prend deux RGBA et les blend en utilisant mix_color.
+Écrivez une fonction ~blend_two_rgba~ qui prend deux RGBA et les blend en utilisant lib::mix_color.
 
 Ensuite, vous pouvez utiliser cette fonction pour implémenter tous les ~C operator+(const A & lhs, const B & rhs)~ nécessaires.
 
-Astuce: vous pouvez vous arranger écrire une macro avec ~#define~ pour ne pas avoir à réécrire 6 fois la même fonction.
+Astuce: si vous êtes en confiance et que vous avez du temps, vous pouvez vous arranger écrire une macro avec ~#define~ pour ne pas avoir à réécrire 6 fois la même fonction.
 
 Vous auriez quelque chose comme ça:
 #+begin_src c++
@@ -142,6 +142,7 @@ IMPL_ADD(Luma, RGB , RGB);
 IMPL_ADD(RGB , RGB , RGB);
 #+end_src
 
+Vous pouvez vous passer de la macro (c'est d'ailleurs conseillé si vous n'êtes pas en avance).
 
 *** Luma as alpha mask
 
