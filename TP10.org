@@ -117,27 +117,42 @@ template<typename A, typename B>
 A from(const B & stuff);
 #+end_src
 
-On va se baser sur ce principe: on peut tout convertir en RGBA, et on peut convertir RGBA en tout.
-Commencez par implémenter dans l'ordre:
-+ la conversion RGBA => RGBA (cas trivial)
-+ la conversion RGBA => RGB
-+ la conversion RGBA => Luma
-+ la conversion RGB  => RGBA
-+ la conversion Luma => RGBA
+Implémentez les cas de conversions suivants:
 
-Ensuite, implémentez un cas plus général
+| Entrée | Sortie | Méthode                                      |
+|--------+--------+----------------------------------------------|
+| RGBA   | RGBA   | on retourne juste la valeur qu'on reçoit     |
+| RGB    | RGB    | on retourne juste la valeur qu'on reçoit     |
+| Luma   | Luma   | on retourne juste la valeur qu'on reçoit     |
+| RGBA   | RGB    | on retire le canal alpha                     |
+| RGB    | RGBA   | on met 255 pour le canal alpha               |
+| RGB    | Luma   | on utilise lib::rgb_to_grayscale()           |
+| Luma   | RGB    | on utilise lib::grayscale_to_rgb()           |
+| RGBA   | Luma   | On utilise from<RGBA, RGB> et from<RGB,Luma> |
+| Luma   | RGBA   | On utilise from<Luma, RGB> et from<RGB,RGBA> |
 
+Remarquez qu'on aurait pu avoir l'idée de faire les 3 premiers cas en une seule fois avec
 #+begin_src c++
-template<typename A, typename B>
-A from(const B & stuff)
+template<typename A>
+A from(const A & x)
 {
-    // TODO
+    return x;
 }
 #+end_src
 
-Où vous convertirez le type B en RGBA, puis le RGBA en type A.
+Mais attention! c++ n'autorise pas la spécialisation partielle de fonctions templates, et ça n'est donc pas possible (il aurait fallut utiliser une class ou une struct, ce qu'on ne fera pas aujourd'hui).
 
-Implémentez ensuite ~B into<A,B>(const A &)~, qui fait la même chose que ~from<B,A>~ (ça se fait en une seule fois).
+Pour spécialiser la fonction, suivez ce modèle:
+#+begin_src c++
+template<>
+RGBA from(const RGB & x)
+{
+    return {x.r,x.g,x.b,255};
+}
+#+end_src
+
+
+
 
 
 
