@@ -114,15 +114,22 @@ On veut pouvoir additioner les différents pixels qu'on a définit pour pouvoir 
 On peut:
 + soit /blender/ les couleurs de deux pixels (en utilisant la fonction mix_color de la lib du TP)
 + soit se servir de l'image de droite comme un /masque de transparence/.
-  # METTRE Images d'exemple.
+On va se servir de la fonction lib::mix_color pour le blending.
+L'idée est de faire une "superposition" d'une image par une autre, la fonction mix_color n'est donc pas symétrique.
+[[./figures/blending.png]]
+
+Appliquer le masque de transparence B sur une image A voudra dire pour nous “remplacer le canal alpha de A par B„ (B sera donc une image à un seul canal).
+Voici un exemple parlant
+[[./figures/transparency_mask.png]]
+
 On va se baser sur ce tableau pour savoir quoi faire:
 | A    | B    | effet                  | Type sortant C |
 |------+------+------------------------+----------------|
-| tout | Luma | masque de transparence | RGBA           |
 | tout | RGBA | blending               | RGBA           |
 | RGBA | RGB  | blending               | RGBA           |
 | RGB  | RGB  | blending               | RGB            |
 | Luma | RGB  | blending               | RGB            |
+| tout | Luma | masque de transparence | RGBA           |
 
 
 *** color blending
