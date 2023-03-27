@@ -74,13 +74,17 @@ namespace lib
         int w, h, c;
         const uint8_t * data = stbi_load(path.c_str(),
                                          &w, &h, &c, 0);
+        
+        std::cout << "MARCO\n";
         Image<P,W,H> img = {};
         if(data == NULL)
         {
             std::cout << "Could not find image '" << path << "'" << std::endl;
             exit(1);
         }
-        else if (w!=W || h != H || c != sizeof(P))
+        std::cout << "Found an image with dims (" << w <<"," << h << ") and " << c << "channels." << std::endl;
+        // return img;
+        if (w!=W || h != H || c != sizeof(P))
         {
             std::cout << "Could not open image '"
                       << path << "' with the dimensions ("

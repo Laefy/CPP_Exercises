@@ -12,3 +12,19 @@ TEST_CASE("Luma as transparency mask (RGB+Luma) => RGBA")
     REQUIRE(pix.b == 4);
     REQUIRE(pix.a == 120);
 }
+
+TEST_CASE("PHOTO COMPOSITING: Un gentil petit chat")
+{
+    const auto cat  = lib::load<RGB ,500,500>("../images/mojus-500.png");
+    
+    const auto mask = lib::load<Luma, 500,500>("../images/mojus-backrooms-alpha.png");
+    const auto grad = lib::load<RGBA ,500,500>("../images/mojus-backroom-grad.png");
+    const auto back = lib::load<Luma , 500,500>("../images/mojus-backrooms.png");
+    const auto sum = back + (cat+mask) + grad;
+    
+    lib::save(sum, "images/cute_cat.png");
+    
+    
+}
+
+

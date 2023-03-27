@@ -60,6 +60,37 @@ public:
 
 
 
+template<size_t W, size_t H>
+Image<RGB, W, H>
+operator+(const Image<Luma,W,H> & lhs,
+          const Image<RGBA,W,H> & rhs)
+{
+    Image<RGB, W, H> out = {};
+    for (size_t j = 0; j < H; ++j)
+    {
+        for (size_t i = 0; i < W; ++i)
+        {
+            out(i,j) = lhs(i,j) + rhs(i,j);
+        }
+    }
+    return out;
+}
+template<size_t W, size_t H>
+Image<RGB, W, H>
+operator+(const Image<Luma,W,H> & lhs,
+          const Image<RGB,W,H> & rhs)
+{
+    Image<RGB, W, H> out = {};
+    for (size_t j = 0; j < H; ++j)
+    {
+        for (size_t i = 0; i < W; ++i)
+        {
+            out(i,j) = lhs(i,j) + rhs(i,j);
+        }
+    }
+    return out;
+}
+
 template<typename A, typename B, size_t W, size_t H>
 Image<A, W, H>
 operator+(const Image<A,W,H> & lhs,

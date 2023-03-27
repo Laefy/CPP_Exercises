@@ -172,12 +172,33 @@ Vous auriez quelque chose comme ça:
 IMPL_ADD(RGBA, RGBA, RGBA);
 IMPL_ADD(RGBA, RGB , RGBA);
 IMPL_ADD(RGB , RGBA, RGB );
-IMPL_ADD(Luma, RGBA, RGBA);
+IMPL_ADD(Luma, RGBA, RGB);
 IMPL_ADD(Luma, RGB , RGB);
 IMPL_ADD(RGB , RGB , RGB);
 #+end_src
 
 Vous pouvez vous passer de la macro (c'est d'ailleurs conseillé si vous n'êtes pas en avance).
+
+*Attention*: remarquez les cas où on a du Luma à gauche: on ne retourne pas du Luma mais du RGB.
+
+Il faut donc ajouter les spécialisations à l'opérateur + de ~image.hpp~:
+
+#+begin_src c++
+template<size_t W, size_t H>
+Image<RGB, W, H>
+operator+(const Image<Luma,W,H> & lhs,
+          const Image<RGBA,W,H> & rhs)
+{
+  // TODO
+}
+template<size_t W, size_t H>
+Image<RGB, W, H>
+operator+(const Image<Luma,W,H> & lhs,
+          const Image<RGB ,W,H> & rhs)
+{
+  // TODO
+}
+#+end_src
 
 *** Masque de transparence
 
