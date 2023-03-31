@@ -1,50 +1,63 @@
 Move Semantics
 ===============
 
-C++ has a special kind of reference (denoted &&) called *r-value reference*,
-while the usual reference (denoted with a single &) is called *l-value reference*.
-It can be used as in the following function but should be understood even if it does not appear in your code.
+C++ has a special kind of reference (denoted &&) called *r-value reference*.
+While the usual reference (denoted with a single &) is actually called *l-value reference*.
+
+First toy example
+------------------
+
+Let us take the following code as example.
 ```C++
-void my_function(std::string&& s){
-  // Body of my_function
+void my_function(std::string&& s)
+{
+  // Something the 
+}
+void my_function(std::string const& s)
+{
+  // Something
+}
+
+int main () 
+{
+  std::string hello = "Hello world";
+  my_function(std::move(hello)); // we use std::move() to make a r-value reference.
 }
 ```
-A &&-reference is like a &-reference but with the extra meaning that the referenced object (by `s`) is unimportant to the caller (whoever called `myfunction`), often because it is about to be deleted.
+A &&-reference is like a &-reference but with the extra meaning that the referenced object (`s`) is unimportant to the caller (`main`), often because it is about to be deleted.
+C++ uses the &&-reference to implement *move semantics* meaning that the called function (`my_function`) is allowed to *steal the content* of the argument.
 
-C++ uses the &&-reference to implement *move semantics* meaning that
-the called function (here `my_function`) is allowed to *steal the content* 
-of the argument.
+Here for instance, 
+- nothing happens in `main` after the call to `my_function` hence the string `hello` will be destroyed anyway; 
+- the program has two versions of `my_function`, one uses the type `std::string&&` meaning that `my_function` can benefit from stealing the content of the passed `std::string`
 
-Example with concatenation of lists
+Hence, it makes sense to choose the version `my_function` using &&-reference.
+
+
+Real example: concatenation of `std::list`
 ------------------------------------
+The strengh of `std::list` is that concatenation may be done in constant time. Indeed `std::list` is a doubly-linked list hence consider the two lists below.
 
-For instance, the strengh of `std::list` is that concatenation may be done in constant time.
-Indeed `std::list` is a doubly-linked list hence if
+- `list1=`  null <-> 0 <-> 1 <-> 2 <-> null
+- `list2=`  null <-> 4 <-> 5 <-> 6 <-> null
 
-> list1:  null <-> 0 <-> 1 <-> 2 <-> null
-> list2:  null <-> 4 <-> 5 <-> 6 <-> null
+Their concatenation is
 
-then
+- null <-> 0 <-> 1 <-> 2 <-> 4 <-> 5 <-> 6 <-> null
 
-> list1+list2: null <-> 0 <-> 1 <-> 2 <-> 4 <-> 5 <-> 6 <-> null
-
-can be done by 
+and can be done by 
 
 - changing the forward pointer of 2 to 4
-- changing the backward pointer from 4 to 2
+- changing the backward pointer from 4 to 2.
 
-However, in the end, we have only one list, hence we *destroyed* one of them.
-
-It is implemented in the stl by the function-member `std::list::splice` thanks
-to the *move semantics*.
+The problem is that, in the end, we have only one list.  C++ solves this problem by using *move semantics* and an *r-value reference* in the function-member `std::list::splice`.
 It is defined as
 ```C++
   void splice( const_iterator pos, list&& other ); 
 ```
 in [this page](https://en.cppreference.com/w/cpp/container/list/splice).
 
-The meaning here is that the object `*this` will *steal the content* of `other`
-to concatenate it at the end of `*this`.
+The meaning here is that the object `*this` will *steal the content* of `other` to concatenate it at the end of `*this`.
 
 Look and execute [test11](test11-splice.cpp) for an example.
 
