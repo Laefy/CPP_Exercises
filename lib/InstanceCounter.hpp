@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * La classe `InstanceCounter` compte le nombre d'objets de type InstanceCounter en mémoire.
+ * The class `InstanceCounter` counts the number of instances.
  */
 class InstanceCounter
 {

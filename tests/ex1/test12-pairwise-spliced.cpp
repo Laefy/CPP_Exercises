@@ -5,9 +5,9 @@
 
 /*
 Your job is to write a function pairwise_splice(l1,l2) that
-- takes as argument two list of lists
-- moves the lists from the first lists to the first using `splice`
-- int is essentially an int that cannot be copied
+- takes as argument two list of lists l1 and l2
+- **moves** the lists inside l1 to the lists inside l2 using `splice`:
+  the content of l2[i] is moved into l1[i] for each i.
 */
 
 TEST_CASE("a. Example of std::list::splice")
