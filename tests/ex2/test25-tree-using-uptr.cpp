@@ -20,9 +20,9 @@ public:
         {
             uge::unique_ptr<ABR>& child = (i < _label) ? left : right;
             if (child.get() == nullptr)
-                child = new ABR { i };
+                child = uge::unique_ptr<ABR> { new ABR { i } };
             //       ^^^
-            // For this file to compile, you need to define this assignment operator
+            // For this file to work, you need to define this assignment operator
             else
                 (*child).insert(i);
         }
@@ -76,8 +76,8 @@ TEST_CASE("b. `ABR` is automatically movable.")
     REQUIRE(InstanceCounter::count() == 0);
 }
 
-TEST_CASE("c. You did not fall into the usual trap. ")
+TEST_CASE("c. You did not fall into the usual trap (r-value reference).")
 {
     uge::unique_ptr<ABR> uptr { new ABR { 4 } };
-    uptr = std::move(uptr);
+    uptr = std::move(uptr); // moving uptr into itself should do nothing.
 }
