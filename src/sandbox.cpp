@@ -1,5 +1,4 @@
 #include <string>
 
 int main()
-{
-}
+{}
