@@ -6,11 +6,12 @@
 /*
 Your job is to write (in files ex1.{hpp,cpp}) a function pairwise_concatenate(l1,l2) that
 - takes as argument two list of lists l1 and l2
+- l2 is an r-value reference
 - **moves** the lists inside l1 to the lists inside l2 using `concatenate`
   the content of l2[i] is moved into l1[i] for each i.
 */
 
-TEST_CASE("a. Pairwise_concatenate with an r-value reference")
+TEST_CASE("a. pairwise_concatenate with an r-value reference")
 {
     std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
     std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
@@ -47,10 +48,9 @@ TEST_CASE("b. If using an r-value reference, elements were moved.")
         }
     }
 
-    // We splice
     pairwise_concatenate(list1, std::move(list2));
 
-    // Let us look at the integers addresses after the splice
+    // Let us look at the integers addresses after the concatenation
     std::list<std::list<int*>> addresses_after = { {}, {}, {} };
     {
         auto addresses_it = addresses_after.begin();
