@@ -24,7 +24,7 @@ TEST_CASE("b. A `uge::unique_ptr` has a function-member `get()`.")
     REQUIRE(ic1 == ic2);
 }
 
-TEST_CASE("c. A `uge::unique_ptr` is default-constructible in which case it holds a nullptr.")
+TEST_CASE("c. A `uge::unique_ptr` is default-constructible, in which case it holds a nullptr.")
 {
     uge::unique_ptr<InstanceCounter> uptr;
     REQUIRE(uptr.get() == nullptr);

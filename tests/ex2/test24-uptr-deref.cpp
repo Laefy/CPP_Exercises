@@ -3,7 +3,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("b. `uge::unique_ptr` can be dereferenced")
+TEST_CASE("a. A `uge::unique_ptr` can be dereferenced")
 {
     InstanceCounter* ptr  = new InstanceCounter();
     InstanceCounter& ref1 = *ptr;
