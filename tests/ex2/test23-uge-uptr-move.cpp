@@ -23,6 +23,7 @@ TEST_CASE("a. `uge::unique_ptr` is move-constructible.")
 
 TEST_CASE("b. Move of an empty `uge::unique_ptr` does not cause memory problems.")
 {
+    InstanceCounter::reset_counters();
     uge::unique_ptr<InstanceCounter> uptr1 {};
     uge::unique_ptr<InstanceCounter> uptr2 = std::move(uptr2);
     REQUIRE(InstanceCounter::count() == 0u);
