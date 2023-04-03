@@ -117,7 +117,7 @@ Consider the class `Person3` below, and in [this file](../../lib/Person3.hpp)
 class Person3
 {
 public:
-    Person3(name)
+    Person3(std::string name)
         : _name { std::move(name) }
     {}
 
@@ -155,4 +155,20 @@ In each of the following case:
 
 
 Q22.19: Can we do better?  
-Spoiler: yes but it's outside the scope of this course.
+Spoiler: yes sometimes but it's outside the scope of this course.
+
+
+
+Conclusion: 
+-----------
+Consider a some function, constructor, or function-member  `f` that takes a `SomeClass` in parameter.
+
+- If `f` needs to store a copy of its argument; and
+- If `SomeClass` is move-constructible (usually true, in most cases the compiler will provides a default move-constructor), 
+- then it is usually better to pass the `SomeClass` by value.
+```C++
+void f(..., SomeClass some_object, ...)
+{
+  // We use `std::move(some_object)` when we need to store it
+}
+```

@@ -1,10 +1,10 @@
-#include <list>
-#include <vector>
-#include <array>
-#include <set>
-#include <catch2/catch_test_macros.hpp>
-
 #include "../../src/ex3.hpp"
+
+#include <array>
+#include <catch2/catch_test_macros.hpp>
+#include <list>
+#include <set>
+#include <vector>
 
 // Your job is to implement this function:
 #ifdef OMITTED_BY_THE_COMPILER
@@ -25,9 +25,9 @@ Hints:
 
 TEST_CASE("The function `content_of_same_type` works as expected. ")
 {
-  REQUIRE(content_of_same_type<std::vector<int>, std::vector<int>>() == true);
+    REQUIRE(content_of_same_type<std::vector<int>, std::vector<int>>() == true);
 
-  REQUIRE(content_of_same_type<std::set<std::string>, std::vector<std::string>>() == true);
+    REQUIRE(content_of_same_type<std::set<std::string>, std::vector<std::string>>() == true);
 
-  REQUIRE(content_of_same_type<std::vector<std::string>, std::vector<int>>() == false);
+    REQUIRE(content_of_same_type<std::vector<std::string>, std::vector<int>>() == false);
 }
