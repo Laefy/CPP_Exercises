@@ -3,15 +3,14 @@
 #if false
 int main()
 {
-    // In the following, we ask whether some line compiles
+    // In the following, we ask whether some line compiles.
     // We mean, if we put it here.
 }
 #endif
 
 template <bool b>
 class MyClass
-{
-};
+{};
 
 void f1(bool b)
 {
@@ -19,7 +18,7 @@ void f1(bool b)
         std::cout << "Hello world" << b << std::endl;
     else
     {
-        MyClass<false> my_class{};
+        MyClass<false> my_class {};
         std::cout << my_class.hello() << std::endl:
         // Note that class MyClass<b> has no hello() method;
     }
@@ -36,7 +35,7 @@ void f2()
         std::cout << "Hello world" << b << std::endl;
     else
     {
-        MyClass<b> my_class{};
+        MyClass<b> my_class {};
         std::cout << my_class.hello() << std::endl;
         // Note that class MyClass<b> has no hello() method;
     }
@@ -54,7 +53,7 @@ void f3()
         std::cout << "Hello world" << b << std::endl;
     else
     {
-        MyClass<b> my_class{};
+        MyClass<b> my_class {};
         std::cout << my_class.hello() << std::endl;
         // Note that class MyClass<b> has no hello() method;
     }
@@ -70,7 +69,7 @@ void f4(bool b)
         std::cout << "Hello world" << b << std::endl;
     else
     {
-        MyClass<false> my_class{};
+        MyClass<false> my_class {};
         std::cout << my_class.hello() << std::endl:
         // Note that class MyClass<b> has no hello() method;
     }

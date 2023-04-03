@@ -50,8 +50,8 @@ and can be done by
 - changing the forward pointer of 2 to 4
 - changing the backward pointer from 4 to 2.
 
-The problem is that, in the end, we have only one list.  C++ solves this problem by using *move semantics* and an *r-value reference* in the function-member `std::list::splice`.
-It is defined as
+The problem is that, in the end, we have only one list.  This is a typical case where *move semantics* and an *r-value reference* allow to expression what we want.
+The function-member `std::list::splice` is defined as
 ```C++
   void splice( const_iterator pos, list&& other ); 
 ```

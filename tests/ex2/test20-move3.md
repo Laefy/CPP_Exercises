@@ -8,7 +8,7 @@ A `std:unique_ptr<A> ptr` wants to keep the following invariant:
 
 which implies
 
-> When `ptr` is detroyed, `*ptr` can be destroyed without the risk of multiple destruction of the same object. 
+> When `ptr` is destroyed, `*ptr` can be destroyed without the risk of multiple destructions of the same object. 
 
 
 In order to keep the invariant above, `std:unique_ptr<A>` cannot be copied. However, it can be `moved`. 
@@ -26,4 +26,5 @@ This is in line with the general *move semantics*: `ptr2` was built by *stealing
 
 
 Another solution would be to copy the pointed object automatically, which is the goal of to tests 21 to 34.
-If your not, you may skip the remainder of exercice 2.
+
+If you are late, you may skip the remainder of exercice 2.

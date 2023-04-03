@@ -1,14 +1,16 @@
-#include <catch2/catch_test_macros.hpp>
 #include "../../lib/InstanceCounter.hpp"
 #include "../../src/uge_unique_ptr.hpp"
 
+#include <catch2/catch_test_macros.hpp>
 #include <iostream>
 
 //          vvvvvvvvvvvvvvv note that ABR derives from InstanceCounter
 class ABR : InstanceCounter
 {
 public:
-    ABR(int label) : _label{label} {}
+    ABR(int label)
+        : _label { label }
+    {}
 
     void insert(int i)
     {
@@ -16,9 +18,9 @@ public:
             return;
         else
         {
-            uge::unique_ptr<ABR> &child = (i < _label) ? left : right;
+            uge::unique_ptr<ABR>& child = (i < _label) ? left : right;
             if (child.get() == nullptr)
-                child = new ABR{i};
+                child = new ABR { i };
             //       ^^^
             // For this file to compile, you need to define this assignment operator
             else
@@ -27,16 +29,16 @@ public:
     }
 
 private:
-    uge::unique_ptr<ABR> left{nullptr};
-    uge::unique_ptr<ABR> right{nullptr};
-    int _label;
+    uge::unique_ptr<ABR> left { nullptr };
+    uge::unique_ptr<ABR> right { nullptr };
+    int                  _label;
 };
 
 TEST_CASE("a. `ABR` is automatically copiable.")
 {
     InstanceCounter::reset_counters();
     {
-        ABR t{4};
+        ABR t { 4 };
         t.insert(2);
         t.insert(6);
         t.insert(1);
@@ -57,7 +59,7 @@ TEST_CASE("b. `ABR` is automatically movable.")
 {
     InstanceCounter::reset_counters();
     {
-        ABR t{4};
+        ABR t { 4 };
         t.insert(2);
         t.insert(6);
         t.insert(1);
@@ -72,4 +74,10 @@ TEST_CASE("b. `ABR` is automatically movable.")
         // Oo why 8??  think about it       ^
     }
     REQUIRE(InstanceCounter::count() == 0);
+}
+
+TEST_CASE("c. You did not fall into the usual trap. ")
+{
+    uge::unique_ptr<ABR> uptr { new ABR { 4 } };
+    uptr = std::move(uptr);
 }

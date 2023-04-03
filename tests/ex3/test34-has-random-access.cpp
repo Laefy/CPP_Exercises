@@ -1,10 +1,10 @@
-#include <list>
-#include <vector>
-#include <array>
-#include <set>
-#include <catch2/catch_test_macros.hpp>
-
 #include "../../src/ex3.hpp"
+
+#include <array>
+#include <catch2/catch_test_macros.hpp>
+#include <list>
+#include <set>
+#include <vector>
 
 // Your job is to write a template function with the signature given below
 #ifdef OMITTED_BY_THE_COMPILER

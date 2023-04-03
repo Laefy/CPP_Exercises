@@ -1,13 +1,14 @@
 
-#include <catch2/catch_test_macros.hpp>
 #include "../../lib/InstanceCounter.hpp"
 #include "../../src/uge_unique_ptr.hpp"
+
+#include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("a. `uge::unique_ptr` is copy-constructible.")
 {
     InstanceCounter::reset_counters();
     {
-        uge::unique_ptr<InstanceCounter> uptr1 = (new InstanceCounter());
+        uge::unique_ptr<InstanceCounter> uptr1 { new InstanceCounter() };
         REQUIRE(InstanceCounter::count() == 1u);
         uge::unique_ptr<InstanceCounter> uptr2 = uptr1;
         REQUIRE(InstanceCounter::count() == 2u);
@@ -17,12 +18,20 @@ TEST_CASE("a. `uge::unique_ptr` is copy-constructible.")
     REQUIRE(InstanceCounter::count() == 0u);
 }
 
-TEST_CASE("B. `uge::unique_ptr` is move-constructible.")
+TEST_CASE("b. `uge::unique_ptr` can be empty.")
+{
+    InstanceCounter::reset_counters();
+    uge::unique_ptr<InstanceCounter> uptr { nullptr };
+    REQUIRE(InstanceCounter::count() == 0u);
+    REQUIRE(uptr.get() == nullptr);
+}
+
+TEST_CASE("c. `uge::unique_ptr` is move-constructible.")
 {
     InstanceCounter::reset_counters();
     {
-        InstanceCounter *ptr = new InstanceCounter();
-        uge::unique_ptr<InstanceCounter> uptr1{ptr};
+        InstanceCounter*                 ptr { new InstanceCounter() };
+        uge::unique_ptr<InstanceCounter> uptr1 { ptr };
         REQUIRE(InstanceCounter::count() == 1u);
         REQUIRE(uptr1.get() == ptr);
 
