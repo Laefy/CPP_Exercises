@@ -47,7 +47,7 @@ Excluding the default constructor `MyClass()`, the compiler will generate 5 memb
 
 The *rule of five* states that these five functions should be consistent.  If you modify any of these, you need to consider if you need to reimplement any of the other.
 
-Sometimes, it means doing nothing special, as below:
+Sometimes, it means doing nothing special:
 ```C++
   MyClass(const MyClass&) = default;
 ```  

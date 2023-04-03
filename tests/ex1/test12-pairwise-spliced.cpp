@@ -4,25 +4,41 @@
 #include <list>
 
 /*
-Your job is to write a function pairwise_splice(l1,l2) that
+Your job is to write (in files ex1.{hpp,cpp}) a function pairwise_concatenate(l1,l2) that
 - takes as argument two list of lists l1 and l2
-- **moves** the lists inside l1 to the lists inside l2 using `splice`:
+- **copies** or **moves** the lists inside l1 to the lists inside l2 using `concatenate`
   the content of l2[i] is moved into l1[i] for each i.
 */
 
-TEST_CASE("a. Example of std::list::splice")
+TEST_CASE("a. Pairwise_concatenate with an l-value reference")
 {
     std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
     std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
 
-    pairwise_splice(list1, std::move(list2));
+    pairwise_concatenate(list1, list2);
+    //                          ^^^^^ l-value reference
+
+    std::list<std::list<int>> target1 = { { 0, 1, 2, 0, 1, 2 }, { 3, 4, 3, 4 }, { 5, 6, 5, 6 } };
+    REQUIRE(list1 == target1);
+
+    std::list<std::list<int>> target2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
+    REQUIRE(list2 == target2);
+}
+
+TEST_CASE("b. Pairwise_concatenate with an r-value reference")
+{
+    std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
+    std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
+
+    pairwise_concatenate(list1, std::move(list2));
+    //                          ^^^^^^^^^^^^^^^^ r-value reference
 
     std::list<std::list<int>> target1 = { { 0, 1, 2, 0, 1, 2 }, { 3, 4, 3, 4 }, { 5, 6, 5, 6 } };
 
     REQUIRE(list1 == target1);
 }
 
-TEST_CASE("b. The lists were moved and copied.")
+TEST_CASE("c. If using an r-value reference, elements were moved.")
 {
     std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
     std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
@@ -47,7 +63,7 @@ TEST_CASE("b. The lists were moved and copied.")
     }
 
     // We splice
-    pairwise_splice(list1, std::move(list2));
+    pairwise_concatenate(list1, std::move(list2));
 
     // Let us look at the integers addresses after the splice
     std::list<std::list<int*>> addresses_after = { {}, {}, {} };
@@ -65,12 +81,12 @@ TEST_CASE("b. The lists were moved and copied.")
     REQUIRE(addresses_before == addresses_after);
 }
 
-TEST_CASE("c. The case where list1.size() > list2.size() is treated")
+TEST_CASE("d. The case where list1.size() > list2.size() is treated properly")
 {
     std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
     std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 } };
 
-    pairwise_splice(list1, std::move(list2));
+    pairwise_concatenate(list1, std::move(list2));
 
     std::list<std::list<int>> target1 = { { 0, 1, 2, 0, 1, 2 }, { 3, 4, 3, 4 }, { 5, 6 } };
     REQUIRE(list1 == target1);
@@ -79,12 +95,12 @@ TEST_CASE("c. The case where list1.size() > list2.size() is treated")
     REQUIRE(list2 == target2);
 }
 
-TEST_CASE("d. The case where list1.size() < list2.size() is treated")
+TEST_CASE("e. The case where list1.size() < list2.size() is treated properly")
 {
     std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 } };
     std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
 
-    pairwise_splice(list1, std::move(list2));
+    pairwise_concatenate(list1, std::move(list2));
 
     std::list<std::list<int>> target1 = { { 0, 1, 2, 0, 1, 2 }, { 3, 4, 3, 4 }, { 5, 6 } };
     REQUIRE(list1 == target1);

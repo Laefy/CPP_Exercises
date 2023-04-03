@@ -11,6 +11,7 @@ endforeach()
 
 SET(ex1_sources "")
 foreach(file 
+        lib/concatenate.cpp
         src/ex1.cpp
         # <----------------------------- AJOUTER VOS .cpp POUR l'EXERCICE 1 ICI
         )

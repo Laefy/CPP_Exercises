@@ -41,23 +41,32 @@ The strengh of `std::list` is that concatenation may be done in constant time. I
 - `list1=`  null <-> 0 <-> 1 <-> 2 <-> null
 - `list2=`  null <-> 4 <-> 5 <-> 6 <-> null
 
-Their concatenation is
+We want to concatenate `list2` at the end of `list1`, in order to obtain the following list.
 
 - null <-> 0 <-> 1 <-> 2 <-> 4 <-> 5 <-> 6 <-> null
 
-and can be done by 
+This can be done in constant time by:
 
 - changing the forward pointer of 2 to 4
 - changing the backward pointer from 4 to 2.
 
-The problem is that, in the end, we have only one list.  This is a typical case where *move semantics* and an *r-value reference* allow to expression what we want.
-The function-member `std::list::splice` is defined as
-```C++
-  void splice( const_iterator pos, list&& other ); 
-```
-in [this page](https://en.cppreference.com/w/cpp/container/list/splice).
+Howevever, we just used the content of `list2` in such a way that makes `list2` invalid.
+- We can this concatenation in constant time only if we are allowed to *destroy* one of `list1` or `list2`.
+- Otherwise, we can still do it, it will be linear in the length of `list2`
 
-The meaning here is that the object `*this` will *steal the content* of `other` to concatenate it at the end of `*this`.
+This is a typical case where *move semantics* and an *r-value reference* allow to express what we want.
+In file [concatenate.hpp]("../concatenate.hpp"), we define two functions that concatenate `list2` at the end of `list1`.
+```C++
+//                                                    vv r-value reference
+void concatenate(std::list<int>& list1, std::list<int>&& list2);
+//                             ^
+//      list1 is an l-value reference because we will modify it
+//                             v
+void concatenate(std::list<int>& list1, const std::list<int>& list2);
+//                                      ^^^^^               ^ const l-value reference
+```
+- If we use the first function, `list1` will *steal the content* of `list2`.
+- If we use the second function, `list1` will *copy* the content `list2`.
 
 Look and execute [test11](test11-splice.cpp) for an example.
 
