@@ -67,12 +67,12 @@ In each of the following case:
   * c. Are some copy unnecessary ?
 - Q22.3 (Victor): 
   * a. What is the type of the expression `"Victor Marsault"`
-  * b. Is it copied copied to call `Person(const std::string& name)`?
+  * b. Is it copied to call `Person(const std::string& name)`?
   * c. Is it copied by `_name { name }` ?
   * d. Are some copy unnecessary ?
 - Q22.4 (Céline)
   * a. what is the type of the expression `celine+" "+noel` ?
-  * b. Is it copied copied to call `Person(const std::string& name)`?
+  * b. Is it copied to call `Person(const std::string& name)`?
   * c. Is it copied by `_name { name }` ?
   * d. Are some copy unnecessary ?
 
