@@ -55,7 +55,7 @@ Howevever, we just used the content of `list2` in such a way that makes `list2` 
 - Otherwise, we can still do it, it will be linear in the length of `list2`
 
 This is a typical case where *move semantics* and an *r-value reference* allow to express what we want.
-In file [concatenate.hpp]("../concatenate.hpp"), we define two functions that concatenate `list2` at the end of `list1`.
+In file [concatenate.hpp](../../lib/concatenate.hpp), we define two functions that concatenate `list2` at the end of `list1`.
 ```C++
 //                                                    vv r-value reference
 void concatenate(std::list<int>& list1, std::list<int>&& list2);
