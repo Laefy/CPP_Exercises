@@ -51,7 +51,7 @@ This can be done in constant time by:
 - changing the backward pointer from 4 to 2.
 
 Howevever, we just used the content of `list2` in such a way that makes `list2` invalid.
-- We can this concatenation in constant time only if we are allowed to *destroy* one of `list1` or `list2`.
+- We can do this concatenation in constant time only if we are allowed to *destroy* `list2`.
 - Otherwise, we can still do it, it will be linear in the length of `list2`
 
 This is a typical case where *move semantics* and an *r-value reference* allow to express what we want.

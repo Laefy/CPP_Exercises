@@ -5,7 +5,8 @@
 
 /*
 Your job is to write (in files ex1.{hpp,cpp}) a function pairwise_concatenate(l1,l2) that
-- takes as argument two list of lists l1 and l2
+- takes as argument two list of lists l1 and l2, where l2 is a l-value reference
+                                                               ^
 - **copies** the lists inside l1 to the lists inside l2 using `concatenate`
   the content of l2[i] is moved into l1[i] for each i.
 */
