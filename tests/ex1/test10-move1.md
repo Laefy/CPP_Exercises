@@ -38,12 +38,12 @@ Real example: concatenation of `std::list`
 ------------------------------------
 The strengh of `std::list` is that concatenation may be done in constant time. Indeed `std::list` is a doubly-linked list hence consider the two lists below.
 
-- `list1=`  null <-> 0 <-> 1 <-> 2 <-> null
-- `list2=`  null <-> 4 <-> 5 <-> 6 <-> null
+- `list1=`  null <- 0 <-> 1 <-> 2 -> null
+- `list2=`  null <- 4 <-> 5 <-> 6 -> null
 
 We want to concatenate `list2` at the end of `list1`, in order to obtain the following list.
 
-- null <-> 0 <-> 1 <-> 2 <-> 4 <-> 5 <-> 6 <-> null
+- null <- 0 <-> 1 <-> 2 <-> 4 <-> 5 <-> 6 -> null
 
 This can be done in constant time by:
 
