@@ -8,7 +8,7 @@ Your job is to write (in files ex1.{hpp,cpp}) a function pairwise_concatenate(l1
 - takes as argument two list of lists l1 and l2, where l2 is a l-value reference
                                                                ^
 - **copies** the lists inside l1 to the lists inside l2 using `concatenate`
-  the content of l2[i] is moved into l1[i] for each i.
+  the content of l2[i] is moved at the end of l1[i] for each i.
 */
 
 TEST_CASE("a. Pairwise_concatenate with an l-value reference")

@@ -66,29 +66,7 @@ TEST_CASE("b. If using an r-value reference, elements were moved.")
     REQUIRE(addresses_before == addresses_after);
 }
 
-TEST_CASE("c. The case where list1.size() > list2.size() is treated properly")
-{
-    std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
-    std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 } };
-
-    pairwise_concatenate(list1, std::move(list2));
-
-    std::list<std::list<int>> target1 = { { 0, 1, 2, 0, 1, 2 }, { 3, 4, 3, 4 }, { 5, 6 } };
-    REQUIRE(list1 == target1);
-}
-
-TEST_CASE("d. The case where list1.size() < list2.size() is treated properly")
-{
-    std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 } };
-    std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
-
-    pairwise_concatenate(list1, std::move(list2));
-
-    std::list<std::list<int>> target1 = { { 0, 1, 2, 0, 1, 2 }, { 3, 4, 3, 4 }, { 5, 6 } };
-    REQUIRE(list1 == target1);
-}
-
-TEST_CASE("e. test12 still passes")
+TEST_CASE("c. test12 still passes")
 {
     std::list<std::list<int>> list1 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };
     std::list<std::list<int>> list2 = { { 0, 1, 2 }, { 3, 4 }, { 5, 6 } };

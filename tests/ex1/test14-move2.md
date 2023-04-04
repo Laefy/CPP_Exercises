@@ -36,15 +36,18 @@ private:
 };
 ```
 
+
 Here are the four most common use-case that may arise:
 ```C++
 /* == Case 1 == */
 std::string youssef_bergeron_name{"Youssef Bergeron"};
-Person1 yb{youssef_bergeron_name}; 
+Person1 yb{youssef_bergeron_name};
+// We will then still use/modify youssef_bergeron_name
 
 /* == Case 2 == */
 std::string clement_chomicki_name = "Clément Chomicki" ;
-Person1 cc{std::move(clement_chomicki_name)}
+Person1 cc{std::move(clement_chomicki_name)};
+// We don't need `clement_chomicki_name` anymore
 
 /* == Case 3 == */
 Person1 vm{"Victor Marsault"};
@@ -58,23 +61,23 @@ Person1 cn{celine+" "+noel};
 In each of the following case:
 
 - Q22.1 (Youssef):
-  * a. Is the string `youssef_bergeron_name` copied to call `Person(const std::string& name)`?
-  * b. Is it copied by `_name { name }` ?
-  * c. Are some copy unnecessary ?
+  * a. Is the content of string `youssef_bergeron_name` copied to call `Person1(const std::string& name)`?
+  * b. Is it copied to execute  `_name { name }` ?
+  * c. How many copies in total? Are some copy unnecessary ?
 - Q22.2 (Clément):
-  * a. Is the string `clement_chomicki_name` copied to call `Person(const std::string& name)`?
-  * b. Is it copied by `_name { name }` ?
-  * c. Are some copy unnecessary ?
+  * a. Is the content of string `clement_chomicki_name` copied to call `Person1(const std::string& name)`?
+  * b. Is it copied to execute  `_name { name }` ?
+  * c. How many copies in total? Are some copy unnecessary ?
 - Q22.3 (Victor): 
   * a. What is the type of the expression `"Victor Marsault"`
-  * b. Is it copied to call `Person(const std::string& name)`?
-  * c. Is it copied by `_name { name }` ?
-  * d. Are some copy unnecessary ?
+  * b. Is it copied to call `Person1(const std::string& name)`?
+  * c. Is it copied to execute  `_name { name }` ?
+  * d. How many copies in total? Are some copy unnecessary ?
 - Q22.4 (Céline)
-  * a. what is the type of the expression `celine+" "+noel` ?
-  * b. Is it copied to call `Person(const std::string& name)`?
-  * c. Is it copied by `_name { name }` ?
-  * d. Are some copy unnecessary ?
+  * a. What is the type of the expression `celine+" "+noel` ?
+  * b. Is its content copied to call `Person1(const std::string& name)`?
+  * c. Is it copied to execute `_name { name }` ?
+  * d. How many copies in total? Are some copy unnecessary ?
 
 
 [Optional] What about `std::string_view` ?
@@ -105,8 +108,8 @@ but then
  
 
 Q22.5: 
-  * a. Which copy from above did it prevent?
-  * b. Is there still too many copies in some cases?
+  * a. Which copy from which case did it prevent?
+  * b. Are there unnecessary copies in some cases?
 
 
 Using the move semantics
@@ -132,10 +135,12 @@ Here are our four common use-cases again:
 /* == Case 6 == */
 std::string youssef_bergeron_name{"Youssef Bergeron"};
 Person3 yb{youssef_bergeron_name}; 
+// We will then still use/modify youssef_bergeron_name
 
 /* == Case 7 == */
 std::string clement_chomicki_name = "Clément Chomicki" ;
-Person3 cc{std::move(clement_chomicki_name)}
+Person3 cc{std::move(clement_chomicki_name)};
+// We don't need `clement_chomicki_name` anymore
 
 /* == Case 8 == */
 Person3 vm{"Victor Marsault"};
