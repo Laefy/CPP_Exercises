@@ -14,7 +14,7 @@
 
 ```bash
 # Build some source files (= generate object-files)
-g++ -c file1.cpp file2.cpp file3.cpp
+g++ -c file1.cpp file2.cpp file3.cpp --std=c++17
 # Link the object-files into an executable.
 g++ -o the_exe file1.o file2.o file3.o
 # Execute the binary.
@@ -117,7 +117,7 @@ public:
 
 2. Dans le fichier [main.cpp](ex2/main.cpp), ajoutez une fonction `main`.  
 A l'intérieur, instanciez un objet de type `Person` et modifiez ses attributs afin que son prénom soit "Palluche" et son nom de famille "La Faluche".  
-Enfin, ajoutez les instructions permettant d'afficher "La personne s'appelle Palluche La Faluche".
+Enfin, ajoutez les instructions permettant d'afficher "La personne s'appelle Palluche La Faluche" (en utilisant les attributs de l'objet bien sûr).
 
 3. Essayez de compiler le programme. Modifiez les fichiers [main.cpp](ex2/main.cpp) et [Person.hpp](ex2/Person.hpp) afin de corriger les erreurs si vous en avez.  
 *Indice : pensez à inclure les headers de **TOUS** les symboles que vous avez utilisés !*  
@@ -154,7 +154,7 @@ Pensez à prendre des notes pour les donner à vos camarades absents.
 1. Parlez de vos différents blocages avec le restant de la classe et discutez des solutions.
 
 2. Expliquez la différence entre phase de build (compilation) et phase de link (édition des liens).  
-Pourquoi peut-on dire que l'expression "compiler un programme" est un abus de langage ?
+En quoi consiste la précompilation et à quel moment est-elle effectuée ?
 
 3. Que signifient les messages suivants ?  
 a. error: 'qqchose' was not declared in this scope  
@@ -167,7 +167,7 @@ Quelle est l'erreur qui s'affiche ?
 En quoi est-elle différente des erreurs de la question précédente ?  
 Expliquez ce qu'elle signifie exactement.
 
-5. Décommentez maintentant les instructions commentée des fichiers [main.cpp](ex3/main.cpp) et [utils.hpp](ex3/utils.hpp).  
+5. Décommentez maintenant les instructions commentées des fichiers [main.cpp](ex3/main.cpp) et [utils.hpp](ex3/utils.hpp).  
 Compilez maintenant le programme complet (avec les modules main et utils).  
 Quelle est l'erreur qui s'affiche ? S'agit-il d'une erreur de build ou de link ?  
 Pourquoi se produit-elle ?  
