@@ -7,7 +7,7 @@ int main()
 
     char name[20] = "";
     std::cin >> std::setw(20) >> name;
-    std::cout << "Bonjour Palluche La Falluche !" << std::endl;
+    std::cout << "Bonjour " << name << " !" << std::endl;
 
     return 0;
 }
