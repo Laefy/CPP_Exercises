@@ -63,7 +63,9 @@ std::cout << (c3 < c1) << std::endl; // -> 0
 10. **(Bonus)** Modifiez l'implémentation de `print` pour qu'elle affiche `"As"`, `"Roi"`, `"Dame"` et `"Valet"` plutôt que les valeurs associées.  
 Essayez de ne pas utiliser de `if` !
 11. **(Bonus)** Remplacez la fonction `print` par un opérateur de flux.  
-Que devez-vous faire pour que cette fonction puisse accéder aux attributs de `Card`, sans changer leur visibilité ?  
+Que devez-vous faire pour que cette fonction puisse accéder aux attributs de `Card`, sans changer leur visibilité ?
+12. **(Bonus)** Définissez deux `enum-class` (vous pouvez rechercher de quoi il s'agit sur Internet) `CardValue` et `CardColor`.
+Remplacez les types de `_value` et `_color` et adaptez le code pour que le programme compile, tout en conservant le même comportement.
 
 ### La classe `Player` (40min)
 
@@ -76,9 +78,10 @@ Ajoutez un class-initializer pour assigner à `_score` la valeur 0.
 4. Vous allez maintenant définir une **fonction-membre statique** permettant de distribuer les cartes entre les joueurs. Voici le prototype attendu : `void Player::deal_all_cards(Player& p1, Player& p2);`.  
 En ce qui concerne l'implémentation :
     - Commencez par définir une variable locale `std::vector<Card> all_cards`, dans laquelle vous ajoutez toutes les cartes possibles (vous pouvez utiliser deux boucles `for` imbriquées).
-    - Copiez-collez l'instruction ci-dessous (vous aurez besoin d'include `<algorithm>` et `<random>`). Elle permet de mélanger le tableau de façon aléatoire.
+    - Copiez-collez les instructions ci-dessous (vous aurez besoin d'include `<algorithm>` et `<random>`). Elles permettent de mélanger le tableau de façon aléatoire.
     ```cpp
-    std::shuffle(all_cards.begin(), all_cards.end(), std::default_random_engine(seed));
+    std::random_device rd;
+    std::shuffle(all_cards.begin(), all_cards.end(), std::default_random_engine(rd()));
     ```
     - Ajoutez la première moitié de `all_cards` à la main du premier joueur et la seconde à la main du deuxième.
 5. Définissez un opérateur d'indice dans la classe `Player` pour récupérer la n-ième carte de sa main.  
@@ -103,7 +106,10 @@ Quel mot-clef devez-vous utiliser pour transformer la déclaration de l'attribut
 Dedans, vous afficherez les deux cartes jouées au tour courant.
 Vous incrémenterez le score du joueur qui remporte le pli (en cas d'égalité, pas de changement), puis vous augmenterez le nombre de tours.  
 La fonction renverra sous forme de booléen si la partie est terminée ou pas.
-3. Enfin, définissez un **getter** dans `Player` permettant de récupérer le score de chaque joueur.  
+Attention, cette fonction **ne modifie pas** le contenu de `Player::_cards`, n'essayez pas de supprimer des éléments du `std::vector`.
+4. Enfin, définissez un **getter** dans `Player` permettant de récupérer le score de chaque joueur.  
 Assurez-vous qu'il puisse être utilisé sur des variables `const`. 
-4. Modifiez la fonction `main` pour simuler une partie de bataille entre `Julien` et `Gerald`.
-
+5. Modifiez la fonction `main` pour simuler une partie de bataille entre `Julien` et `Gerald`.
+6. **(Bonus)** A quoi sert la fonction `std::this_thread::sleep_for` ?
+Utilisez-la dans votre code pour qu'une seconde s'écoule entre chaque pli.
+7. **(Bonus)** Modifiez votre code de manière à gérer l'égalité comme dans les règles officielles : on pose une carte face cachée, puis une carte face visible, et le gagnant remporte alors 3 points au lieu de 1.
