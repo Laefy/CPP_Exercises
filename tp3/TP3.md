@@ -45,9 +45,9 @@ int main()
 
 ![](images/ex1-a.svg)
 
-1. Pourquoi n'y a-t-il pas de relation entre `last_wheel` et `wheels[3]` contrairement à `first_wheel` et `wheels[0]`.
+1. Pourquoi n'y a-t-il pas de relation entre `last_wheel` et `wheels[3]` contrairement à `first_wheel` et `wheels[0]` ?
 
-### Cas B - Pointeurs observants
+### Cas B - Pointeurs-observants
 
 ```cpp
 struct Worker;
@@ -72,9 +72,9 @@ int main()
 
 ![](images/ex1-b.svg)
 
-1. Dans le graphe d'ownership, comment distingue t-on un pointeur d'une référence ?
+1. Dans le graphe d'ownership, comment distingue-t-on un pointeur d'une référence ?
 2. Comment est représenté un pointeur nul ?
-3. En terme de code, quelles sont les deux différences principales entre un pointeur observant et une référence ?
+3. En termes de code, quelles sont les deux différences principales entre un pointeur-observant et une référence ?
 
 ### Cas C - Insertions dans un `std::vector`
 
@@ -110,7 +110,7 @@ Lors d'une insertion, si le buffer mémoire réservé par `std::vector` n'a pas 
 Chaque élément est déplacé de son ancienne adresse mémoire vers la nouvelle.
 
 1. Essayez de représenter les transitions dans le graphe d'ownership après le dernier `push_back` si celui-ci déclenchait une réallocation mémoire.
-2. Quel problème releve-t-on dans le graphe ?
+2. Quel problème relève-t-on dans le graphe ?
 3. Modifiez le code ci-dessus afin que `products` contienne des pointeurs ownants. Pensez à ajouter un destructeur à `Client` pour libérer la mémoire allouée dynamiquement.
 4. Redessinez le graphe d'ownership de la question 1, mais en prenant en compte vos changements dans le code.
 5. Avez-vous toujours le problème relevé à la question 2 ?
@@ -208,7 +208,7 @@ On vous propose trois architectures différentes pour le programme :
 **Architecture C**
 ![](images/ex3-c.svg)
 
-Pour chacune d'entre elles, vous indiquerez les opérations que le programme devrait effectuer pour satisfaire chacun des besoins cités plus haut, sans jamais introduire de dangling-references.
+Pour chacune d'entre elles, vous indiquerez les opérations que le programme devrait effectuer pour satisfaire chacun des besoins cités plus haut, sans jamais introduire de dangling-reference.
 
 ### 2. Compilation via CMake (10min)
 
@@ -225,7 +225,7 @@ Lancez ensuite la configuration du projet.
 ![](images/ex3-cmake1.png)
 
 3. Une fois la configuration terminée, vous devriez pouvoir sélectionner la cible `hr-soft-tests` dans la liste `Debug`.
-Appuyer ensuite sur le bouton pour lancer la compilation et l'exécution du programme.
+Appuyez ensuite sur le bouton pour lancer la compilation et l'exécution du programme.
 ![](images/ex3-cmake2.png)
 
 4. La compilation et l'exécution peuvent aussi être faites via `Ctrl+Shift+P > CMake: Debug`. Ajoutez un raccourci clavier sur cette commande si vous n'en avez pas déjà un.
@@ -237,7 +237,7 @@ La fonction `main` de `hrsoft-tests` se trouve à l'intérieur de [HRSoftTests.c
 Ce programme instancie les mêmes données que celles présentées dans les schémas de la partie 1.
 
 1. Commencez par prendre connaissance de [HRSoftTests.cpp](3-hrsoft/HRSoftTests.cpp) ainsi que des fichiers contenus dans le dossier [HRSoft](3-hrsoft/HRSoft).  
-Pour quelle raison le programme utilise-t-il des `std::list` plutôt que des `std::vector` pour stocker les départements et les employées ?  
+Pour quelle raison le programme utilise-t-il des `std::list` plutôt que des `std::vector` pour stocker les départements et les employés ?  
 Si vous ne trouvez pas, remplacez les `list` par des `vector` et lancez le programme en mode Debug pour observer le comportement.
 En particulier, utilisez le debugger pour surveiller le contenu de `rd_dpt`.
 
@@ -249,7 +249,7 @@ Décommentez les instructions correspondantes dans [HRSoftTests.cpp](3-hrsoft/HR
 Vérifiez que tout fonctionne après avoir décommenté les instructions correspondantes dans le `main`.
 
 4. Définissez maintenant la fonction `remove_employee` de la classe `System`. N'hésitez pas à ajouter d'autres fonctions dans les autres classes si vous en avez besoin.  
-Prenez bien garde à ne pas laisser de pointeurs observants sur l'employé retiré du système.
+Prenez bien garde à ne pas laisser de pointeurs-observants sur l'employé retiré du système.
 Décommentez les dernières instructions du `main` pour vous assurer que tout fonctionne.
 
 ### 4. (Bonus) Implémentation de HRSoft (1h30)
@@ -269,4 +269,4 @@ Décommentez les dernières instructions du `main` pour vous assurer que tout fo
     - la commande `"r toto 200"` permet d'augmenter le salaire de `toto` de 200€,
     - la commande `"s"` permet d'afficher pour chaque département la somme des salaires des employés qu'il contient.
 
-Notez bien que les fonctions `parse_name` et `parse_salary` qui récupère les arguments entrés par l'utilisateur.
+Notez bien que les fonctions `parse_name` et `parse_salary` permettent de récupérer les arguments entrés par l'utilisateur.
