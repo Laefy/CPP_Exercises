@@ -4,5 +4,5 @@
 
 TEST_CASE("Il existe une classe PhoneNumber dont le constructeur attend 5 entiers positifs")
 {
-    auto phone_number = PhoneNumber { 01, 64, 12, 66, 73 };
+    auto phone_number = PhoneNumber { 1, 64, 12, 66, 73 };
 }

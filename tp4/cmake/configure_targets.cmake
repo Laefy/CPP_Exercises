@@ -12,14 +12,14 @@ foreach(target ${all_targets})
 
         target_link_libraries(${target} PRIVATE Catch2::Catch2WithMain)
         target_compile_features(${target} PRIVATE cxx_std_17)
-        target_compile_options(${target} PRIVATE -Wall -W -Wextra -Wfatal-errors -Wno-unused-variable)
+        target_compile_options(${target} PRIVATE -Wall -W -Wextra -Wfatal-errors -Wno-unused-variable -fdiagnostics-color=always)
 
-        set(test_target "run-and-save-${target}")
+        set(test_target "run-${target}")
 
         add_custom_target(
             ${test_target}
             DEPENDS ${target}
-            COMMAND $<TARGET_FILE:${target}>
+            COMMAND $<TARGET_FILE:${target}> --colour-mode=ansi
         )
 
         add_custom_command(
@@ -32,7 +32,7 @@ foreach(target ${all_targets})
         )
 
         add_test(
-            NAME "${target}" 
+            NAME "${target}"
             COMMAND "${CMAKE_COMMAND}" --build ${CMAKE_BINARY_DIR} --target ${test_target}
         )
 
@@ -42,3 +42,24 @@ foreach(target ${all_targets})
     endif()
 
 endforeach()
+
+add_custom_target(
+    run-all-tests
+    COMMAND "${CMAKE_COMMAND}"
+        -DTARGETS="${all_tests}"
+        -DBUILD_PATH="${CMAKE_BINARY_DIR}"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/run_tests.cmake"
+)
+
+add_custom_target(
+    run-all-tests-silent
+    COMMAND "${CMAKE_COMMAND}"
+        -DTARGETS="${all_tests}"
+        -DBUILD_PATH="${CMAKE_BINARY_DIR}"
+        -DQUIET=1
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/run_tests.cmake"
+)
+
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/run_tests.sh.in" "run_tests.sh"
+    @ONLY
+)
