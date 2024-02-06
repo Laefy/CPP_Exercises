@@ -6,6 +6,7 @@ foreach(exercice_folder ${exercice_folders})
 
     get_filename_component(exercice_id ${exercice_folder} NAME_WE)
     file(GLOB_RECURSE exercice_src "${exercice_folder}/src/*")
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${exercice_folder}/src")
 
     file(GLOB_RECURSE exercice_tests "${exercice_folder}/tests/*")
     foreach(exercice_test ${exercice_tests})

@@ -60,7 +60,7 @@ cmake -S chemin/vers/le/dossier/tp4 -B .
 
 Une fois la configuration terminée, compilez le framework de tests unitaires avec la commande suivante :
 ```b
-cmake --build . --target Catch2WithMain
+cmake --build . --target Catch2WithMain -j
 ```
 
 Enfin, vous pouvez compiler les tests et les exécuter à partir du script `run_tests.sh` généré dans votre dossier de build.
