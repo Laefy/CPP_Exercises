@@ -1,5 +1,17 @@
-// Pour indiquer qu'une fonction-membre ne modifie pas l'état de l'objet, on écrit const devant le type de
-// retour de la fonction.
+////////////////////////////////////////////////////////////////////////////////////////
+// Vous devez indiquer si chacune des propositions est vraie (true) ou fausse (false).
+//
+// Exemple : Le C++ est le meilleur langage de tous les temps.
+#define ANSWER_EX1 true
+//                 ^^^^ indiquez votre réponse ici
+//
+// Exemple : Le Java est le meilleur langage de tous les temps.
+#define ANSWER_EX2 false
+//                 ^^^^^
+////////////////////////////////////////////////////////////////////////////////////////
+
+// Pour indiquer qu'une fonction-membre ne modifie pas l'état de l'objet, on écrit const
+// devant le type de retour de la fonction.
 #define ANSWER_1
 
 // Le type char* est le mieux adapté pour représenter des chaînes de caractères.

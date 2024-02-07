@@ -122,7 +122,7 @@ Le but est de définir une classe `PhoneNumber`, qui servira à représenter un 
 Ajoutez le fichier requis par le test et implémentez son contenu.
 
 Une fois que vous pensez avoir terminé, utilisez `./run_tests.sh ex2-01` pour compiler et exécuter ce premier test.  
-Si vous avez réussi à le faire passer, passez au test suivant. 
+Si vous avez réussi à le faire passer, passez au test suivant.
 
 ### Conseils
 

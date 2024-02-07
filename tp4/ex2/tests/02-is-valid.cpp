@@ -5,7 +5,7 @@
 TEST_CASE(
     "La fonction-membre is_valid() permet de savoir si les numéros sont bien tous compris entre 0 et 99")
 {
-    auto       pn1          = PhoneNumber { 1, 64, 12, 66, 73 };
+    auto       pn1          = PhoneNumber { 1, 64, 0, 66, 73 };
     const auto pn1_is_valid = pn1.is_valid();
     REQUIRE(true == pn1_is_valid);
 

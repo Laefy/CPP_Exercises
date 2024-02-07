@@ -25,7 +25,7 @@ foreach(target ${TARGETS})
     execute_process(
         COMMAND "${CMAKE_COMMAND}" --build "${BUILD_DIR}" --target "${target}"
         OUTPUT_VARIABLE output
-        ERROR_VARIABLE error
+        ERROR_VARIABLE output
         RESULT_VARIABLE result
     )
 
@@ -50,10 +50,6 @@ foreach(target ${TARGETS})
         if(NOT ${QUIET})
             if(output)
                 message(${output})
-                message("")
-            endif()
-            if(error)
-                message(${error})
             endif()
         endif()
 
