@@ -131,3 +131,10 @@ Si vous avez réussi à le faire passer, passez au test suivant.
 
 ## Exercice 3 - Code à trous
 
+
+
+TODO script
+extraire les archives au bon endroit
+effectuer la premiere configuration du projet
+changer les permissions des fichiers dans EXAM :
+  - read-only pour tout sauf les dossiers src, le repertoire .vscode et le dossier backup
