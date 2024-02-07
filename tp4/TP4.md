@@ -100,7 +100,7 @@ Par exemple, si je sais que Victor a les cheveux courts, que Céline a les cheve
 
 Si vous exécutez `./run_tests.sh ex1`, le test associé deviendra vert dès lors que vous aurez répondu à toutes les questions (même si vous avez mal répondu).
 
-## Exercice 2 - Implémentation d'un répertoire téléphonique
+## Exercice 2 - Implémentation d'un répertoire téléphonique (60min)
 
 Dans ce type d'exercice, vous devez coder différentes classes et fonctions afin de faire passer les tests unitaires fournis.  
 Avec le framework Catch2, les tests unitaires ont la forme suivante :
@@ -124,12 +124,66 @@ Ajoutez le fichier requis par le test et implémentez son contenu.
 Une fois que vous pensez avoir terminé, utilisez `./run_tests.sh ex2-01` pour compiler et exécuter ce premier test.  
 Si vous avez réussi à le faire passer, passez au test suivant.
 
+### Dépendances
+
+Certains tests sont dépendants les uns des autres.  
+Le graphe ci-dessous vous indique les dépendances en question.
+
+```mermaid
+graph LR;
+
+01[01-phone-number]
+02[02-is-valid]
+03[03-const-is-valid]
+04[04-index]
+05[05-index-out]
+06[06-const-index]
+07[07-multi-inclusions]
+11[11-print-out]
+12[12-print-any-stream]
+13[13-print-concat]
+21[21-phone-book-entry]
+22[22-accessors]
+23[23-return-refs]
+24[24-const-accessors]
+25[25-equality]
+26[26-const-equality]
+31[31-phone-book]
+32[32-add-entry]
+33[33-get-entry]
+34[34-valid-entry]
+35[35-unique-entry]
+36[36-no-desinstanciation]
+
+01-->02-->03
+01-->04-->05
+04-->06
+01-->07
+01-->11-->12-->13
+02-->22-->23-->36
+22-->24
+01-->21-->22
+21-->25-->26
+21-->32
+31--->32-->33-->34
+22-->33-->35
+25-->35
+33-->36
+```
+
 ### Conseils
 
 1. Attention aux régressions ! Relancez régulièrement l'intégralité des tests de l'exercice avec `./run_tests.sh ex2` pour vous assurez que vos dernières modifications n'ont pas cassé un test qui passait précédement.
 2. Ne restez pas bloqué trop longtemps sur la même question. La plupart des tests sont indépendants, donc n'hésitez pas à avancer et à revenir sur ceux qui vous posaient problème s'il vous reste du temps à la fin de la séance.
 
-## Exercice 3 - Code à trous
+## Exercice 3 - Code à trous (20min)
+
+Le dernier type d'exercice est un texte à trou, mais avec du code.
+Vous devez donner une valeur (ou non) à chacune des constantes `ANSWER_X` de manière à faire en sorte que le test passe.
+
+Ouvrez le premier fichier [ex3/tests/holes-1.cpp](ex3/tests/holes-1.cpp).
+Le but est de définir une classe PhoneNumber, qui servira à représenter un numéro de téléphone.
+Ajoutez le fichier requis par le test et implémentez son contenu.
 
 
 
