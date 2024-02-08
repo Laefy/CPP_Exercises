@@ -68,12 +68,17 @@ Enfin, vous pouvez compiler les tests et les exécuter à partir du script `run_
 # Lance la compilation et l'exécution de tous les tests unitaires
 ./run_tests.sh
 
-# Lance la compilation et l'exécution des tests de l'exercice 2
-./run_tests.sh ex2
+# Lance la compilation et l'exécution des tests contenant le pattern donné
+./run_tests.sh <pattern>
+
+# Par exemple
+./run_tests.sh ex2      # => tous les tests de l'exercice 2
+./run_tests.sh ex2-1    # => exercice 2, tests 10 à 19
+./run_tests.sh ex2-23   # => exercice 2, test 23 uniquement
 ```
 
 Chaque fois que vous réussirez à faire passer un test unitaire, les fichiers-sources concernés seront sauvegardés dans le dossier [backup](backup).  
-Ainsi, si vous vous rendez compte que vos dernières modifications ont cassé votre code, vous pourrez retrouver la dernière version valide de vos fichiers dans ce dossier.
+Ainsi, si vous vous rendez compte que vos dernières modifications ont cassé votre code, vous pourrez retrouver la dernière version fonctionnelle de vos fichiers dans ce dossier.
 
 ## Exercice 1 - Vrai ou Faux (20 min)
 
@@ -179,16 +184,10 @@ graph LR;
 ## Exercice 3 - Code à trous (20min)
 
 Le dernier type d'exercice est un texte à trou, mais avec du code.
-Vous devez donner une valeur (ou non) à chacune des constantes `ANSWER_X` de manière à faire en sorte que le test passe.
+Vous devez donner une valeur à chacune des constantes `ANSWER_X` de manière à faire en sorte que le test passe.
+Notez que parfois, la bonne réponse est "rien". Laissez alors la valeur de la constante vide.
 
-Ouvrez le premier fichier [ex3/tests/holes-1.cpp](ex3/tests/holes-1.cpp).
-Le but est de définir une classe PhoneNumber, qui servira à représenter un numéro de téléphone.
-Ajoutez le fichier requis par le test et implémentez son contenu.
+Dans ce genre d'exercice, les tests vous indiquent si le code compile, mais pas forcément si vos réponses sont bien celles attendues.
 
-
-
-TODO script
-extraire les archives au bon endroit
-effectuer la premiere configuration du projet
-changer les permissions des fichiers dans EXAM :
-  - read-only pour tout sauf les dossiers src, le repertoire .vscode et le dossier backup
+Par exemple, pour le test [ex3/tests/01-types.cpp](ex3/tests/01-types.cpp), on attend que vous trouviez le prototype (type de retour et types des paramètres) optimal pour chacune des déclarations de fonctions.  
+Si le test passe, cela signifie simplement que vos réponses permettent au code de compiler, pas nécessairement que vous avez utilisé les bons types.

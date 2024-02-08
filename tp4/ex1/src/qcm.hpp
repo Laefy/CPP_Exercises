@@ -1,4 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////
+//
 // Vous devez indiquer si chacune des propositions est vraie (true) ou fausse (false).
 //
 // Exemple : Le C++ est le meilleur langage de tous les temps.
@@ -8,6 +9,7 @@
 // Exemple : Le Java est le meilleur langage de tous les temps.
 #define ANSWER_EX2 false
 //                 ^^^^^
+//
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // Pour indiquer qu'une fonction-membre ne modifie pas l'état de l'objet, on écrit const
