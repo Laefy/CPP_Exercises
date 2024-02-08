@@ -1,0 +1,10 @@
+# !/bin/bash
+
+if [ $# > 0 ]
+then
+    filter=-DFILTER="$1"
+else
+    filter=
+fi
+
+cmake -DTARGETS="@all_tests@" -DBUILD_PATH="@CMAKE_BINARY_DIR@" $filter -P "@CMAKE_CURRENT_SOURCE_DIR@/cmake/run_tests.cmake"
