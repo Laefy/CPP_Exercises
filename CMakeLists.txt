@@ -5,7 +5,7 @@ file(GLOB tp_folders ${CMAKE_CURRENT_SOURCE_DIR}/tp*)
 foreach(tp_folder ${tp_folders})
 
 if(EXISTS ${tp_folder}/CMakeLists.txt)
-        add_subdirectory(${tp_folder})
-    endif()
+    add_subdirectory(${tp_folder})
+endif()
 
 endforeach()
