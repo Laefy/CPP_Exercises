@@ -129,6 +129,8 @@ Il est possible de ne définir qu'un seul opérateur d'assignation pour gérer �
 
 Cherchez de quoi il s'agit sur Internet, commentez vos opérateurs d'assignation par copie et par déplacement, et implémentez un opérateur d'assignation permettant de gérer ces deux opérations à la fois.
 
+D'après les logs du programme, quelle genre d'opération s'avère moins efficace qu'avec l'implémentation précédente ? 
+
 ## Exercice 3 - Recettes (75 min)
 
 Vous allez créer un programme qui vous permet de fabriquer des objets à partir de matériaux suivant une recette.  
@@ -170,7 +172,7 @@ Pour le restant de l'exercice, n'hésitez pas à ajouter les fonctions qui vous 
 Vous ajouterez un nouvel attribut à la classe `ProgramData` pour y stocker les matériaux.
 Individuellent, chacun d'entre eux sera alloué via `std::make_unique<Material>` et sera conservé sous forme de `std::unique_ptr<Material>`.
 5. Testez la commande `"m <name>"` plusieurs fois d'affilée, puis quitter le programme avec `"q"`, afin de vous assurez-vous via les logs du programme que chaque `Material` créé est détruit une seule et unique fois.
-6. Implémentez ensuite la fonction `ProgramData::get_materials`.  
+6. Implémentez ensuite la fonction `ProgramData::get_materials`, qui remplit le tableau en paramètre avec la liste des matériaux présents dans l'inventaire.
 Vous pouvez utiliser la fonction-membre `get` de `unique_ptr` pour récupérer un pointeur-observant sur son contenu. 
 7. (Bonus) Limitez les copies au maximum en **déplaçant** les objets que vous aurez besoin de stocker.
 
@@ -181,10 +183,12 @@ Cet identifiant correspondra au numéro de la recette (la première recette ayan
 2. Implémentez le contenu de l'`operator<<` pour `Recipe`. Celui-ci affichera l'idenfiant de la recette ainsi que sa formule.  
 Par exemple : `"(1) Eau Sirop => Grenadine"`
 3. Modifiez le contenu de `register_recipe` de manière à stocker les recettes enregistrées dans `ProgramData`.  
-4. Implémentez maintenant `collect_doable_recipes`, qui remplit le tableau passé en paramètre avec des pointeurs-observants sur les recettes dont les matériaux requis sont disponibles dans l'inventaire.
-5. Testez que les commandes `"m"`, `"r"` et `"t"` fonctionnent comme elles le devraient.
-6. (Bonus) Adaptez votre code afin de gérer les recettes qui nécessite plusieurs `Material` avec le même nom.
-7. (Bonus) Limitez les copies au maximum en déplaçant les paramètres que vous aurez besoin de stocker.
+A la fin de l'ajout, affichez dans la console `"Recipe <...> has been registered"`.  
+4. Testez que la commande `"r"` fonctionnent comme elles le devraient.
+5. Implémentez maintenant `collect_doable_recipes`, qui remplit le tableau passé en paramètre avec des pointeurs-observants sur les recettes dont les matériaux requis sont disponibles dans l'inventaire.
+6. Testez que les commandes `"m"`, `"r"` et `"t"` fonctionnent correctement.
+7. (Bonus) Adaptez votre code afin de gérer les recettes qui nécessite plusieurs `Material` avec le même nom.
+8. (Bonus) Limitez les copies au maximum en déplaçant les paramètres que vous aurez besoin de stocker.
 
 ### D. Production
 

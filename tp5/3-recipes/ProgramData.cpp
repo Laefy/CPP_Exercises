@@ -1,14 +1,5 @@
 #include "ProgramData.hpp"
 
-std::ostream& operator<<(std::ostream& stream, const Material& material)
-{
-    return stream;
-}
-
-std::ostream& operator<<(std::ostream& stream, const Recipe& recipe)
-{
-    return stream;
-}
 
 void ProgramData::add_material(std::string name)
 {}

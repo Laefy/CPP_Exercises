@@ -1,4 +1,6 @@
+#include "Material.hpp"
 #include "ProgramData.hpp"
+#include "Recipe.hpp"
 
 #include <algorithm>
 #include <deque>
@@ -15,7 +17,7 @@ void print_usage()
     std::cout
         << "\tl                                       : Affiche les materiaux presents dans l'inventaire"
         << std::endl;
-    std::cout << "\tr <m1> [+ <m2>...] => <p1> [+ <p2> ...] : Enregistre la recette donnee" << std::endl;
+    std::cout << "\tr <m1> [<m2> ...] => <p1> [<p2> ...]    : Enregistre la recette donnee" << std::endl;
     std::cout << "\tt                                       : Affiche les recettes realisables avec "
                  "l'inventaire actuel"
               << std::endl;

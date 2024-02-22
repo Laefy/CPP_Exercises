@@ -1,17 +1,10 @@
 #pragma once
 
-#include <ostream>
+#include "Material.hpp"
+#include "Recipe.hpp"
+
 #include <string>
 #include <vector>
-
-class Material;
-class Recipe;
-
-// Affiche le nom d'un materiau.
-std::ostream& operator<<(std::ostream& stream, const Material& material);
-
-// Affiche l'identifiant et la formule d'une recette.
-std::ostream& operator<<(std::ostream& stream, const Recipe& recipe);
 
 // Contient le résultat de la production d'une recette.
 struct ProductionResult
