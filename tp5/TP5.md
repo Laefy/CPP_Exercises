@@ -2,8 +2,8 @@
 
 ## Objectifs
 
-- Identifier les l-value et les r-value
-- Comprendre l'intérêt du déplacement
+- Identifier les l-values et les r-values
+- Comprendre le mécanisme du déplacement
 - Se familiariser avec l'utilisation des `unique_ptr`
 
 ## Exercice 1 - l-value ou r-value ? (15 min)
