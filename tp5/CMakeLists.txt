@@ -7,3 +7,11 @@ add_executable(tp5-ex2
 )
 
 target_compile_features(tp5-ex2 PRIVATE cxx_std_17)
+
+add_executable(tp5-ex3
+    3-recipes/main.cpp
+    3-recipes/ProgramData.cpp
+    3-recipes/ProgramData.hpp
+)
+
+target_compile_features(tp5-ex3 PRIVATE cxx_std_17)
