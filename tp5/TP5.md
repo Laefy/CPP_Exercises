@@ -15,37 +15,37 @@
 
 a. `i` est un `int`  
 ```cpp
-4
-4 + i
-i
-i = 4
-i == 4
+4          // => r-value
+4 + i      // => r-value
+i          // => l-value
+i = 4      // => l-value
+i == 4     // => r-value
 ```
 
 b. `vec` est un `std::vector<char>`
 ```cpp
-vec[5]
-vec
-vec.pop_back()
-std::vector { 'a', 'b', 'c' }
-vec.push_back('d')
-std::move(vec)
+vec[5]                          // => l-value
+vec                             // => l-value
+vec.pop_back()                  // => rien ! (retourne void)
+std::vector { 'a', 'b', 'c' }   // => r-value
+vec.push_back('d')              // => l-value
+std::move(vec)                  // => r-value
 ```
 
 c. `ptr` est un pointeur de `int`
 ```cpp
-ptr + 3
-*(ptr + 3)
-*ptr + 3
+ptr + 3     // => r-value
+*(ptr + 3)  // => l-value
+*ptr + 3    // => r-value
 ```
 
 d. `str` est une `std::string`
 ```cpp
-std::string { "aaaa" }
-str
-str + "aaaa"
-str += "aaaa"
-"aaaa"
+std::string { "aaaa" }  // => r-value
+str                     // => l-value
+str + "aaaa"            // => r-value
+str += "aaaa"           // => l-value
+"aaaa"                  // => l-value (string-pool)
 ```
 
 2. Supposons que vous ayiez l'instruction : `Class inst { expr }`.  

@@ -1,3 +1,5 @@
+#include "CopyablePtr.hpp"
+
 #include <iostream>
 #include <utility>
 
