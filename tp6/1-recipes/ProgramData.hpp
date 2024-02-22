@@ -3,6 +3,7 @@
 #include "Material.hpp"
 #include "Recipe.hpp"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -36,5 +37,10 @@ public:
     ProductionResult produce(size_t recipe_id);
 
 private:
+    size_t find_material(const std::string& name, size_t& nb_required) const;
+    bool   can_produce(const Recipe& recipe, std::vector<std::string>* missing_materials) const;
+
     // Placez vos données ici...
+    std::vector<std::unique_ptr<Material>> _materials;
+    std::vector<Recipe>                    _recipes;
 };
