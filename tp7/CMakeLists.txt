@@ -2,11 +2,15 @@ cmake_minimum_required(VERSION 3.16)
 project(TP7)
 
 add_executable(tp7-ex2
+    dungeon/Character.hpp
     dungeon/Dungeon.cpp
     dungeon/Entity.hpp
+    dungeon/Item.hpp
     dungeon/Logger.hpp
+    dungeon/Potion.hpp
     dungeon/Random.cpp
     dungeon/Random.hpp
+    dungeon/Trap.hpp
 )
 
 target_compile_features(tp7-ex2 PRIVATE cxx_std_17)
