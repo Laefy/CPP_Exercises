@@ -35,8 +35,8 @@ cmake --build <chemin_vers_le_dossier_build> --target tp6-ex1
 ```
 
 2. Prenez connaissance du contenu des fichiers pré-existants et répondez aux questions suivantes :
-- Quel est le rôle de la fonction `display` ?
-- Quel est le rôle de la fonction `update` (dans `Dungeon.cpp`) ?
+- Dans [Dungeon.cpp](dungeon/Dungeon.cpp), quel est le rôle de la fonction `display` ?
+- Dans [Dungeon.cpp](dungeon/Dungeon.cpp), quel est le rôle de la fonction `update` ?
 - Quelle variable du `main` porte l'ownership des entitées ?
 
 ### B. Personnage
@@ -119,6 +119,6 @@ Modifiez ensuite la condition dans la fonction `remove_dead_entities` de [Dungeo
 3. Pour faire disparaître les `Item` de la grille, ajoutez leur un attribut `is_consumed` de type booléen ainsi qu'une fonction publique `consume` qui passe cet attribut à `true`.
 Appelez cette fonction à l'endroit approprié, et utilisez la valeur de `is_consumed` pour définir l'implémentation de `should_destroy` dans les instances d'`Item`.
 
-4. Ajoutez un destructeur spécifique à la classe `Character` afin de logger dans la console qu'un personnage est mort. Vous écrirez dans la variable globale `logger` (voir [Logger.hpp](dungeon/Logger.hpp)) plutôt que dans `std::cout` afin que les logs persistent.
+4. Ajoutez un destructeur spécifique à la classe `Character` afin de logger dans la console qu'un personnage est mort. Vous écrirez dans la variable globale `logger` (voir [Logger.hpp](dungeon/Logger.hpp)) plutôt que dans `std::cout`. Cela permettra d'afficher les logs en dessous de la grille.
 On attendra quelque chose comme : `"A character died at position (5, 7)"`.
 Si votre destructeur n'est pas appelé, demandez-vous sur quel est le type statique de l'objet détruit et ce qu'il se passe au cours de la résolution de l'appel.

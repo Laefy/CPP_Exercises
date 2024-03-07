@@ -30,7 +30,7 @@ void fill_grid(Grid& grid, const std::vector<std::unique_ptr<Entity>>& entities)
         const auto x = entity->get_x();
         const auto y = entity->get_y();
 
-        if (0 <= x && x < grid.size() && 0 <= y && y < grid.size())
+        if (0 <= x && x < grid.front().size() && 0 <= y && y < grid.size())
         {
             grid[y][x].push_back(entity.get());
         }
@@ -79,10 +79,14 @@ void display(const Grid& grid, const std::deque<std::string>& logs)
     std::system("clear");
 #endif
 
-    stream << "\n\n\n";
+    stream << "\n";
     for (const auto& log : logs)
     {
         stream << log << "\n";
+    }
+    for (int i = logs.size(); i < 2; ++i)
+    {
+        stream << "\n";
     }
 
     std::cout << stream.str() << std::endl;
@@ -90,13 +94,10 @@ void display(const Grid& grid, const std::deque<std::string>& logs)
 
 void trigger_interactions(const std::vector<Entity*>& entities)
 {
-    for (auto e1 = 0; e1 < entities.size(); ++e1)
+    if (entities.size() > 1)
     {
-        for (auto e2 = e1 + 1; e2 < entities.size(); ++e2)
-        {
-            // entities[e1]->interact_with(*entities[e2]);
-            // entities[e2]->interact_with(*entities[e1]);
-        }
+        // entities[0]->interact_with(*entities[1]);
+        // entities[1]->interact_with(*entities[0]);
     }
 }
 
@@ -116,7 +117,26 @@ void remove_dead_entities(std::vector<std::unique_ptr<Entity>>& entities)
     }
 }
 
-void update(Grid& grid, std::vector<std::unique_ptr<Entity>>& entities, std::deque<std::string>& logs)
+void collect_logs(std::deque<std::string>& logs)
+{
+    while (!logger.eof())
+    {
+        std::getline(logger, logs.emplace_back());
+        if (logs.back().empty())
+        {
+            logs.pop_back();
+        }
+    }
+
+    logger = {};
+
+    while (logs.size() > 2)
+    {
+        logs.erase(logs.begin());
+    }
+}
+
+void update(Grid& grid, std::vector<std::unique_ptr<Entity>>& entities)
 {
     for (auto& entity : entities)
     {
@@ -135,16 +155,6 @@ void update(Grid& grid, std::vector<std::unique_ptr<Entity>>& entities, std::deq
 
     remove_dead_entities(entities);
     fill_grid(grid, entities);
-
-    while (!logger.eof())
-    {
-        std::getline(logger, logs.emplace_back());
-    }
-
-    while (logs.size() > 4)
-    {
-        logs.erase(logs.begin());
-    }
 }
 
 int main()
@@ -168,10 +178,11 @@ int main()
 
     while (true)
     {
+        collect_logs(logs);
         display(grid, logs);
 
         std::this_thread::sleep_for(1s);
-        update(grid, all_entities, logs);
+        update(grid, all_entities);
     }
 
     return 0;
