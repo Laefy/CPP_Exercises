@@ -21,22 +21,22 @@ class Human
 class Cat // Implémentation 1
 {
 public:
-    Cat(Human o)
-        : owner { std::move(o) }
+    Cat(std::vector<Human> o)
+        : owners { std::move(o) }
     {}
 
 private:
-    Human owner;
+    std::vector<Human> owners;
 };
 class Cat // Implémentation 2
 {
 public:
-    Cat(const Human& o)
-        : owner { o }
+    Cat(const std::vector<Human>& o)
+        : owners { o }
     {}
 
 private:
-    Human owner;
+    std::vector<Human> owners;
 };
 #endif
 // Est-ce que l'implémentation 1 est meilleure que l'implémentation 2?
@@ -77,7 +77,7 @@ private:
 class AssocVector
 {
 public:
-    void add_data(std::string const& key, const std::string& value)
+    void add_data(const std::string& key, const std::string& value)
     {
         keys.emplace_back(key);
         values.emplace_back(new std::string { value });
@@ -97,7 +97,7 @@ private:
 class AssocVector
 {
 public:
-    void add_data(std::string const& key, const std::string& value)
+    void add_data(const std::string& key, const std::string& value)
     {
         keys.emplace_back(new std::string { key });
         values.emplace_back(new std::string { value });
@@ -106,7 +106,7 @@ public:
     ~AssocVector()
     {
         for (auto a : values)
-            delete keys.second;
+            delete a;
     }
 
 private:
@@ -131,8 +131,8 @@ public:
 
     ~AssocVector()
     {
-        for (auto a : values)
-            delete keys.second;
+        for (auto a& : values)
+            delete a.get();
     }
 
 private:
@@ -191,18 +191,18 @@ int main()
     m->fct();               // Ligne 2
 }
 #endif
-// 20. Si je veux redéfinir fct() dans Mère, je dois utiliser le mot-clef "virtual" dans la définition de
+// 20. Si je veux redéfinir fct() dans Fille, je dois utiliser le mot-clef "virtual" dans la déclaration on de
 // Mere::fct(), sans quoi Fille ::fct() ne sera pas appelée à la ligne 2 ci-dessus.
 #define ANSWER_20
-// 21. Si je veux redéfinir fct() dans Mère, je dois utiliser le mot-clef "virtual" dans la définition de
+// 21. Si je veux redéfinir fct() dans Fille, je dois utiliser le mot-clef "virtual" dans la déclaration de
 // Fille::fct(), sans quoi Fille ::fct() ne sera pas appelée à la ligne 2 ci-dessus.
 #define ANSWER_21
-// 22. Si je veux redéfinir fct() dans Mère, je dois utiliser le mot-clef "override" dans la définition de
+// 22. Si je veux redéfinir fct() dans Fille, je dois utiliser le mot-clef "override" dans la définition de
 // Fille::fct(), sans quoi Fille::fct() ne sera pas appelée ligne 2 ci-dessus.
 #define ANSWER_22
 // 23. Si Mere::fct() est virtuelle pure, il est impossible d'instancier la classe Mere.
 #define ANSWER_23
 // 24. On utilise le mot-clef "pure virtual" pour indiquer qu'une fonction-membre est virtuelle pure.
 #define ANSWER_24
-// 25. S'il est impossible d'instancier la classe Mere, le code à la ligne 1 ci-dessus ne compilera pas.
+// 25. S'il est impossible d'instancier la classe Mere, le code à la ligne 1 ci-dessus ne compile pas.
 #define ANSWER_25

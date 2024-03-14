@@ -9,8 +9,8 @@ TEST_CASE("La destruction d'une StringInstancePair provoque la destruction de l'
     {
         StringInstancePair p { "Test" };
 
-        REQUIRE(p.str() == "Test");
-        const auto& i = p.ins();
+        REQUIRE(p.get_str() == "Test");
+        const auto& i = p.get_instance_counter();
 
         REQUIRE(0 == InstanceCounter::deletions());
     }

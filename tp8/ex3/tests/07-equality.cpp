@@ -15,10 +15,14 @@ TEST_CASE("On peut tester l'égalité de Base")
 
     // Deux classes dérivées avec la même valeur sont égales si
     // la valeur encapsulée est la même
+    REQUIRE(i1 == i2);
+    REQUIRE(i2 == i1);
     REQUIRE(b1 == b2);
     REQUIRE(b2 == b1);
     REQUIRE(!(b1 == b3));
     REQUIRE(!(b3 == b1));
+    REQUIRE(!(i1 == i3));
+    REQUIRE(!(i3 == i1));
 
     DerivedString s4 { "quarante deux" };
     Base&         b4 = s4;
@@ -32,11 +36,11 @@ TEST_CASE("On peut tester l'égalité de Base")
     REQUIRE(!(b1 == b6));
     REQUIRE(!(b6 == b1));
 
-    // Deux classes dérivées différentes ne sont jamais égales
-
-    REQUIRE(b1 == b2);
-    REQUIRE(b2 == b1);
-    REQUIRE(!(b1 == b2));
-    REQUIRE(!(b2 == b1));
+    // Deux objets ne sont jamais égaux s'il leurs types dynamique sont différents.
+    // On pourra supposer l'invariant suivant.  Etant donné deux objets o1 et o2 qui sont d'un type dérivant
+    // de Base, alors o1 et o2 ont le même type dynamique si et seulement si o1.type() == o2.type().
+    REQUIRE(!(i1 == s4));
+    REQUIRE(!(s4 == i1));
     REQUIRE(!(b4 == b1));
+    REQUIRE(!(b1 == b4));
 }

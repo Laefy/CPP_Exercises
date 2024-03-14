@@ -5,17 +5,22 @@
 #include <catch2/catch_test_macros.hpp>
 #include <iostream>
 
-class DerivedEmptyA : public Base
+class Derived42 : public DerivedInt
 {
 public:
-    std::string to_string() const { return "(emptyA)"; }
-    bool        is_null() const { return false; }
+    Derived42()
+        : DerivedInt { 42 }
+    {}
+    std::string to_string() const { return "6 x 9"; }
 };
-class DerivedEmptyB : public Base
+
+class DerivedQuaranteDeux : public DerivedString
 {
 public:
-    std::string to_string() const { return "(emptyB)"; }
-    bool        is_null() const { return true; }
+    DerivedQuaranteDeux()
+        : DerivedString { "quarante deux" }
+    {}
+    std::string to_string() const { return "six fois neuf"; }
 };
 
 TEST_CASE("L'opérateur << est implémenté en utilisant une fonction virtuelle")
@@ -32,15 +37,15 @@ TEST_CASE("L'opérateur << est implémenté en utilisant une fonction virtuelle"
     ss2 << b2;
     REQUIRE(ss2.str() == "quarante deux");
 
-    DerivedEmptyA     e3 {};
+    Derived42         e3 {};
     Base&             b3 = e3;
     std::stringstream ss3;
     ss3 << b3;
-    REQUIRE(ss3.str() == "(emptyA)");
+    REQUIRE(ss3.str() == "6 x 9");
 
-    DerivedEmptyB     e4 {};
-    Base&             b4 = e4;
-    std::stringstream ss4;
+    DerivedQuaranteDeux e4 {};
+    Base&               b4 = e4;
+    std::stringstream   ss4;
     ss4 << b4;
-    REQUIRE(ss4.str() == "(emptyB)");
+    REQUIRE(ss4.str() == "six fois neuf");
 }

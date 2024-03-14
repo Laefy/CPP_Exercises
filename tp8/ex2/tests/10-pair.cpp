@@ -10,6 +10,6 @@ TEST_CASE("Il existe une classe StringInstancePair avec deux getters")
     REQUIRE(1 == InstanceCounter::constructions());
     REQUIRE(0 == InstanceCounter::deletions());
 
-    REQUIRE(p.str() == "Test");
-    InstanceCounter i = p.ins();
+    REQUIRE(p.get_str() == "Test");
+    InstanceCounter i = p.get_instance_counter();
 }
