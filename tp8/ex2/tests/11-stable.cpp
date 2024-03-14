@@ -4,7 +4,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <string>
 
-TEST_CASE("L'instance contenue dans une StringInstancePair est stable par move")
+TEST_CASE("Après un move d'une StringInstancePair, l'InstanceCounter contenue reste au même endroit dans la "
+          "mémoire.")
 {
     StringInstancePair p1 { "Test" };
     const auto&        i1 = p1.get_instance_counter();
