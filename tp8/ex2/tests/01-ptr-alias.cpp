@@ -3,7 +3,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Definir les type PTR_ALIAS1 et PTR_ALIAS2 dans ../src/alias.hpp")
+TEST_CASE("Definir les alias PTR_ALIAS1 et PTR_ALIAS2 dans ../src/alias.hpp.  Il n'y a pas besoin "
+          "d'implémenter des classes !")
 {
     {
         PTR_ALIAS1 ptr { new InstanceCounter {} };

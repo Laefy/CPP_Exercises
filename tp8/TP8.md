@@ -1,4 +1,4 @@
-# TP4 - Révisions
+# TP8 - Révisions
 
 ## Objectifs
 
@@ -18,7 +18,7 @@ Cela vous évitera les **lags habituels du mode exam** ainsi que d'autres soucis
 
 Vous aurez accès à différentes ressources pour vous débloquez si nécessaire pendant la séance :
 - une version statique du cours en ligne,
-- [une version statique de cppreference](../resources/cppreference),
+- [une version statique de cppreference](/usr/share/cppreference/doc/html/en/),
 - [les slides du cours magistral](../resources/slides).
 
 ### Contenu du dossier
@@ -55,7 +55,7 @@ mkdir build
 cd build
 
 # Configure le projet afin qu'il utilise le CMakeLists.txt dans `tp4` et place les fichiers générés dans `build`
-cmake -S chemin/vers/le/dossier/tp4 -B .
+cmake -S chemin/vers/le/dossier/tp8 -B .
 ```
 
 Une fois la configuration terminée, compilez le framework de tests unitaires avec la commande suivante :
@@ -80,7 +80,7 @@ Enfin, vous pouvez compiler les tests et les exécuter à partir du script `run_
 Chaque fois que vous réussirez à faire passer un test unitaire, les fichiers-sources concernés seront sauvegardés dans le dossier [backup](backup).  
 Ainsi, si vous vous rendez compte que vos dernières modifications ont cassé votre code, vous pourrez retrouver la dernière version fonctionnelle de vos fichiers dans ce dossier.
 
-## Exercice 1 - Vrai ou Faux (20 min)
+## Exercice 1 - Vrai ou Faux (30 min)
 
 Le premier exercice est un vrai ou faux.
 
@@ -105,9 +105,9 @@ Par exemple, si je sais que Victor a les cheveux courts, que Céline a les cheve
 
 Si vous exécutez `./run_tests.sh ex1`, le test associé deviendra vert dès lors que vous aurez répondu à toutes les questions (même si vous avez mal répondu).
 
-## Exercice 2 - Implémentation d'un répertoire téléphonique (60min)
+## Rappel
 
-Dans ce type d'exercice, vous devez coder différentes classes et fonctions afin de faire passer les tests unitaires fournis.  
+Dans les exercies 2 et 3ype d'exercice, vous devez coder différentes classes et fonctions afin de faire passer les tests unitaires fournis.  
 Avec le framework Catch2, les tests unitaires ont la forme suivante :
 ```cpp
 TEST_CASE("Titre du test")
@@ -122,72 +122,27 @@ TEST_CASE("Titre du test")
 Dans un premier temps, il faut réussir à implémenter le code permettant au test de **compiler**.  
 La seconde étape est d'adapter ce code afin qu'**il se comporte comme attendu** (c'est-à-dire que les conditions spécifiées dans les `REQUIRE` s'évaluent à `true`).
 
-Ouvrez le premier fichier de tests [ex2/tests/01-phone-number.cpp](ex2/tests/01-phone-number.cpp).  
-Le but est de définir une classe `PhoneNumber`, qui servira à représenter un numéro de téléphone.  
-Ajoutez le fichier requis par le test et implémentez son contenu.
+Pour résoudre un test (par exemple [ex2/tests/01-ptr-alias.cpp](ex2/tests/01-ptr-alias.cpp)), il faut créer les fichiers adéqsuat (par exemple `ex2/src/alias.hpp`) et y écrire le code pour que le teste passe.
 
-Une fois que vous pensez avoir terminé, utilisez `./run_tests.sh ex2-01` pour compiler et exécuter ce premier test.  
-Si vous avez réussi à le faire passer, passez au test suivant.
-
-### Dépendances
-
-Certains tests sont dépendants les uns des autres.  
-Le graphe ci-dessous vous indique les dépendances en question.
-
-```mermaid
-graph LR;
-
-01[01-phone-number]
-02[02-is-valid]
-03[03-const-is-valid]
-04[04-index]
-05[05-index-out]
-06[06-const-index]
-07[07-multi-inclusions]
-11[11-print-out]
-12[12-print-any-stream]
-13[13-print-concat]
-21[21-phone-book-entry]
-22[22-accessors]
-23[23-return-refs]
-24[24-const-accessors]
-25[25-equality]
-26[26-const-equality]
-31[31-phone-book]
-32[32-add-entry]
-33[33-get-entry]
-34[34-valid-entry]
-35[35-unique-entry]
-36[36-no-desinstanciation]
-
-01-->02-->03
-01-->04-->05
-04-->06
-01-->07
-01-->11-->12-->13
-02-->22-->23-->36
-22-->24
-01-->21-->22
-21-->25-->26
-21-->32
-31--->32-->33-->34
-22-->33-->35
-25-->35
-33-->36
-```
+Une fois que vous pensez avoir terminé, utilisez `./run_tests.sh ex2-01` pour compiler et exécuter ce premier test.  Si vous avez réussi à le faire passer, passez au test suivant, etc.
 
 ### Conseils
 
 1. Attention aux régressions ! Relancez régulièrement l'intégralité des tests de l'exercice avec `./run_tests.sh ex2` pour vous assurez que vos dernières modifications n'ont pas cassé un test qui passait précédement.
 2. Ne restez pas bloqué trop longtemps sur la même question. La plupart des tests sont indépendants, donc n'hésitez pas à avancer et à revenir sur ceux qui vous posaient problème s'il vous reste du temps à la fin de la séance.
 
-## Exercice 3 - Code à trous (20min)
 
-Le dernier type d'exercice est un texte à trou, mais avec du code.
-Vous devez donner une valeur à chacune des constantes `ANSWER_X` de manière à faire en sorte que le test passe.
-Notez que parfois, la bonne réponse est "rien". Laissez alors la valeur de la constante vide.
+## Exercice 2 - Petit exercices sur la gestion de la mémoire (45 min)
 
-Dans ce genre d'exercice, les tests vous indiquent si le code compile, mais pas forcément si vos réponses sont bien celles attendues.
+Le test `ex2-01` demande de trouver deux types qui ont le comportement attendu.  Il faut utiliser des alias, et il est inutile de créer de nouvelles classes.
 
-Par exemple, pour le test [ex3/tests/01-types.cpp](ex3/tests/01-types.cpp), on attend que vous trouviez le prototype (type de retour et types des paramètres) optimal pour chacune des déclarations de fonctions.  
-Si le test passe, cela signifie simplement que vos réponses permettent au code de compiler, pas nécessairement que vous avez utilisé les bons types.
+Les questions 1X de cet exercice reposent sur la classe [`InstanceCounter`](ex2/lib/InstanceCounter.hpp) qui est fournie.  Prenez le temps de bien lire le code cette classe avant d'essayer de résoudre les tests.  
+Le but est de coder une classe `StringInstancePair` qui représente une paire (`std::string`,`InstanceCounter`) tout en satisfant un certain nombre de contraintes (arbitraites) données par les tests.
+
+
+## Exercice 3 - Petit exercice sur l'héritage (45 min)
+
+L'exercice 3 porte sur l'héritage.  On demande de créer une classe `Base` pet puis deux classes `DerivedInt` et `DerivedString` qui hérite de `Base`.
+
+Là encore les tests imposent des contraintes et le but est de trouver un moyen de les satisfaire dans les code des classes.  Vérifier bien à chaque test que vous passez encore les tests précédents.
+

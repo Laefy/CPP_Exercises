@@ -10,5 +10,6 @@ TEST_CASE("Il existe une classe abstraite Base qui possède une fonction-membre 
         bool s = b->is_null();
     }
 
+    // Cet test vérifie que la classe Base est abstraite.
     REQUIRE(std::is_abstract<Base>() == true);
 }

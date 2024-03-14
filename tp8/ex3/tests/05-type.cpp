@@ -16,7 +16,7 @@ public:
     std::string type() { return "This is not my type"; }
 };
 
-TEST_CASE("Base possède une fonction-membre type() donnant le type dynamique mais qui n'est pas polymorphe")
+TEST_CASE("Base possède une fonction-membre type() donnant le type dynamique mais qui n'est pas virtuelle")
 {
     const Base* b = nullptr; // Ceci est une astuce pour utiliser le type Base
     if (b != nullptr)        // bien qu'on ne puisse pas l'instancier.

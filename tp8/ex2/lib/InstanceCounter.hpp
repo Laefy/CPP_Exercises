@@ -15,21 +15,15 @@ public:
         ++_copies;
         _origin = &other;
     }
-    InstanceCounter(InstanceCounter&&)
-    {
-        ++_constr;
-        ++_moves;
-    }
+    InstanceCounter(InstanceCounter&&) { ++_constr; }
     InstanceCounter& operator=(const InstanceCounter&) = delete;
     InstanceCounter& operator=(InstanceCounter&&)      = delete;
 
     ~InstanceCounter() { ++_delete; }
 
-    static int             assignments() { return _assign; }
     static int             constructions() { return _constr; }
     static int             copies() { return _copies; }
     static int             deletions() { return _delete; }
-    static int             moves() { return _moves; }
     const InstanceCounter* origin() const { return _origin; }
 
     // Deux InstanceCounter sont égaux s'ils sont stockés au même endroit.
@@ -40,7 +34,6 @@ private:
     inline static int      _constr = 0;
     inline static int      _copies = 0;
     inline static int      _delete = 0;
-    inline static int      _moves  = 0;
     const InstanceCounter* _origin = nullptr;
 };
 

@@ -84,8 +84,8 @@ public:
     }
 
 private:
-    std::vector<std::unique_ptr<std::string>> keys;
-    std::vector<td::string*>                  values;
+    std::vector<std::string> keys;
+    std::vector<td::string*> values;
 };
 #endif
 // Est-ce que l'utilisation de la classe ci-dessus est susceptible de créer des problèmes de mémoire (fuite,
@@ -99,7 +99,7 @@ class AssocVector
 public:
     void add_data(const std::string& key, const std::string& value)
     {
-        keys.emplace_back(new std::string { key });
+        keys.emplace_back(std::make_unique<std::string>(key));
         values.emplace_back(new std::string { value });
     }
 
@@ -111,7 +111,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<std::string>> keys;
-    std::vector<td::string*>                  values;
+    std::vector<std::string*>                 values;
 };
 #endif
 // Est-ce que l'utilisation de la classe ci-dessus est susceptible de créer des problèmes de mémoire (fuite,
@@ -125,8 +125,8 @@ class AssocVector
 public:
     void add_data(std::string const& key, const std::string& value)
     {
-        keys.emplace_back(new std::string { key });
-        values.emplace_back(new std::string { value });
+        keys.emplace_back(std::make_unique<std::string>(key));
+        values.emplace_back(std::make_unique<std::string>(value));
     }
 
     ~AssocVector()
