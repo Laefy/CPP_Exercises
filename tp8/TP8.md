@@ -8,11 +8,8 @@
 
 ## Amorce de la séance
 
-Avant le début de l'examen, on vous demandera de prendre place à vos machines, de vous connecter et d'exécuter une commande qui servira à extraire les différents fichiers au bon endroit sur la machine.
-
-Une fois l'examen commencé, vous pourrez double-cliquer sur le fichier `${HOME}/launch_vscode.sh` pour ouvrir le dossier du TP noté dans VSCode.  
-Si à un moment, vous devez réouvrir VSCode, passez toujours par le script `${HOME}/launch_vscode.sh`.
-Cela vous évitera les **lags habituels du mode exam** ainsi que d'autres soucis de configuration.
+Avant le début de l'examen, on vous demandera de prendre place à vos machines, de vous connecter et d'exécuter le script Python `prepare_station.py` fourni.
+Celui-ci servira à extraire les différents fichiers au bon endroit sur la machine et à lancer VSCode.
 
 ### Documentation
 
@@ -54,7 +51,7 @@ mkdir build
 # Rentre à l'intérieur du dossier `build`
 cd build
 
-# Configure le projet afin qu'il utilise le CMakeLists.txt dans `tp4` et place les fichiers générés dans `build`
+# Configure le projet afin qu'il utilise le CMakeLists.txt dans `tp8` et place les fichiers générés dans `build`
 cmake -S chemin/vers/le/dossier/tp8 -B .
 ```
 
@@ -107,7 +104,7 @@ Si vous exécutez `./run_tests.sh ex1`, le test associé deviendra vert dès lor
 
 ## Rappel
 
-Dans les exercies 2 et 3ype d'exercice, vous devez coder différentes classes et fonctions afin de faire passer les tests unitaires fournis.  
+Dans les exercices 2 et 3, vous devez coder différentes classes et fonctions afin de faire passer les tests unitaires fournis.  
 Avec le framework Catch2, les tests unitaires ont la forme suivante :
 ```cpp
 TEST_CASE("Titre du test")
@@ -119,12 +116,14 @@ TEST_CASE("Titre du test")
   REQUIRE(/** une autre assertion **/);
 }
 ```
+
 Dans un premier temps, il faut réussir à implémenter le code permettant au test de **compiler**.  
 La seconde étape est d'adapter ce code afin qu'**il se comporte comme attendu** (c'est-à-dire que les conditions spécifiées dans les `REQUIRE` s'évaluent à `true`).
 
-Pour résoudre un test (par exemple [ex2/tests/01-ptr-alias.cpp](ex2/tests/01-ptr-alias.cpp)), il faut créer les fichiers adéqsuat (par exemple `ex2/src/alias.hpp`) et y écrire le code pour que le teste passe.
+Pour résoudre un test (par exemple [ex2/tests/01-ptr-alias.cpp](ex2/tests/01-ptr-alias.cpp)), il faut créer les fichiers adéquats (par exemple `ex2/src/alias.hpp`) et y écrire le code pour que le test passe.
 
-Une fois que vous pensez avoir terminé, utilisez `./run_tests.sh ex2-01` pour compiler et exécuter ce premier test.  Si vous avez réussi à le faire passer, passez au test suivant, etc.
+Une fois que vous pensez avoir terminé, utilisez `./run_tests.sh ex2-01` pour compiler et exécuter ce premier test.
+Si vous avez réussi à le faire passer, passez au test suivant, etc.
 
 ### Conseils
 
@@ -134,15 +133,15 @@ Une fois que vous pensez avoir terminé, utilisez `./run_tests.sh ex2-01` pour c
 
 ## Exercice 2 - Petit exercices sur la gestion de la mémoire (45 min)
 
-Le test `ex2-01` demande de trouver deux types qui ont le comportement attendu.  Il faut utiliser des alias, et il est inutile de créer de nouvelles classes.
+Le test `ex2-01` demande de trouver deux types qui ont le comportement attendu. Il faut utiliser des alias et il est inutile de créer de nouvelles classes.
 
-Les questions 1X de cet exercice reposent sur la classe [`InstanceCounter`](ex2/lib/InstanceCounter.hpp) qui est fournie.  Prenez le temps de bien lire le code cette classe avant d'essayer de résoudre les tests.  
-Le but est de coder une classe `StringInstancePair` qui représente une paire (`std::string`,`InstanceCounter`) tout en satisfant un certain nombre de contraintes (arbitraites) données par les tests.
+Les questions 1X de cet exercice reposent sur la classe [`InstanceCounter`](ex2/lib/InstanceCounter.hpp) qui est fournie.  Prenez le temps de bien lire le code cette classe avant de commencer à coder.  
+Le but est de coder une classe `StringInstancePair` qui représente une paire (`std::string`, `InstanceCounter`) tout en satisfaisant un certain nombre de contraintes posées par les tests.
 
 
 ## Exercice 3 - Petit exercice sur l'héritage (45 min)
 
 L'exercice 3 porte sur l'héritage.  On demande de créer une classe `Base` pet puis deux classes `DerivedInt` et `DerivedString` qui hérite de `Base`.
 
-Là encore les tests imposent des contraintes et le but est de trouver un moyen de les satisfaire dans les code des classes.  Vérifier bien à chaque test que vous passez encore les tests précédents.
-
+Là encore, les tests imposent des contraintes et le but est de trouver un moyen de les satisfaire dans les code des classes.
+Vérifiez bien à chaque test que vous passez encore les tests précédents.
