@@ -166,19 +166,19 @@ int main()
 }
 #endif
 // Dans les questions suivantes, on ne parle que de la ligne 4.
-// 10. L'expression w est-elle une r-value?
+// 10. L'expression w est-elle une l-value?
 #define ANSWER_10
-// 11. L'expression 1 est-elle une r-value?
+// 11. L'expression 1 est-elle une l-value?
 #define ANSWER_11
-// 12. L'expression x+1 est-elle une r-value?
+// 12. L'expression x+1 est-elle une l-value?
 #define ANSWER_12
-// 13. L'expression y est-elle une r-value?
+// 13. L'expression y est-elle une l-value?
 #define ANSWER_13
-// 14. L'expression g(x + 1, y) est-elle une r-value?
+// 14. L'expression g(x + 1, y) est-elle une l-value?
 #define ANSWER_14
-// 15. L'expression f(g(x + 1, y), z) est-elle une r-value?
+// 15. L'expression f(g(x + 1, y), z) est-elle une l-value?
 #define ANSWER_15
-// 16. L'expression f(w, f(g(x + 1, y), z)) est-elle une r-value?
+// 16. L'expression f(w, f(g(x + 1, y), z)) est-elle une l-value?
 #define ANSWER_16
 
 // 2X. // ===================================================================================================
