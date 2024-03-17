@@ -28,7 +28,7 @@ vec[5]                          // => l-value
 vec                             // => l-value
 vec.pop_back()                  // => rien ! (retourne void)
 std::vector { 'a', 'b', 'c' }   // => r-value
-vec.push_back('d')              // => l-value
+vec.emplace_back('d')              // => l-value
 std::move(vec)                  // => r-value
 ```
 
