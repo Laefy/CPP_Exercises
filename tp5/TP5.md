@@ -28,7 +28,7 @@ vec[5]
 vec
 vec.pop_back()
 std::vector { 'a', 'b', 'c' }
-vec.push_back('d')
+vec.emplace_back('d')
 std::move(vec)
 ```
 
