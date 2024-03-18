@@ -40,7 +40,9 @@ private:
 };
 #endif
 // Est-ce que l'implémentation 1 est meilleure que l'implémentation 2?
-#define ANSWER_1
+#define ANSWER_1 \
+    true // L'implémentation permet d'éviter toute copie si
+         // l'appelant move un vector dans le constructeur.
 
 // 2. // ====================================================================================================
 // Voici deux implémentations de constructeurs pour une classe Dog
@@ -70,7 +72,7 @@ private:
 };
 #endif
 // Est-ce que l'implémentation 1 est meilleure que l'implémentation 2?
-#define ANSWER_2
+#define ANSWER_2 false // L'implementation 1 n'a aucun sens.
 
 // 3. // ====================================================================================================
 #ifdef CODE_IGNORE_PAR_LE_COMPILATEUR
@@ -90,7 +92,7 @@ private:
 #endif
 // Est-ce que l'utilisation de la classe ci-dessus est susceptible de créer des problèmes de mémoire (fuite,
 // double-déallocation, etc.) ?
-#define ANSWER_3
+#define ANSWER_3 true // Les std::string dans values ne seront jamais désallouées
 
 // 4. // ====================================================================================================
 #ifdef CODE_IGNORE_PAR_LE_COMPILATEUR
@@ -116,7 +118,9 @@ private:
 #endif
 // Est-ce que l'utilisation de la classe ci-dessus est susceptible de créer des problèmes de mémoire (fuite,
 // double-déallocation, etc.) ?
-#define ANSWER_4
+#define ANSWER_4 \
+    false // Le destructeur s'occupe bien de supprimer les chaînes dans values. Notez que cette
+          // implémentation est étrange et qu'il faudrait utiliser des unique_ptr dans values.
 
 // 5. // ====================================================================================================
 #ifdef CODE_IGNORE_PAR_LE_COMPILATEUR
@@ -142,7 +146,7 @@ private:
 #endif
 // Est-ce que l'utilisation de la classe ci-dessus est susceptible de créer des problèmes de mémoire (fuite,
 // double-déallocation, etc.) ?
-#define ANSWER_5
+#define ANSWER_5 true // Les chaines dans values seront désallouées deux fois.
 
 // 1X. // ================================================================================================
 // considère le code ci-dessous
@@ -167,19 +171,19 @@ int main()
 #endif
 // Dans les questions suivantes, on ne parle que de la ligne 4.
 // 10. L'expression w est-elle une r-value?
-#define ANSWER_10
+#define ANSWER_10 false
 // 11. L'expression 1 est-elle une r-value?
-#define ANSWER_11
+#define ANSWER_11 true
 // 12. L'expression x+1 est-elle une r-value?
-#define ANSWER_12
+#define ANSWER_12 true
 // 13. L'expression y est-elle une r-value?
-#define ANSWER_13
+#define ANSWER_13 false
 // 14. L'expression g(x + 1, y) est-elle une r-value?
-#define ANSWER_14
+#define ANSWER_14 true
 // 15. L'expression f(g(x + 1, y), z) est-elle une r-value?
-#define ANSWER_15
+#define ANSWER_15 false
 // 16. L'expression f(w, f(g(x + 1, y), z)) est-elle une r-value?
-#define ANSWER_16
+#define ANSWER_16 false
 
 // 2X. // ===================================================================================================
 // On conside un programme avec deux classes, Fille et Mère, où Fille hérite de Mère.
@@ -193,16 +197,26 @@ int main()
 #endif
 // 20. Si je veux redéfinir fct() dans Fille, je dois utiliser le mot-clef "virtual" dans la déclaration on de
 // Mere::fct(), sans quoi Fille ::fct() ne sera pas appelée à la ligne 2 ci-dessus.
-#define ANSWER_20
+#define ANSWER_20 true
+
 // 21. Si je veux redéfinir fct() dans Fille, je dois utiliser le mot-clef "virtual" dans la déclaration de
 // Fille::fct(), sans quoi Fille ::fct() ne sera pas appelée à la ligne 2 ci-dessus.
-#define ANSWER_21
+#define ANSWER_21 false // Dans le contexte décrit, ce "virtual" n'a aucun effet.
+
 // 22. Si je veux redéfinir fct() dans Fille, je dois utiliser le mot-clef "override" dans la définition de
 // Fille::fct(), sans quoi Fille::fct() ne sera pas appelée ligne 2 ci-dessus.
-#define ANSWER_22
-// 23. Si Mere::fct() est virtuelle pure, il est impossible d'instancier la classe Mere.
-#define ANSWER_23
+#define ANSWER_22 \
+    false // C'est une bonne pratique de mettre "override" car sinon on risque de faire des erreurs. Néanmoins
+          // cet "override" ne change pas le comportement du programme. La question était un peu ambigüe
+          // (désolé)
+
+//  23. Si Mere::fct() est virtuelle pure, il est impossible d'instancier la classe Mere.
+#define ANSWER_23 true
+
 // 24. On utilise le mot-clef "pure virtual" pour indiquer qu'une fonction-membre est virtuelle pure.
-#define ANSWER_24
+#define ANSWER_24 false // Ce mot-clef n'existe pas
+
 // 25. S'il est impossible d'instancier la classe Mere, le code à la ligne 1 ci-dessus ne compile pas.
-#define ANSWER_25
+#define ANSWER_25 \
+    false // Les classes virtuelles pures ne sont pas instanciable et on les manipule typiquement par pointeur
+          // ou référence.
