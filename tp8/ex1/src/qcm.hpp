@@ -123,7 +123,7 @@ private:
 class AssocVector
 {
 public:
-    void add_data(std::string const& key, const std::string& value)
+    void add_data(const std::string& key, const std::string& value)
     {
         keys.emplace_back(std::make_unique<std::string>(key));
         values.emplace_back(std::make_unique<std::string>(value));
@@ -131,7 +131,7 @@ public:
 
     ~AssocVector()
     {
-        for (auto a& : values)
+        for (auto& a: values)
             delete a.get();
     }
 
