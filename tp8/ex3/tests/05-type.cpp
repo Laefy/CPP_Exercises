@@ -35,6 +35,6 @@ TEST_CASE("Base possède une fonction-membre type() donnant le type dynamique ma
     REQUIRE(b2.type() == "String");
 
     DerivedEmptyString e {};
-    Base&              b3 = s;
+    Base&              b3 = e;
     REQUIRE(b3.type() == "String");
 }
