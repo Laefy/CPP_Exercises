@@ -7,13 +7,9 @@
 - Utiliser quelques algorithmes de la librairie standard
 - Définir des lambdas
 
-## Exercice 1 - Conteneurs (20 min)
+## Exercice 1 - Lambdas et algorithmes (40 min)
 
-
-
-## Exercice 2 - Lambdas et algorithmes (30 min)
-
-Ouvrez chacun des liens dans godbolts et complétez le code afin que les fonctions produisent les résultats attendus.  
+Ouvrez chacun des liens ci-dessous et complétez le code afin que les fonctions produisent les résultats attendus.  
 Une seule contrainte, on vous imposera un algorithme de la librairie standard à utiliser.
 
 1. Algorithme: std::remove_if
@@ -24,17 +20,22 @@ Une seule contrainte, on vous imposera un algorithme de la librairie standard à
    Code: https://godbolt.org/z/55x9Efrza
    https://godbolt.org/z/T5adjjj3h
 
-3. Algorihtme: std::accumulate
-   Code:
+3. Algorithme: std::transform + std::back_inserter
+   Code: https://godbolt.org/z/PrPoEYK5d
+   https://godbolt.org/z/3Kba6x53n
 
-4. Algorithme: std::transform + std::back_inserter
-   Code:
+4. Algorithme: std::accumulate
+   Code: https://godbolt.org/z/61P6K414P
+   https://godbolt.org/z/rao7YdWj3
 
-5. Algorithme: peu importe, du moment que vous implémentez le contenu de apply_on_entities_with_type et que vous l'utilisez ensuite.
+6. Algorithme: peu importe, du moment que vous implémentez le contenu de apply_on_entities_with_type et que vous l'utilisez ensuite.
    Code: https://godbolt.org/z/v5rn1aqGe
+   https://godbolt.org/z/d3je369GY
+
+
+## Exercice 2 - unordered_map (40 min)
 
 
 
 
-
-## Exercice 3 - ...
+## Exercice 3 - set (40 min)
