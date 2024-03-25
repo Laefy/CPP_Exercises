@@ -108,7 +108,8 @@ L'objectif est le même que pour l'exercice précédent, mais le type servira de
 ### A. Point3d
 
 1. Définissez une structure `Point3d` contenant trois attributs entiers `x`, `y` et `z`.
-2. Ajoutez une fonction `main` à votre programme et définissez une variable `coords` de type `std::set<Point3d>`. Quelle est l'erreur de compilation ?
+2. Ajoutez une fonction `main` à votre programme et définissez une variable `coords` de type `std::set<Point3d>`.
+3. Essayez maintenant d'insérer des éléments dans le `coords`. Comment expliquez-vous que vous ayez une erreur de compilation maintenant alors que vous n'en aviez pas à la question précédente ?
 
 ### B. Spécifier des foncteurs
 
