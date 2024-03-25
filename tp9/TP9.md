@@ -33,18 +33,23 @@ Une seule contrainte, on vous imposera un algorithme de la librairie standard à
 
 1. Algorithme: std::remove_if  
    Code: https://godbolt.org/z/KaTnr8Pr4  
+   Solution: https://godbolt.org/z/e1hxecKav
 
 2. Algorithme: std::find_if  
    Code: https://godbolt.org/z/55x9Efrza  
+   Solution: https://godbolt.org/z/T5adjjj3h
 
 3. Algorithme: std::transform + std::back_inserter  
    Code: https://godbolt.org/z/PrPoEYK5d  
+   Solution: https://godbolt.org/z/3Kba6x53n
 
 4. Algorithme: std::accumulate  
    Code: https://godbolt.org/z/61P6K414P  
+   Solution: https://godbolt.org/z/rao7YdWj3
 
 6. Algorithme: peu importe, du moment que vous implémentez le contenu de apply_on_entities_with_type et que vous l'utilisez ensuite.  
    Code: https://godbolt.org/z/v5rn1aqGe  
+   Solution: https://godbolt.org/z/d3je369GY
 
 ## Exercice 3 - unordered_map (30 min)
 
@@ -101,6 +106,9 @@ struct hash<type_pour_lequel_on_specialise>
 
 2. Définissez la spécialisation de `std::hash` pour le type `Point2d` et vérifiez que `grid` peut maintenant être définie avec le type `std::unordered_map<Point2d, Content>`.
 
+**Solution**: https://godbolt.org/z/nnb8hsv3K
+
+
 ## Exercice 4 - set (30 min)
 
 L'objectif est le même que pour l'exercice précédent, mais le type servira de clé au type `set`.
@@ -132,4 +140,6 @@ Si le type du foncteur de comparaison n'est pas spécifié, c'est la classe `std
 1. Par défaut, la classe-template `std::less` tente d'appeler l'`operator<` du type concerné.  
 Implémentez `Point3d::operator<`.  
 
-2. Vérifiez que vous pouvez maintenant retirer l'argument `Point3dCompare` du type de `coords`.  
+2. Vérifiez que vous pouvez maintenant retirer l'argument `Point3dCompare` du type de `coords`.
+
+**Solution**: https://godbolt.org/z/dfvYe38qT
