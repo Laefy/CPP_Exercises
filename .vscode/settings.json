@@ -86,6 +86,7 @@
         "forward_list": "cpp",
         "locale": "cpp",
         "xlocbuf": "cpp",
-        "xlocmes": "cpp"
+        "xlocmes": "cpp",
+        "complex": "cpp"
     }
 }
