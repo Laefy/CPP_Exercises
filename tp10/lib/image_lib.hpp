@@ -5,6 +5,7 @@
 
 #include <array>
 #include <cstdint>
+#include <filesystem>
 #include <iostream>
 #include <string>
 
@@ -19,19 +20,19 @@ std::array<uint8_t, 4> mix_color(const uint8_t r1, const uint8_t g1, const uint8
                                  const uint8_t r2, const uint8_t g2, const uint8_t b2, const uint8_t a2);
 
 template <typename P, size_t W, size_t H>
-Image<P, W, H> load(const std::string& path)
+Image<P, W, H> load(const std::filesystem::path& path)
 {
     int            w, h, c;
     const uint8_t* data = stbi_load(path.c_str(), &w, &h, &c, 0);
 
-    std::cout << "MARCO\n";
     Image<P, W, H> img = {};
     if (data == NULL)
     {
         std::cout << "Could not find image '" << path << "'" << std::endl;
         exit(1);
     }
-    std::cout << "Found an image with dims (" << w << "," << h << ") and " << c << "channels." << std::endl;
+    std::cout << "Loaded " << path << " with dims (" << w << "," << h << ") and " << c << " channels."
+              << std::endl;
     if (w != W || h != H || c != sizeof(P))
     {
         std::cout << "Could not open image '" << path << "' with the dimensions (" << W << "," << H << ","
@@ -52,10 +53,15 @@ Image<P, W, H> load(const std::string& path)
 }
 
 template <typename P, size_t W, size_t H>
-void save(const Image<P, W, H>& img, const std::string& path)
+void save(const Image<P, W, H>& img, const std::filesystem::path& path)
 {
+    std::filesystem::create_directories(path.parent_path());
+
     const auto data = reinterpret_cast<const uint8_t*>(&img);
-    stbi_write_png(path.c_str(), W, H, sizeof(P), data, W * sizeof(P));
+    if (stbi_write_png(path.c_str(), W, H, sizeof(P), data, W * sizeof(P)))
+    {
+        std::cout << "Saved image at '" << path << "'" << std::endl;
+    }
 }
 
 } // namespace image_lib

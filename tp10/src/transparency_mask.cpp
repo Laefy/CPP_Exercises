@@ -8,7 +8,8 @@
 
 void usage()
 {
-    std::cout << "./transparency_mask path/to/images/folder" << std::endl;
+    std::cout << "Usage:\n"
+              << "./transparency_mask path/to/images/folder" << std::endl;
 }
 
 int main(int argc, char** argv)
@@ -30,7 +31,7 @@ int main(int argc, char** argv)
     }
 
     {
-        const auto cat  = image_lib::load<RGBA, 500, 500>(input_path / "mojus-500.png");
+        const auto cat  = image_lib::load<RGB, 500, 500>(input_path / "mojus-500.png");
         const auto mask = image_lib::load<Luma, 500, 500>(input_path / "mojus-backrooms-alpha.png");
         const auto grad = image_lib::load<RGBA, 500, 500>(input_path / "mojus-backroom-grad.png");
         const auto back = image_lib::load<Luma, 500, 500>(input_path / "mojus-backrooms.png");

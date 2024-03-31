@@ -8,7 +8,8 @@
 
 void usage()
 {
-    std::cout << "./blend path/to/images/folder" << std::endl;
+    std::cout << "Usage:\n"
+              << "./blend path/to/images/folder" << std::endl;
 }
 
 int main(int argc, char** argv)
