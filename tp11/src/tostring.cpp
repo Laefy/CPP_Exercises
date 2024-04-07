@@ -50,7 +50,7 @@ int main()
     // Q2: Puis les conversions simples fournies par la fonction std::to_string
     std::cout << "int" << std::endl << " -> " << to_string(3) << std::endl;
 
-    // Q3: On s'attaque maintenant aux conteneurs
+    // Q4: On s'attaque maintenant aux conteneurs
     std::cout << "std::vector<int>" << std::endl
               << " -> " << to_string(std::vector<int> { 1, 2, 3, 4 }) << std::endl;
     std::cout << "std::vector<std::vector<int>>" << std::endl
@@ -58,14 +58,14 @@ int main()
               << to_string(std::vector<std::vector<int>> { std::vector<int> { 0, 1, 2, 3 },
                                                            std::vector<int> { 4, 5, 6, 7 } })
               << std::endl;
-    // Q3b: avec une spécialisation pour les std::array
+    // Q4b: avec une spécialisation pour les std::array
     std::cout << "std::array<int, 4>" << std::endl
               << " -> " << to_string(std::array<int, 4> { 1, 2, 3, 4 }) << std::endl;
 
-    // Q4: Si un objet présente une fonction de conversion, on l'utilise
+    // Q5: Si un objet présente une fonction de conversion, on l'utilise
     std::cout << "Convertible" << std::endl << " -> " << to_string(Convertible {}) << std::endl;
 
-    // Q5: S'il est streamable (en implémentant l'opérateur << sur ostream), idem
+    // Q6: S'il est streamable (en implémentant l'opérateur << sur ostream), idem
     std::cout << "Streamable" << std::endl << " -> " << to_string(Streamable {}) << std::endl;
 
     // Commenter cette ligne si elle bloque la compilation trop tot dans le TP
