@@ -87,6 +87,7 @@
         "locale": "cpp",
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "codecvt": "cpp"
     }
 }
