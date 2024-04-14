@@ -1,7 +1,7 @@
 separate_arguments(TARGETS)
 
 set(tests_count 0)
-set(failures_count 0)
+set(failed_tests "")
 
 option(QUIET "Whether the errors of the tests are output" OFF)
 
@@ -53,11 +53,13 @@ foreach(target ${TARGETS})
             endif()
         endif()
 
-        math(EXPR failures_count "${failures_count}+1")
+        list(APPEND failed_tests "${target}")
 
     endif()
 
 endforeach()
+
+list(LENGTH failed_tests failures_count)
 
 if(${failures_count} EQUAL 0)
 
@@ -68,9 +70,11 @@ if(${failures_count} EQUAL 0)
 
 else()
 
+    string(REPLACE ";" "\n" failed_tests "${failed_tests}")
+
     execute_process(COMMAND 
         ${CMAKE_COMMAND} -E env CLICOLOR_FORCE=1
-        ${CMAKE_COMMAND} -E cmake_echo_color --red --bold "===================================\n${failures_count} TESTS OUT OF ${tests_count} HAVE FAILED"
+        ${CMAKE_COMMAND} -E cmake_echo_color --red --bold "===================================\n${failures_count} TESTS OUT OF ${tests_count} HAVE FAILED:\n${failed_tests}"
     )
 
 endif()

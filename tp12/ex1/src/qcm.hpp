@@ -96,19 +96,19 @@ struct MyObject
 
 // Question 32
 // La capture d'une lamda correspond aux attributs de l'objet associé.
-#define ANSWER_31
-
-// Question 33
-// On écrit [value&] pour capturer `value` par référence. 
 #define ANSWER_32
 
 // Question 33
-// On écrit [*value] pour capturer `value` par valeur.
+// On écrit [value&] pour capturer `value` par référence. 
 #define ANSWER_33
 
 // Question 34
-// On écrit [v = std::move(value)] pour déplacer `value` dans la capture.
+// On écrit [*value] pour capturer `value` par valeur.
 #define ANSWER_34
+
+// Question 35
+// On écrit [v = std::move(value)] pour déplacer `value` dans la capture.
+#define ANSWER_35
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,3 +127,8 @@ struct MyObject
 // Question 43
 // Lorsqu'on définit une spécialisation totale, il faut commencer par écrire `template <>`.
 #define ANSWER_43
+
+// Question 44
+// Il est préférable de définir les fonctions-templates et les types-templates dans les
+// headers pour éviter les erreurs de compilation.
+#define ANSWER_44
