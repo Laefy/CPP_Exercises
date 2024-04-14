@@ -2,6 +2,6 @@
 
 #pragma once
 
-#define ANSWER_1
-#define ANSWER_2
-#define ANSWER_3
+#define ANSWER_1 std::remove_if
+#define ANSWER_2 [](int v) { return v < 0; }
+#define ANSWER_3 erase

@@ -1,13 +1,13 @@
 #pragma once
 
-#define ANSWER_00
+#define ANSWER_00 <functional>
 
-#define ANSWER_10
-#define ANSWER_11
-#define ANSWER_12
-#define ANSWER_13
-#define ANSWER_14
+#define ANSWER_10 std::function
+#define ANSWER_11 bool
+#define ANSWER_12 T&
+#define ANSWER_13 T
+#define ANSWER_14 void
 
-#define ANSWER_20
-#define ANSWER_21
-#define ANSWER_22
+#define ANSWER_20 [&value](const int& v) { return v < value; }
+#define ANSWER_21 [](std::string& s) { s += " " + s; }
+#define ANSWER_22 [c = 0u]() mutable { return c++; }
