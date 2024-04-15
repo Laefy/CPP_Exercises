@@ -12,19 +12,31 @@
 
 | Conteneur     | Insertion (en tête / en fin) | Suppression (en tête / en fin) | Accès |
 |---------------|--------------|--------------|--------------|
-| array         |     N/A      |     N/A      |              |
-| vector        |              |              |              |
-| deque         |              |              |              |
-| forward_list  |              |              |              |
-| list          |              |              |              |
-| set           |              |              |              |
-| unordered_set |              |              |              |
+| array         |     N/A      |     N/A      |     O(1)     |
+| vector        |     O(N)     | O(N) / O(1)  |     O(1)     |
+| deque         |     O(1)     |     O(1)     |     O(1)     |
+| forward_list  | O(1) / O(N)  | O(1) / O(N)  |     O(N)     |
+| list          |     O(1)     |     O(1)     |     O(N)     |
+| set           |  O(log(N))   |  O(log(N))   |  O(log(N))   |
+| unordered_set |     O(1)     |     O(1)     |     O(1)     |
 
-2. Supposons que vous avez récupéré un itérateur sur un élément d'un conteneur avec : `auto it = std::find(c.begin(), c.end(), element_to_find)`.  
-En fonction du type de conteneur, quelles sont les opérations succeptibles d'invalider cet itérateur ? Essayez d'être précis dans vos réponses.  
-Exemple : Si `c` est un `std::vector`, alors `it` peut être invalidé en cas de suppression d'un élément précédent `it` dans le conteneur.
+2. Supposons que vous ayez récupéré un itérateur sur un élément d'un conteneur avec : `auto it = std::find(ctn.begin(), ctn.end(), element_to_find)`.  
+En fonction du type de conteneur, quelles sont les opérations susceptibles d'invalider cet itérateur ? Essayez d'être précis dans vos réponses.  
+Exemple : Si `ctn` est un `std::vector`, alors `it` peut être invalidé en cas de suppression d'un élément précédent `it` dans le conteneur.
+- vector : l'itérateur sera invalidé si
+   - on erase cet itérateur
+   - on erase avant cet itérateur
+   - on ajoute n'importe où et une réallocation a lieu
+- list / set / map / unordered_set / unordered_map : l'itérateur sera invalidé si
+   - on erase cet itérateur 
+- deque : l'itérateur sera invalidé si
+   - on erase le premier ou le dernier élément et que l'itérateur pointe dessus
+   - on erase n'importe quel autre élément de deque
 
 3. Quelle est la différence entre les fonctions `push_back` et `emplace_back` de la classe-template `std::vector` ?
+`push_back` copie (si l-value) ou move (si r-value) l'objet passé en paramètre pour construire l'élément. Il faut donc que le paramètre soit du même type
+que les éléments du `std::vector`.
+`emplace_back` forward ses paramètres au constructeur de l'élément. Il faut donc que les arguments passés à la fonction correspondent à la signature de l'un des constructeurs des éléments du `std::vector`.
 
 ## Exercice 2 - Lambdas et algorithmes (40 min)
 
@@ -54,6 +66,7 @@ Une seule contrainte, on vous imposera un algorithme de la librairie standard à
 ## Exercice 3 - unordered_map (30 min)
 
 L'objectif de cet exercice est de vous faire implémenter un type que vous pourrez utiliser en temps que clé de hashage d'une `unordered_map`.
+Correction: https://godbolt.org/z/3YEbbhP37
 
 ### A. Point2d
 
@@ -106,17 +119,16 @@ struct hash<type_pour_lequel_on_specialise>
 
 2. Définissez la spécialisation de `std::hash` pour le type `Point2d` et vérifiez que `grid` peut maintenant être définie avec le type `std::unordered_map<Point2d, Content>`.
 
-**Solution**: https://godbolt.org/z/nnb8hsv3K
-
-
 ## Exercice 4 - set (30 min)
 
 L'objectif est le même que pour l'exercice précédent, mais le type servira de clé au type `set`.
+Correction: https://godbolt.org/z/n88YWssPx
 
 ### A. Point3d
 
 1. Définissez une structure `Point3d` contenant trois attributs entiers `x`, `y` et `z`.
-2. Ajoutez une fonction `main` à votre programme et définissez une variable `coords` de type `std::set<Point3d>`. Quelle est l'erreur de compilation ?
+2. Ajoutez une fonction `main` à votre programme et définissez une variable `coords` de type `std::set<Point3d>`.
+3. Essayez maintenant d'insérer des éléments dans le `coords`. Comment expliquez-vous que vous ayez une erreur de compilation maintenant alors que vous n'en aviez pas à la question précédente ?
 
 ### B. Spécifier des foncteurs
 
@@ -140,6 +152,4 @@ Si le type du foncteur de comparaison n'est pas spécifié, c'est la classe `std
 1. Par défaut, la classe-template `std::less` tente d'appeler l'`operator<` du type concerné.  
 Implémentez `Point3d::operator<`.  
 
-2. Vérifiez que vous pouvez maintenant retirer l'argument `Point3dCompare` du type de `coords`.
-
-**Solution**: https://godbolt.org/z/dfvYe38qT
+2. Vérifiez que vous pouvez maintenant retirer l'argument `Point3dCompare` du type de `coords`.  
