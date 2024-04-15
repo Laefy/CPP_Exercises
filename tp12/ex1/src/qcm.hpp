@@ -34,7 +34,7 @@ struct MyObject
 #define ANSWER_01 false
 
 // Je peux définir et insérer une instance de MyObject dans un std::set<MyObject>.  
-#define ANSWER_02 false
+#define ANSWER_02 true
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
